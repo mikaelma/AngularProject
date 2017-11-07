@@ -54,12 +54,28 @@ This is a basic sketch of the components we will have to use. The list is not fi
 
 ## ER Diagram
 ![Mongoose schema of the database](/README-Images/databaseER.png)
-This is the mongoose schemas for the two collections we will be using. 
-The user schema needs a firstname, surname, password(encrypted), email, an array of created drink recipes 
-and an array of drinks the user has favourised. We will be using an additional package for mongoose which makes the email for each user unique so that you can't create two users with same email. 
-The arrays of drinks will be reffered to the Drink scgema.
 
-The Drink schema needs the name of the drink, an array of ingredients and an author which is the user that created the drink.
-Description, image, glass and recipe is not required. 
+This is the mongoose schemas for the two collections we will be using. 
+The user schema needs:
+* firstname
+* surname
+* password(encrypted)
+* email
+* an array of created drink recipes 
+* an array of drinks the user has favourised
+
+We will be using an additional package for mongoose which makes the email for each user unique so that you can't create two users with same email. 
+The arrays of drinks will be reffered to the _Drink schema_.
+
+The Drink schema requires:
+* name of the drink
+* an array of ingredients
+* author which is the user that created the drink.
+
+The Drink schema contains, but does not require:
+* Description
+* image
+* glass
+* recipe
 
 
