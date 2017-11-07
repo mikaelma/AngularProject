@@ -50,7 +50,7 @@ This is a basic sketch of the components we will have to use. The list is not fi
 # Mockup frontend
 
 # Mockup backend
-![Basic backend functionality](https://www.cronj.com/blog/wp-content/uploads/2015/11/MEAN-Stack-cycle.png)
+![Basic backend functionality](/README-Images/backendMockup.png)
 
 ## ER Diagram
-![Mongoose schema of the database](https://imgur.com/a/F7ASh)
+![Mongoose schema of the database](/README-Images/databaseER.png)
