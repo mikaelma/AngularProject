@@ -55,7 +55,8 @@ This is a basic sketch of the components we will have to use. The list is not fi
 ## ER Diagram
 ![Mongoose schema of the database](/README-Images/databaseER.png)
 
-This is the mongoose schemas for the two collections we will be using. 
+This is the mongoose schemas for the two collections we will be using; _User_ and _Drink_.
+
 The user schema needs:
 * firstname
 * surname
