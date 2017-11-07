@@ -29,6 +29,7 @@ For backend the server will run NodeJS with express and the database will be Mon
 ## Modules
 * Mongoose - Methods for communicating with MongoDB
 * Express
+* Material UI - prestyled components used on the frontend.
 
 # Folder structure
 
