@@ -12,9 +12,9 @@ In this project we will create a portal containing a catalog of different cockta
 
 (Some of the items may not be required or present in the final version of the application)
 
-First the user is presented with a login screen where he or she can choose to either log into an existing user account or create a new one. 
+The user is presented with the portal screen where he or she can choose to either log into an existing user account, create a new one or just browse the existing drinks.
 
-If the user is returning from a previous session, the user already be logged in and can continue exporing the site.
+If the user is returning from a previous session where he or she logged in, the user can continue exporing the site, logged in.
 
 The system will have a user database storing all user information and users will be able to log in to our system. 
 
@@ -53,3 +53,4 @@ This is a basic sketch of the components we will have to use. The list is not fi
 ![Basic backend functionality](https://www.cronj.com/blog/wp-content/uploads/2015/11/MEAN-Stack-cycle.png)
 
 ## ER Diagram
+![Mongoose schema of the database](https://imgur.com/a/F7ASh)
