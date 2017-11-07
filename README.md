@@ -50,6 +50,11 @@ This is a basic sketch of the components we will have to use. The list is not fi
 - Register new user component
 
 # Mockup frontend
+![Front page](/README-Images/mock1.png)
+![Drink page](/README-Images/mock2.png)
+![My page](/README-Images/mock3.png)
+![New drink page](/README-Images/mock4.png)
+
 
 # Mockup backend
 ![Basic backend functionality](/README-Images/backendMockup.png)
