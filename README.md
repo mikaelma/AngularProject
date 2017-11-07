@@ -20,13 +20,13 @@ The system will have a user database storing all user information and users will
 
 # Technology
 
-**Frontend**
+## Frontend
 The system uses Angular 5 for frontend.
 
-**Backend**
+## Backend
 For backend the server will run NodeJS with express and the database will be MongoDB.
 
-**Modules**
+## Modules
 * Mongoose - Methods for communicating with MongoDB
 * Express
 
