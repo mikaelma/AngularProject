@@ -33,6 +33,7 @@ For backend the server will run NodeJS with express and the database will be Mon
 # Folder structure
 
 /client - The angular part of the application served to the client
+
 /server - The server side of the application hosting the REST API and acting as a web server
 
 ## Components
