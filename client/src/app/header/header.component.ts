@@ -7,7 +7,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
   styleUrls: ['./header.component.css']
 })
 
-export class HeaderComponent{
+export class HeaderComponent {
   name: string;
   password: string;
 
