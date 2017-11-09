@@ -6,19 +6,27 @@ import {routing} from './app.routing';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { CreateDrinkComponent } from './drinks/create-drink/create-drink.component';
-
+import {MyPageComponent} from "./my-page/my-page.component";
+import {HeaderComponent} from "./header/header.component";
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    CreateDrinkComponent
+    CreateDrinkComponent,
+    MyPageComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    routing
+    routing,
+    MatToolbarModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatIconModule,
+    Angular2FontawesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
