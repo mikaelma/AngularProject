@@ -42,7 +42,7 @@ import { DrinkListComponent } from './drink-list/drink-list.component';
     MatTableModule,
   ],
 
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent],
   entryComponents: [HeaderDialogBoxComponent]
 
