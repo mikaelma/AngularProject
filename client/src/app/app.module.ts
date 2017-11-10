@@ -11,8 +11,10 @@ import { MainGuard } from './main.guard';
 import { MyPageComponent } from './my-page/my-page.component';
 import { HeaderComponent } from './header/header.component';
 import { HeaderDialogBoxComponent } from './header-dialog-box/header-dialog-box.component';
-import {MatToolbarModule, MatDialogModule, MatButtonModule, MatIconModule, MatFormFieldModule} from '@angular/material';
+import {MatToolbarModule, MatDialogModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatTableModule} from '@angular/material';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
+import { MainPageComponent } from './main-page/main-page.component';
+import { DrinkListComponent } from './drink-list/drink-list.component';
 
 
 
@@ -22,7 +24,9 @@ import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawe
     LoginComponent,
     MyPageComponent,
     HeaderComponent,
-    HeaderDialogBoxComponent
+    HeaderDialogBoxComponent,
+    MainPageComponent,
+    DrinkListComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +38,8 @@ import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawe
     MatButtonModule,
     MatIconModule,
     Angular2FontawesomeModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatTableModule,
   ],
 
   providers: [],
