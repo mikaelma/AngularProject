@@ -7,7 +7,8 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { MyPageComponent } from './my-page/my-page.component';
 import { HeaderComponent } from './header/header.component';
-import {MatToolbarModule, MatDialogModule, MatButtonModule, MatIconModule} from '@angular/material';
+import { HeaderDialogBoxComponent } from './header-dialog-box/header-dialog-box.component';
+import {MatToolbarModule, MatDialogModule, MatButtonModule, MatIconModule, MatFormFieldModule} from '@angular/material';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 
 
@@ -16,7 +17,8 @@ import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawe
     AppComponent,
     LoginComponent,
     MyPageComponent,
-    HeaderComponent
+    HeaderComponent,
+    HeaderDialogBoxComponent
   ],
   imports: [
     BrowserModule,
@@ -26,9 +28,12 @@ import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawe
     MatDialogModule,
     MatButtonModule,
     MatIconModule,
-    Angular2FontawesomeModule
+    Angular2FontawesomeModule,
+    MatFormFieldModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [HeaderDialogBoxComponent]
+
 })
 export class AppModule { }

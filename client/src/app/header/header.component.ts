@@ -1,5 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {HeaderDialogBoxComponent} from '../header-dialog-box/header-dialog-box.component';
 
 @Component({
   selector: 'app-header',
@@ -8,16 +9,15 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 })
 
 export class HeaderComponent {
-  name: string;
+  email: string;
   password: string;
 
   constructor(public dialog: MatDialog) { }
 
-
   openDialog(): void {
-    const dialogRef = this.dialog.open(HeaderDialogComponent, {
+    const dialogRef = this.dialog.open(HeaderDialogBoxComponent, {
       width: '250px',
-      data: { name: this.name, password: this.password }
+      data: { email: this.email, password: this.password }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -25,20 +25,4 @@ export class HeaderComponent {
       this.password = result;
     });
   }
-
-}
-@Component({
-  selector: 'app-header-dialog',
-  templateUrl: 'app-header-dialog.html',
-})
-export class HeaderDialogComponent {
-
-  constructor(
-    public dialogRef: MatDialogRef<HeaderDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
 }
