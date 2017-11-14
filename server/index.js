@@ -5,6 +5,9 @@ var dist = __dirname + "/../client/dist/";
 var bodyParser = require('body-parser');
 var jwt = require('jsonwebtoken');
 var passhash = require('./passhash');
+var mongoose = require("mongoose");
+var Drink = require('./models/drink');
+var User = require('./models/user');
 
 
 var secretKey = "kafornokka";
@@ -15,11 +18,42 @@ var tokens = [];
 console.log(dist);
 
 
+
+let db = mongoose.connect('mongodb://localhost/putin',(err)=>{
+    if(err){
+     console.log(err);
+    }else{
+        console.log("Connected to the database");
+    }    
+});
+
+
+
 app.post('/login',(req,res)=>{
-    console.log(req.body);
-    res.json(req.body);
     let hash = passhash.sha512(req.body.password,passhash.random(20));
-    console.log(hash);
+    User.find({
+        email:req.body.email
+    },(err,userRes)=>{
+        if(err){
+            console.log("Error :(");
+        }else{
+            userRes = userRes[0]
+            let hash = passhash.sha512(req.body.password,userRes.salt);
+            if(hash.passwordHash==userRes.password){
+                console.log("Found user");
+                let urlObject = {
+                    firstName:userRes.firstName,
+                    lastName:userRes.lastName,
+                    email:userRes.email,
+                    favouriteDrinks:userRes.favouriteDrinks,
+                    createdDrinks:userRes.createdDrinks
+                }
+                
+                let jwtToken = jwt.sign(urlObject, secretKey, { expiresIn: 18000 });
+                res.json({token:jwtToken});
+            }
+        }
+    });
 });
 
 app.get('/authorize',(req,res)=>{
@@ -32,6 +66,28 @@ app.get('/authorize',(req,res)=>{
     });
 });
 
+app.get('/drink',(req,res)=>{
+    
+});
+
+app.post('/register',(req,res)=>{
+    let hash = passhash.sha512(req.body.password,passhash.random(20));
+    let user = new User({
+        firstName:req.body.firstName,
+        lastName: req.body.lastName,
+        password:hash.passwordHash,
+        salt:hash.salt,
+        email:req.body.email
+    })
+    user.save((err)=>{
+        if(err){
+            console.log(err);
+        }else{
+            console.log("Saved");
+        }
+    })
+    res.sendStatus(200);
+});
 
 
 app.get('/testToken',(req,res)=>{

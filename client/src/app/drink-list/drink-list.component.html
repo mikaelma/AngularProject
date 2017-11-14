@@ -1,0 +1,9 @@
+<h2>Drinkorama list</h2>
+<ul class="heroes">
+  <li *ngFor="let drink of drinks" (click)="onSelect(drink)">
+    <div class="drinkListItem">
+      <img src={{drink.image}} alt="{drink.name} image">
+      <h3>{{drink.name}}</h3>
+    </div>
+  </li>
+</ul>

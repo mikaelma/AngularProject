@@ -13,8 +13,12 @@ import { MyPageComponent } from './my-page/my-page.component';
 import { HeaderComponent } from './header/header.component';
 import { HeaderDialogBoxComponent } from './header-dialog-box/header-dialog-box.component';
 import {MatToolbarModule, MatDialogModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule} from '@angular/material';
-import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 import { HeaderRegisterDialogBoxComponent } from './header-register-dialog-box/header-register-dialog-box.component';
+import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
+import { MainPageComponent } from './main-page/main-page.component';
+import { DrinkListComponent } from './drink-list/drink-list.component';
+import { DrinkComponent } from './drink/drink.component';
+import { DrinkService } from './drink.service';
 
 
 
@@ -25,8 +29,12 @@ import { HeaderRegisterDialogBoxComponent } from './header-register-dialog-box/h
     MyPageComponent,
     HeaderComponent,
     HeaderDialogBoxComponent,
-    HeaderRegisterDialogBoxComponent
+    HeaderRegisterDialogBoxComponent,
+    MainPageComponent,
+    DrinkListComponent,
+    DrinkComponent,
   ],
+
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -43,7 +51,7 @@ import { HeaderRegisterDialogBoxComponent } from './header-register-dialog-box/h
     MatInputModule
   ],
 
-  providers: [AuthService],
+  providers: [AuthService, DrinkService],
   bootstrap: [AppComponent],
   entryComponents: [HeaderDialogBoxComponent, HeaderRegisterDialogBoxComponent]
 

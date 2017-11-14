@@ -1,0 +1,7 @@
+.drinkListItem {
+    display: flex;
+    flex-direction: row;
+    vertical-align: center;
+    justify-content: center;
+  }
+  
