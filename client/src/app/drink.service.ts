@@ -42,9 +42,7 @@ export class DrinkService {
     });
   }
 
-  getDrink(id: number): Observable<Drink>{z
-
+  getDrink(id: number): Observable<Drink>{
     return of(DRINKS.find(drink => drink.id === id));
-
   }
 }

@@ -1,10 +1,11 @@
 <mat-toolbar color="primary">
   <div class="container">
-
+    {{loginDisplayName}}
     <div class="button">
 
-      <button class="mat-raised-button" id="basic" (click)= "openDialogLogin()" >Login</button>
-      <button class="mat-raised-button mat-warn" mat-raised-button="" color="warn" (click)= "openDialogRegister()">Register</button>
+      <button *ngIf=!isLoggedIn class="mat-raised-button" id="basic" (click)= "openDialogLogin()" >Login</button>
+      <button *ngIf="!isLoggedIn" class="mat-raised-button mat-warn" mat-raised-button="" color="warn" (click)= "openDialogRegister()">Register</button>
+      <button *ngIf=isLoggedIn class="mat-raised-button mat-warn"  (click)= "logout()" >Logout</button>
     </div>
   </div>
 </mat-toolbar>

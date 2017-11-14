@@ -14,7 +14,7 @@ export class AuthService {
   registerUser(user:User,password:string):Observable<Object>{
     let self = this;
     return Observable.create(observer=>{
-      this.http.post<any>('/user',{user:user,password:password}).subscribe(res=>{ // Could create a class for this, but probably more boiler than profit, <any> works fine
+      this.http.post<any>('/register',{user:user,password:password}).subscribe(res=>{ // Could create a class for this, but probably more boiler than profit, <any> works fine
         if(res.token!=null){
           localStorage.setItem("token",res.token);
           observer.next();
