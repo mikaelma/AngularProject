@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import {FormControl, Validators} from '@angular/forms';
+import {FormControl, Validators, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-header-dialog-box',
@@ -8,12 +8,28 @@ import {FormControl, Validators} from '@angular/forms';
   styleUrls: ['./header-dialog-box.component.css'],
 })
 export class HeaderDialogBoxComponent {
+  hide = true;
+  email: string;
+  password: string;
 
-  constructor(
-    public dialogRef: MatDialogRef<HeaderDialogBoxComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+  emailFormControl= new FormControl('', [Validators.required, Validators.email]);
 
-  onNoClick(): void {
-    this.dialogRef.close();
+  constructor(public dialogRefLogin: MatDialogRef<HeaderDialogBoxComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  getErrorMessage() {
+    return this.emailFormControl.hasError('required') ? 'You must enter a value' :
+      this.emailFormControl.hasError('email') ? 'Not a valid email' :
+        '';
+  }
+
+  closeDialog(){
+   // var parsed = JSON.stringify(this.);
+    let res = {
+      email: this.email,
+      password: this.password
+    }
+    console.log(res);
+    this.dialogRefLogin.close(res);
   }
 }
