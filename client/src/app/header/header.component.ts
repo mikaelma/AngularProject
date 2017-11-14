@@ -45,6 +45,7 @@ export class HeaderComponent{
 
     dialogRefRegister.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      console.log('STRING: ' + JSON.parse(JSON.stringify(result)))
     });
   }
 
