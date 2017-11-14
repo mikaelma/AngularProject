@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DrinkListComponent } from '../drink-list/drink-list.component';
+import {AuthService} from '../auth.service';
+import {DrinkService} from '../drink.service';
+import {Drink} from '../drink';
+import {Ingredient} from '../drink';
 
 
 @Component({
@@ -10,9 +14,9 @@ import { DrinkListComponent } from '../drink-list/drink-list.component';
 
 export class MainPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private auth:AuthService,private drinks:DrinkService) { }
 
   ngOnInit() {
-  }
 
+  }
 }

@@ -1,12 +1,14 @@
 export class Ingredient {
     constructor(
-        public measure: number,
+        public quantity: number,
+        public measure:string,
         public name: string)
     {}
 }
 
 export class Drink {
     constructor(
+        public id:number,
         public name:string,
         public ingredients:Array<Ingredient>,
         public author:string,
