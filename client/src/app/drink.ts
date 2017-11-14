@@ -15,6 +15,6 @@ export class Drink {
         public description:string,
         public image:string,
         public glass:string,
-        public recipie:string)
+        public recipe:string)
     {}
 }
