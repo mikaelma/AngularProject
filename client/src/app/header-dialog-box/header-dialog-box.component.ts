@@ -12,7 +12,7 @@ export class HeaderDialogBoxComponent {
   email: string;
   password: string;
 
-  emailFormControl= new FormControl('', [Validators.required, Validators.email]);
+  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
   constructor(public dialogRefLogin: MatDialogRef<HeaderDialogBoxComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) { }

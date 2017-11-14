@@ -1,0 +1,26 @@
+.drinkClass{
+    display: flex;
+    flex-direction: column;
+}
+
+.drinkHolder{
+    display: flex;
+    flex-direction: row;
+}
+
+.ingredient{
+    display: flex;
+    flex-direction: column;
+}
+
+.quantity{
+    font-size: 100%;
+}
+
+.measure{
+    font-size: 80%;
+}
+
+.name{
+    font-size: 80%;
+}
