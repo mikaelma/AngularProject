@@ -19,10 +19,10 @@ export class DrinkComponent implements OnInit {
     private location: Location) {}
 
   ngOnInit() {
-    this.getHero();
+    this.getDrink();
   }
 
-  getHero(){
+  getDrink(){
     const id = +this.route.snapshot.paramMap.get('id');
     this.drinkService.getDrink(id)
       .subscribe(drink => this.drink = drink);
