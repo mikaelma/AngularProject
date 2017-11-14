@@ -1,5 +1,46 @@
 
-<!--
+<div class="loginDialog" id='loginDialog'>
+  <h1 mat-dialog-title id="header">Log In</h1>
+
+  <mat-form-field>
+    <input matInput="" placeholder="Email" id="email" [formControl]="emailFormControl"
+           [(ngModel)] = email>
+    <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" id="password" [(ngModel)] = password>
+  </mat-form-field>
+
+  <div *ngIf="emailFormControl.invalid">
+    <button mat-raised-button disabled id="disabled">Login</button>
+  </div>
+
+  <div *ngIf="!emailFormControl.invalid">
+    <button mat-raised-button color="primary" id="login"(click)="closeDialog()">Login</button>
+  </div>
+
+</div>
+
+
+<!--<h1 mat-dialog-title>Header</h1>
+
+<div class="container">
+
+  <mat-form-field>
+    <input matInput placeholder="Enter your email" [formControl]="email" required id="email">
+    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" id="password">
+  </mat-form-field>
+
+</div>
+
+<button>Login</button>
+
 <div class="container">
   <input matInput placeholder="Enter your email" [formControl]="email" required>
   <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">

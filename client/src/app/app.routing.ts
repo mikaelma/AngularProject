@@ -6,9 +6,10 @@ import { DrinkComponent } from './drink/drink.component';
 
 
 const appRoutes: Routes = [
+
     {path:'login',      component:LoginComponent},
     {path:'main-page',  component:MainPageComponent},
-    {path:'drink/:id', component:DrinkComponent},
+    {path:'drink/:id',  component:DrinkComponent},
 
     {path: '',redirectTo: '/main-page', pathMatch: 'full'}
 ];
