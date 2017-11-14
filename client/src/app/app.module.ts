@@ -45,7 +45,7 @@ import { DrinkService } from './drink.service';
     MatFormFieldModule,
     MatTableModule,
   ],
-  providers: [AuthService, DrinkService],
+  providers: [JwtHelperService,AuthService, DrinkService],
   bootstrap: [AppComponent],
   entryComponents: [HeaderDialogBoxComponent]
 

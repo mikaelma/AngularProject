@@ -8,9 +8,9 @@ var schema = new Schema({
     image: {type: String},
     glass: {type: String},
     ingredients: [{
-        ingredientNumber: {type: Number, required: true},
-        measurementModule: {type: String, required: true},
-        ingredientName: {type: String, required: true}
+        quantity: {type: Number, required: true},
+        measure: {type: String, required: true},
+        name: {type: String, required: true}
     }],
     recipe: {type: String},
     author: {type: Schema.Types.ObjectId, ref: 'User'}

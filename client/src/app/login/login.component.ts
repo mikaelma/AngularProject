@@ -13,9 +13,5 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  login(){
-    this.auth.loginUser("mail","password").subscribe((res)=>{
-      //TODO populate any information holders such as services and navigate to splash?
-    });
-  }
+  
 }
