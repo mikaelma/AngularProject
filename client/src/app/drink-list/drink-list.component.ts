@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DrinkService } from '../drink.service';
 import { Drink } from '../drink';
+import { Router } from '@angular/router/';
 
-/**
- * @title Table with sorting
- */
+
 
 @Component({
   selector: 'app-drink-list',
@@ -16,7 +15,9 @@ export class DrinkListComponent implements OnInit {
   
   drinks: Drink[] = [];
 
-  constructor(private drinkService: DrinkService){}
+  constructor(
+    private drinkService: DrinkService,
+    private route: Router){}
 
   getDrinks(): void {
     this.drinks = this.drinkService.getDrinks();
@@ -24,6 +25,7 @@ export class DrinkListComponent implements OnInit {
 
   onSelect(drink): void{
     console.log("Clicked on: " + drink.name);
+    //Routing to drink
   }
 
   ngOnInit(){

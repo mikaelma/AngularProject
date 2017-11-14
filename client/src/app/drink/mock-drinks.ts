@@ -2,6 +2,7 @@ import { Drink } from '../drink';
 
 export const DRINKS: Drink[] = [
     {
+        id: 1,
         name: 'Sloppy seconds',
         ingredients:[
           {measure: 2, name: 'Moonshine'},
@@ -15,6 +16,7 @@ export const DRINKS: Drink[] = [
         recipie: 'Mix everything in your finest cup. Has to have coffee stains or taste will be dissappointing. Serve warm with a slap to the face.'
       },
       {
+        id: 2,
         name: 'Mayhem Mohito',
         ingredients:[
           {measure: 2, name: 'Leaves, any will do.'},
@@ -28,6 +30,7 @@ export const DRINKS: Drink[] = [
         recipie: 'Mix everything in your finest cup. Has to have coffee stains or taste will be dissappointing. Serve warm with a slap to the face.'
       },
       {
+        id: 3,
         name: 'Neverendig Sleep',
         ingredients:[
           {measure: 1, name: 'Moonshine'},

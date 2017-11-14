@@ -1,16 +1,11 @@
 <mat-toolbar color="primary">
   <div class="container">
 
-    <div class="search">
-      <button class="mat-button" mat-button="">
-        <i class="fa fa-search" aria-hidden="true"></i>
-        Search</button>
-    </div>
-
     <div class="button">
 
-      <button class="mat-raised-button" id="basic" (click)="openDialog()">Login</button>
-      <button class="mat-raised-button mat-warn" mat-raised-button="" color="warn">Register</button>
+      <button class="mat-raised-button" id="basic" (click)= "openDialogLogin()" >Login</button>
+      <button class="mat-raised-button mat-warn" mat-raised-button="" color="warn" (click)= "openDialogRegister()">Register</button>
     </div>
   </div>
 </mat-toolbar>
+

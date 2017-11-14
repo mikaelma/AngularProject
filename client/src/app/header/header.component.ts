@@ -1,6 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {HeaderDialogBoxComponent} from '../header-dialog-box/header-dialog-box.component';
+import {HeaderRegisterDialogBoxComponent} from '../header-register-dialog-box/header-register-dialog-box.component';
+
 
 @Component({
   selector: 'app-header',
@@ -8,21 +10,43 @@ import {HeaderDialogBoxComponent} from '../header-dialog-box/header-dialog-box.c
   styleUrls: ['./header.component.css']
 })
 
-export class HeaderComponent {
-  email: string;
-  password: string;
+export class HeaderComponent{
+
+  loginEmail: string;
+  loginPassword: string;
+
+  firstname: string;
+  surname: string;
+  registerEmail: string;
+  registerPassword: string;
 
   constructor(public dialog: MatDialog) { }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(HeaderDialogBoxComponent, {
+  openDialogLogin(): void {
+    let dialogRefLogin= this.dialog.open(HeaderDialogBoxComponent, {
       width: '250px',
-      data: { email: this.email, password: this.password }
+      data: {loginEmail: this.loginEmail, loginPassword: this.loginPassword}
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.password = result;
+    dialogRefLogin.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
     });
   }
+
+  openDialogRegister(): void {
+    let dialogRefRegister= this.dialog.open(HeaderRegisterDialogBoxComponent, {
+      width: '250px',
+      data: {
+        firstname: this.firstname,
+        surname: this.surname,
+        registerEmail: this.registerEmail,
+        registerPassword: this.registerPassword}
+    });
+
+    dialogRefRegister.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+
 }

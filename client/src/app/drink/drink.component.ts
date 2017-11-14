@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { Drink } from '../drink';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { DrinkService } from '../drink.service';
 
 @Component({
   selector: 'app-drink',
@@ -8,23 +11,24 @@ import { Drink } from '../drink';
 })
 export class DrinkComponent implements OnInit {
 
-  drink: Drink = {
-    name: 'Sloppy seconds',
-    ingredients:[
-      {measure: 2, name: 'Moonshine'},
-      {measure: 2, name: 'Water'},
-      {measure: 1, name: 'Tampon'},
-    ],
-    author: 'Harvey Dent',
-    description: 'Perfect for a late night cap',
-    image: 'https://dutchbros.com/public/images/drinks/Rebel_Unicorn_Blood_Iced.png',
-    glass: 'Large',
-    recipie: 'Mix everything in your finest cup. Has to have coffee stains or taste will be dissappointing. Serve warm with a slap to the face.'
-  };
+  @Input() drink: Drink;
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private drinkService: DrinkService,
+    private location: Location) {}
 
   ngOnInit() {
+    this.getHero();
   }
 
+  getHero(){
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.drinkService.getDrink(id)
+      .subscribe(drink => this.drink = drink);
+  }
+
+  goBack(): void {
+    this.location.back();
+  }
 }

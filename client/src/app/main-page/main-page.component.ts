@@ -5,6 +5,7 @@ import {DrinkService} from '../drink.service';
 import {Drink} from '../drink';
 import {Ingredient} from '../drink';
 
+
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
