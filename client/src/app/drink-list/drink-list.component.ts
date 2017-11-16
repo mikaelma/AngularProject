@@ -3,8 +3,6 @@ import { DrinkService } from '../drink.service';
 import { Drink } from '../drink';
 import { Router } from '@angular/router/';
 
-
-
 @Component({
   selector: 'app-drink-list',
   templateUrl: './drink-list.component.html',

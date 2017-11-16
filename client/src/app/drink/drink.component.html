@@ -17,16 +17,13 @@
         
         <div class="textContainer">
             <h3>Ingrediengs</h3>
-            <ul>
-                <li *ngFor="let ingredient of drink.ingredients">
+                <div *ngFor="let ingredient of drink.ingredients">
                     <div class="text">
                         {{ingredient.quantity}}
                         {{ingredient.measure}}
                         {{ingredient.name}}
                     </div>
-                </li>
-            </ul>
-
+                </div>
             <h3>Recipe</h3>
             <div class="text">{{drink.recipe}}</div>
             <h3>Description</h3>
