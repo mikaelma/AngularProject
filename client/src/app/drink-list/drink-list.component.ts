@@ -3,7 +3,6 @@ import { DrinkService } from '../drink.service';
 import { Drink } from '../drink';
 import { Router } from '@angular/router/';
 import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material';
 
 @Component({
   selector: 'app-drink-list',
@@ -19,13 +18,7 @@ export class DrinkListComponent implements OnInit {
 
   constructor(
     private drinkService: DrinkService,
-    private route: Router,
-    iconRegistry: MatIconRegistry,
-    sanitizer: DomSanitizer){
-      iconRegistry.addSvgIcon(
-          'close',
-          sanitizer.bypassSecurityTrustResourceUrl('assets/img/examples/fa-times.svg'));
-    }
+    private route: Router){}
 
   getDrinks(): void {
     this.drinks = this.drinkService.getDrinks();
