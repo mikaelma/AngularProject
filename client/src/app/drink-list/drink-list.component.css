@@ -1,0 +1,21 @@
+.listHolder{
+  display: flex;
+  flex-direction: row;
+}
+
+.drinkListItem {
+  display: flex;
+  flex-direction: row;
+  vertical-align: center;
+  align-items: center;
+}
+
+.drinkList{
+
+}
+
+.categories{
+  background-color: red;
+}
+
+  
