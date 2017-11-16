@@ -8,7 +8,16 @@ import { LoginComponent } from './login/login.component';
 import { CreateDrinkComponent } from './drinks/create-drink/create-drink.component';
 import {MyPageComponent} from "./my-page/my-page.component";
 import {HeaderComponent} from "./header/header.component";
-
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {
+  MatButtonModule,
+  MatDialogModule,
+  MatIconModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatSelectModule,
+  MatOptionModule} from "@angular/material";
+import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome'
 
 @NgModule({
   declarations: [
@@ -26,7 +35,11 @@ import {HeaderComponent} from "./header/header.component";
     MatDialogModule,
     MatButtonModule,
     MatIconModule,
-    Angular2FontawesomeModule
+    Angular2FontawesomeModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatOptionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,35 @@
+.container{
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+}
+
+mat-form-field{
+  width: 80%;
+}
+
+#rightContainer{
+  flex: 1;
+  display: flex;
+  margin: 2%;
+  flex-direction: column;
+}
+
+#leftContainer{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  margin-top: 3%;
+  margin-left: 3%;
+  height: 100%;
+}
+
+mat-toolbar{
+  background-color: white;
+  margin-left: 8%;
+}
+
+hr{
+  margin-left: 8%;
+  margin-right: 8%;
+}

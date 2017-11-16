@@ -1,3 +1,31 @@
-<p>
-  create-drink works!
-</p>
+<mat-toolbar>Create new drink</mat-toolbar>
+<hr>
+<div class="container">
+  <div id="leftContainer">
+    <img [src]="imageUrl" height="400" width="300">
+  </div>
+  <div id="rightContainer">
+    <mat-form-field>
+      <input matInput placeholder="Drink name">
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput placeholder="Description"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <input type="text" (keyup)="changeImage($event)" matInput placeholder="Image Url">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select (change)="selectGlass($event)" placeholder="Choose type of glass">
+        <mat-option value="rocks">Rocks</mat-option>
+        <mat-option value="cocktail">Cocktail</mat-option>
+        <mat-option value="highball">Highball</mat-option>
+        <mat-option value="shot">Shot</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="ingredientField">
+      <mat-form-field>
+        <input matInput placeholder="Ingredient Name">
+      </mat-form-field>
+    </div>
+  </div>
+</div>
