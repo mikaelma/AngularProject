@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, OnChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import {Drink} from "../../drink";
+import {Drink, Ingredient} from "../../drink";
+import {DrinkService} from "../../drink.service";
 
 @Component({
   selector: 'app-create-drink',
@@ -10,9 +11,9 @@ import {Drink} from "../../drink";
 export class CreateDrinkComponent implements OnInit {
   imageUrl: string = "http://twinterritory.com/wp-content/uploads/2014/02/placeholder-300x400.jpg";
   drinkForm: FormGroup;
-  public data = [{'ingredientName':'','measurementName':'','ingredientUnits':''}];
+  public data = [{'ingredientUnits': 0, 'measurementName':'', 'ingredientName':''}];
 
-  constructor() {}
+  constructor(private drinkService: DrinkService) {}
 
   ngOnInit() {
     this.drinkForm = new FormGroup({
@@ -35,7 +36,7 @@ export class CreateDrinkComponent implements OnInit {
   }
 
   addNewRow(){
-    this.data.push({'ingredientName':'','measurementName':'','ingredientUnits':''})
+    this.data.push({ingredientUnits: 0, measurementName:'', ingredientName:''})
   }
 
   removeRow(){
@@ -47,9 +48,24 @@ export class CreateDrinkComponent implements OnInit {
   }
 
   onSubmit(){
-    const drink = new Drink(
+    let ingredients = new Array<Ingredient>;
+    for(let item of this.data){
+      ingredients.push(new Ingredient(item.ingredientUnits,item.measurementName,item.ingredientName));
+    }
 
+    const drink = new Drink(
+      0,
+      this.drinkForm.value.drinkName,
+      ingredients,
+      "",
+      this.drinkForm.value.description,
+      this.drinkForm.value.imageUrl,
+      this.drinkForm.value.typeOfGlass,
+      this.drinkForm.value.recipe
     );
+    this.drinkService.addDrink(drink).subscribe(res=>{
+      console.log(res);
+    });
 
     console.log(
       this.drinkForm.value.drinkName,
