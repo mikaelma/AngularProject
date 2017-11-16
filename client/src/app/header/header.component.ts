@@ -38,14 +38,14 @@ export class HeaderComponent implements OnInit{
   }
 
   ngOnInit(){
-    let self = this;
+    /*let self = this;
     self.auth.verifyToken().subscribe((res)=>{
       if(res){
         let token = self.jwt.decodeToken(localStorage.getItem("token"));
         self.loginDisplayName = token.firstName+" "+token.lastName
         self.isLoggedIn = true;
       }
-    });
+    }); */
   }
 
   logout(){
