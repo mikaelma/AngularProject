@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation, OnChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import {Drink, Ingredient} from "../../drink";
 import {DrinkService} from "../../drink.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-create-drink',
@@ -13,7 +14,7 @@ export class CreateDrinkComponent implements OnInit {
   drinkForm: FormGroup;
   public data = [{'ingredientUnits': 0, 'measurementName':'', 'ingredientName':''}];
 
-  constructor(private drinkService: DrinkService) {}
+  constructor(private drinkService: DrinkService, public snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this.drinkForm = new FormGroup({
@@ -48,7 +49,7 @@ export class CreateDrinkComponent implements OnInit {
   }
 
   onSubmit(){
-    let ingredients = new Array<Ingredient>;
+    let ingredients = new Array<Ingredient>();
     for(let item of this.data){
       ingredients.push(new Ingredient(item.ingredientUnits,item.measurementName,item.ingredientName));
     }
@@ -63,9 +64,11 @@ export class CreateDrinkComponent implements OnInit {
       this.drinkForm.value.typeOfGlass,
       this.drinkForm.value.recipe
     );
-    this.drinkService.addDrink(drink).subscribe(res=>{
-      console.log(res);
-    });
+    this.drinkService.addDrink(drink).subscribe(
+      res => this.snackBar.open('Successfully created a new drink', null, {duration: 2000}),
+      error => console.log(error)
+      );
+    this.drinkForm.reset()
   }
 
   addIngredientName(e, i){
