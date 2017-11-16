@@ -36,7 +36,7 @@ export class CreateDrinkComponent implements OnInit {
   }
 
   addNewRow(){
-    this.data.push({ingredientUnits: 0, measurementName:'', ingredientName:''})
+    this.data.push({ingredientUnits: 0, measurementName:'cl', ingredientName:''})
   }
 
   removeRow(){
@@ -66,30 +66,17 @@ export class CreateDrinkComponent implements OnInit {
     this.drinkService.addDrink(drink).subscribe(res=>{
       console.log(res);
     });
-
-    console.log(
-      this.drinkForm.value.drinkName,
-      this.drinkForm.value.description,
-      this.drinkForm.value.imageUrl,
-      this.drinkForm.value.drinkName,
-      this.drinkForm.value.typeOfGlass,
-      this.data,
-      this.drinkForm.value.recipe,
-    );
   }
 
   addIngredientName(e, i){
     this.data[i].ingredientName = e.target.value;
-    console.log(this.data[i].ingredientName);
   }
 
   addMeasurementName(e, i){
     this.data[i].measurementName = e.value;
-    console.log(this.data[i].measurementName);
   }
 
   addIngredientUnits(e, i){
     this.data[i].ingredientUnits = e.target.value;
-    console.log(this.data[i].ingredientUnits);
   }
 }
