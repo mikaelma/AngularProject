@@ -24,6 +24,11 @@ mat-form-field{
   height: 100%;
 }
 
+img{
+  width: 50%;
+  height: auto;
+}
+
 mat-toolbar{
   background-color: white;
   margin-left: 8%;
@@ -49,8 +54,24 @@ hr{
 .measurementName{
   width: 25%;
   margin-left: 10px;
+  margin-right: 10px;
+
 }
 
 .ingredientNumber{
   width: 25%;
+  margin-left: 10px;
+}
+
+.ingredientContainer{
+  display: flex;
+  flex-direction: column;
+}
+
+.button{
+  width: 20%;
+}
+
+textarea{
+  height: 100px;
 }

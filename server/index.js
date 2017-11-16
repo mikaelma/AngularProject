@@ -30,13 +30,12 @@ let db = mongoose.connect('mongodb://localhost/putin',(err)=>{
 
 
 app.post('/login',(req,res)=>{
-    let hash = passhash.sha512(req.body.password,passhash.random(20));
     User.find({
         email:req.body.email
     },(err,userRes)=>{
         if(err){
             console.log("Error :(");
-        }else{
+        }else if(userRes[0]){
             userRes = userRes[0]
             let hash = passhash.sha512(req.body.password,userRes.salt);
             if(hash.passwordHash==userRes.password){
@@ -52,6 +51,9 @@ app.post('/login',(req,res)=>{
                 let jwtToken = jwt.sign(urlObject, secretKey, { expiresIn: 18000 });
                 res.json({token:jwtToken});
             }
+        }else{
+            console.log("No user found");
+            res.json({status:403});
         }
     });
 });
@@ -118,22 +120,33 @@ app.post('/drink',(req,res)=>{
 });
 
 app.post('/register',(req,res)=>{
+    console.log(req.body);
     let hash = passhash.sha512(req.body.password,passhash.random(20));
     let user = new User({
-        firstName:req.body.firstName,
-        lastName: req.body.lastName,
+        firstName:req.body.user.firstName,
+        lastName: req.body.user.lastName,
         password:hash.passwordHash,
         salt:hash.salt,
-        email:req.body.email
+        email:req.body.user.email
     });
-    user.save((err)=>{
+    user.save((err,doc)=>{
         if(err){
             console.log(err);
+            res.json({status:500,message:"Error while trying to save document"});
         }else{
             console.log("Saved");
+            let urlObject = {
+                _id:doc._id,
+                firstName:doc.firstName,
+                lastName:doc.lastName,
+                email:doc.email,
+                favouriteDrinks:doc.favouriteDrinks,
+                createdDrinks:doc.createdDrinks
+            }
+            let token = jwt.sign(urlObject,secretKey,{expiresIn:18000});
+            res.json({token:token});
         }
     })
-    res.sendStatus(200);
 });
 
 

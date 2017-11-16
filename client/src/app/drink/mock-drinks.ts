@@ -26,7 +26,7 @@ export const DRINKS: Drink[] = [
         author: 'Harvey Dent',
         description: 'When you need a drink to flush down all those nerves from showing your body at the beach.',
         image: 'https://www.iconexperience.com/_img/v_collection_png/256x256/shadow/drink_yellow.png',
-        glass: 'Medium rare',
+        glass: 'Medium spiral',
         recipe: 'Mix everything in your finest cup. Has to have coffee stains or taste will be dissappointing. Serve warm with a slap to the face.'
       },
       {

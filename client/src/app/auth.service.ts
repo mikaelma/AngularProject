@@ -20,14 +20,13 @@ export class AuthService {
           observer.next();
           observer.complete();
         }else if(res.error){
-          observer.error(new Error("No token provided in response: "+res.error));
-          observer.complete();
+          throw new Error("Server could not register user: "+res.message);
         }
       }) 
     });
   }
 
-  loginUser(email:string,password:string):Observable<Object>{
+  loginUser(email:string,password:string):Observable<User>{
     let self = this;
     let obj = {
       email:email,
@@ -35,9 +34,13 @@ export class AuthService {
     }
     return Observable.create((observer)=>{
       self.http.post<any>('/login',obj).subscribe((res)=>{
+        if(res.status==403){
+          throw new Error("Unauthorized access");
+        }
         localStorage.setItem("token",res.token);
-
-        observer.next(self.jwt.decodeToken(res.token));
+        console.log(localStorage.getItem("token"));
+        let token = self.jwt.decodeToken(res.token);
+        observer.next(new User(token.firstName,token.lastName,token.email,token.favouriteDrinks,token.createdDrinks));
         observer.complete();
       });
     });
@@ -45,11 +48,14 @@ export class AuthService {
 
 
 
-  verifyToken():Observable<any>{
+  verifyToken():Observable<Boolean>{
     let self  = this;
     let token = localStorage.getItem("token");
-    if(!token) throw new Error("Could not find any token");
-    let header=new HttpHeaders(
+    if(!token){
+      console.log("NO TOKEN:(");
+      throw new Error("Could not find any token");
+    }
+    let header=new HttpHeaders(  
       {'Content-Type': 'application/json',
       'Authorization':'Bearer '+ token
     });
@@ -59,7 +65,7 @@ export class AuthService {
           observer.next(true);
           observer.complete();
         }else{
-          observer.error(new Error("Could not authorize"));
+          observer.next(false);
           observer.complete();
         }
       });
