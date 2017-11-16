@@ -2,22 +2,24 @@
     
     <button (click)="goBack()">Back to search</button>
 
-    <h2> {{drink.name}} </h2>
-
+    <div class="header">
+        <div class="headerText">
+            <h2> {{drink.name}} </h2>
+            <div class="text" id="author" >By: Arthur</div>
+        </div>
+        <button>Favorite</button>
+    </div>
     <div class="drinkHolder">
 
         <div class="image">
             <img [src]=drink.image alt="Drink image">
-            <hr>
-            <button>Favorite</button>
-            <p>Author</p>
         </div>
         
-        <div class="text">
+        <div class="textContainer">
             <h3>Ingrediengs</h3>
             <ul>
                 <li *ngFor="let ingredient of drink.ingredients">
-                    <div class="ingredient">
+                    <div class="text">
                         {{ingredient.quantity}}
                         {{ingredient.measure}}
                         {{ingredient.name}}
@@ -25,10 +27,10 @@
                 </li>
             </ul>
 
-            <h3>Recipei</h3>
-            <p>{{drink.recipe}}</p>
-            <h3>Descript</h3>
-            <p>{{drink.description}}</p>
+            <h3>Recipe</h3>
+            <div class="text">{{drink.recipe}}</div>
+            <h3>Description</h3>
+            <div class="text">{{drink.description}}</div>
         </div>
     </div>
 </div>
