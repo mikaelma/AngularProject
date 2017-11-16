@@ -38,6 +38,7 @@ export class HeaderComponent implements OnInit{
   }
 
   ngOnInit(){
+    /*
     let self = this;
     self.auth.verifyToken().subscribe((res)=>{
       if(res){
@@ -46,6 +47,7 @@ export class HeaderComponent implements OnInit{
         self.isLoggedIn = true;
       }
     });
+    */
   }
 
   logout(){

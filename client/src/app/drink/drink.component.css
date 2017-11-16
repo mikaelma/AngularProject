@@ -3,16 +3,33 @@
     flex-direction: column;
 }
 
+.button{
+    width: 10%;
+}
+
 .drinkHolder{
     display: flex;
     flex-direction: row;
+    flex: 2;
 }
 
 .header{
+
+    margin-left: 1em;
+
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
 }
+
+#icon {
+    align-self: center;
+}
+
 
 .headerText{
     display: flex;
@@ -21,6 +38,7 @@
 
 .image{
     margin-top: 10%;
+    flex: 1;
 }
 
 #author{
@@ -35,7 +53,8 @@ h2{
 }
 
 h3{
-    font-family: 'Barlow', sans-serif;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
     font-size: 1.4em;
 }
 
@@ -43,11 +62,14 @@ h3{
     display: flex;
     padding-left: 10%;
     flex-direction: column;
+    flex: 1;
 }
 
 .text{
     font-family: 'Raleway', sans-serif;
     font-size: 1.1em;
+    font-weight: 300;
+    width: 70%;
 }
 
 .ingredient{

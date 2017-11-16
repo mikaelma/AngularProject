@@ -24,7 +24,7 @@ export const DRINKS: Drink[] = [
           {quantity: 5, measure: 'cl', name: 'Light beer'},
         ],
         author: 'Harvey Dent',
-        description: 'Perfect for a late night cap',
+        description: 'When you need a drink to flush down all those nerves from showing your body at the beach.',
         image: 'https://www.iconexperience.com/_img/v_collection_png/256x256/shadow/drink_yellow.png',
         glass: 'Medium rare',
         recipe: 'Mix everything in your finest cup. Has to have coffee stains or taste will be dissappointing. Serve warm with a slap to the face.'
@@ -38,7 +38,7 @@ export const DRINKS: Drink[] = [
           {quantity: 9, measure: 'dl', name: 'Chloroform'},
         ],
         author: 'Harvey Dent',
-        description: 'Perfect for a late night cap',
+        description: 'The gentlemans best friend. Always gets you laid in the most difficult of situations.',
         image: 'https://pbs.twimg.com/profile_images/719575860974460929/RbX6OcuM_400x400.jpg',
         glass: 'Smallest possible',
         recipe: 'Mix everything in your finest cup. Has to have coffee stains or taste will be dissappointing. Serve warm with a slap to the face.'

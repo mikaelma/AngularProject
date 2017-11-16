@@ -1,22 +1,47 @@
-<h2>Drinkorama list</h2>
 
-<h3>Seach Bar</h3>
+
+<mat-form-field class="searchHolder">
+    <input matInput type="text" placeholder="Search" [(ngModel)]="value"/>
+    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+      <mat-icon svgIcon="close"></mat-icon>
+    </button>
+</mat-form-field>
 
 <div class="listHolder">
 
   <div class="categories">
-    HERE IS THE CATEGORY BOX
+    <div>
+      <h2>Alcohol</h2>
+        <mat-selection-list #spirits>
+          <mat-list-option *ngFor="let alcohol of typesOfAcohol">
+            {{alcohol}}
+          </mat-list-option>
+        </mat-selection-list>
+    </div>
+
+    <div>
+      <h2>Glass</h2>
+      <mat-selection-list #glasses>
+          <mat-list-option *ngFor="let glass of typesOfGlass">
+            {{glass}}
+          </mat-list-option>
+        </mat-selection-list>
+    </div>
   </div>
   
-  <mat-list>
-    <mat-list-item *ngFor="let drink of drinks">
-      <a routerLink="/drink/{{drink.id}}">
-        <img matListAvatar src={{drink.image}} alt="Drink image">
-        <h3 matLine> {{drink.name}}</h3>
-      </a>
-    </mat-list-item>
-  </mat-list>
+  <div class="drinkList">
 
+    <div *ngFor="let drink of drinks" (click)="onSelect(drink)">
+      <div class="drinkListItem">
+        <a routerLink="/drink/{{drink.id}}">
+        <img class="drinkImage" src={{drink.image}} alt="{drink.name} image">
+        <div class="drinkName">{{drink.name}}</div>
+        <div class="subHeader">Author: {{drink.author}}</div>
+        <div class="text">"{{drink.description}}"</div>
+        </a>
+      </div>
+    </div>
+  </div>
   <!--
   <ul class="drinkList">
     <li *ngFor="let drink of drinks" (click)="onSelect(drink)">

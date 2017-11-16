@@ -18,7 +18,7 @@ import {DrinkListComponent} from "./drink-list/drink-list.component";
 import {DrinkComponent} from "./drink/drink.component";
 import {
   MatButtonModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule, MatOptionModule, MatSelectModule,
-  MatToolbarModule, MatListModule
+  MatToolbarModule, MatListModule, MatGridListModule,
 } from "@angular/material";
 import {Angular2FontawesomeModule} from "angular2-fontawesome";
 import {DrinkService} from "./drink.service";
@@ -51,9 +51,10 @@ import {DrinkService} from "./drink.service";
     Angular2FontawesomeModule,
     MatFormFieldModule,
     MatInputModule,
-    MatListModule,
+    MatGridListModule,
     MatSelectModule,
-    MatOptionModule
+    MatOptionModule,
+    MatListModule
   ],
   providers: [JwtHelperService,AuthService, DrinkService],
   bootstrap: [AppComponent],
