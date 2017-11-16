@@ -12,7 +12,7 @@ import { MainGuard } from './main.guard';
 import { MyPageComponent } from './my-page/my-page.component';
 import { HeaderComponent } from './header/header.component';
 import { HeaderDialogBoxComponent } from './header-dialog-box/header-dialog-box.component';
-import {MatToolbarModule, MatDialogModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule} from '@angular/material';
+import { MatToolbarModule, MatDialogModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatListModule } from '@angular/material';
 import { HeaderRegisterDialogBoxComponent } from './header-register-dialog-box/header-register-dialog-box.component';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 import { MainPageComponent } from './main-page/main-page.component';
@@ -48,7 +48,8 @@ import { DrinkService } from './drink.service';
     MatIconModule,
     Angular2FontawesomeModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatListModule,
   ],
   providers: [JwtHelperService,AuthService, DrinkService],
   bootstrap: [AppComponent],

@@ -5,6 +5,19 @@
   justify-content: space-between;
 }
 
+.userContainer{
+  display: flex;
+  flex-direction: row;
+}
+
+.username{
+  font-family: 'Raleway';
+  font-size: 1.2em;
+  justify-content: center;
+  vertical-align: bottom;
+  padding-right: 10px;
+}
+
 .search{
 }
 

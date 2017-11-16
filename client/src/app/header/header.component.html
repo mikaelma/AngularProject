@@ -1,10 +1,16 @@
 <mat-toolbar color="primary">
   <div class="container">
-    {{loginDisplayName}}
-    <div class="button">
-      <button *ngIf=!isLoggedIn class="mat-raised-button" id="basic" (click)= "openDialogLogin()" >Login</button>
-      <button *ngIf="!isLoggedIn" class="mat-raised-button mat-warn" mat-raised-button="" color="warn" (click)= "openDialogRegister()">Register</button>
-      <button *ngIf=isLoggedIn class="mat-raised-button mat-warn"  (click)= "logout()" >Logout</button>
+    <h1>Drinkorama</h1>
+    <div class="userContainer">
+      <div class="username">
+        John Olav
+        {{loginDisplayName}}
+      </div>
+      <div class="button">
+        <button *ngIf=!isLoggedIn class="mat-raised-button" id="basic" (click)= "openDialogLogin()" >Login</button>
+        <button *ngIf="!isLoggedIn" class="mat-raised-button mat-warn" mat-raised-button="" color="warn" (click)= "openDialogRegister()">Register</button>
+        <button *ngIf=isLoggedIn class="mat-raised-button mat-warn"  (click)= "logout()" >Logout</button>
+      </div>
     </div>
   </div>
 </mat-toolbar>

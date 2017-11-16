@@ -8,6 +8,16 @@
     HERE IS THE CATEGORY BOX
   </div>
   
+  <mat-list>
+    <mat-list-item *ngFor="let drink of drinks">
+      <a routerLink="/drink/{{drink.id}}">
+        <img matListAvatar src={{drink.image}} alt="Drink image">
+        <h3 matLine> {{drink.name}}</h3>
+      </a>
+    </mat-list-item>
+  </mat-list>
+
+  <!--
   <ul class="drinkList">
     <li *ngFor="let drink of drinks" (click)="onSelect(drink)">
       <a routerLink="/drink/{{drink.id}}">
@@ -18,5 +28,5 @@
       </a>
     </li>
   </ul>
-
+  -->
 </div>
