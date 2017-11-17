@@ -16,15 +16,8 @@ export class DrinkService {
   constructor(private http:HttpClient,private jwt:JwtHelperService){}
   drinks:Drink[] = [];
   getDrinks(): Observable<Drink[]>{
-    //return DRINKS;
-
-    //subscribe
-    //return observable with drinks
     let self = this;
     return self.http.get<any>('/drinks').map(res => {
-
-      console.log("inne")
-
       let drinks = new Array<Drink>();
       for (let drink of res) {
         let ingredients = new Array<Ingredient>();
@@ -49,7 +42,6 @@ export class DrinkService {
         ))
       }
       this.drinks = drinks;
-      console.log(this.drinks);
       return drinks;
     })
   }
@@ -76,7 +68,7 @@ export class DrinkService {
       })
     });
   }
-  
+
   addDrink(drink:Drink):Observable<any>{
     let self  = this;
     let token = localStorage.getItem("token");
@@ -111,6 +103,35 @@ export class DrinkService {
       ,res.glass,res.recipe);
     });
   }
-}
 
-let drinks = new Array<Drink>();
+  searchDrink(name: string): Observable<Drink[]>{
+    let self = this;
+    return self.http.get<any>('/drinks/' + name).map(res => {
+      let drinks = new Array<Drink>();
+      for (let drink of res) {
+        let ingredients = new Array<Ingredient>();
+        for (let ingredient of drink.ingredients) {
+          ingredients.push(new Ingredient(
+            ingredient.quantity,
+            ingredient.measure,
+            ingredient.name
+          ))
+        }
+
+        drinks.push(new Drink(
+          drink._id,
+          drink.name,
+          ingredients,
+          drink.authorId,
+          drink.authorName,
+          drink.description,
+          drink.image,
+          drink.glass,
+          drink.recipe
+        ))
+      }
+      this.drinks = drinks;
+      return drinks;
+    })
+  }
+}

@@ -33,6 +33,20 @@ export class DrinkListComponent implements OnInit {
       this.router.navigate(['/drink',id])
   }
 
+  searchDrink(e){
+    if (e.target.value.length > 2){
+      this.drinkService.searchDrink(e.target.value)
+        .subscribe(
+          (drinks: Drink[]) => {
+            console.log('sub');
+            this.drinks = drinks;
+          }
+        )
+    } else {
+      this.getDrinks();
+    }
+  }
+
   onSelect(drink): void{
     console.log("Clicked on: " + drink.name);
     //Routing to drink

@@ -77,6 +77,18 @@ app.get('/drinks',(req,res)=>{
         }else{
             res.json(drinks);
         }
+    }).limit(12);
+});
+
+app.get('/drinks/:name',(req,res)=>{
+    let self = this;
+    let name = req.params.name;
+    Drink.find({name: {$regex : ".*" + name + ".*", '$options' : 'i'}}, (err,drinks) => {
+    if(err){
+        res.sendStatus(500);
+    }else{
+        res.json(drinks);
+        }
     });
 });
 
