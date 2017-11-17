@@ -10,7 +10,7 @@ import {} from '@auth0/angular-jwt'
 export class AuthService {
 
   constructor(private jwt:JwtHelperService, private http:HttpClient) { }
-  
+
   registerUser(user:User,password:string):Observable<Object>{
     let self = this;
     return Observable.create(observer=>{
@@ -22,9 +22,10 @@ export class AuthService {
         }else if(res.error){
           throw new Error("Server could not register user: "+res.message);
         }
-      }) 
+      })
     });
   }
+  
 
   loginUser(email:string,password:string):Observable<User>{
     let self = this;
@@ -55,7 +56,7 @@ export class AuthService {
       console.log("NO TOKEN:(");
       throw new Error("Could not find any token");
     }
-    let header=new HttpHeaders(  
+    let header=new HttpHeaders(
       {'Content-Type': 'application/json',
       'Authorization':'Bearer '+ token
     });

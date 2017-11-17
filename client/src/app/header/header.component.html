@@ -1,18 +1,28 @@
 <mat-toolbar color="primary">
   <div class="container">
-    <a routerLink="">
+
+    <div class="subContainer">
+      <a routerLink="">
       <img class="logo" src='assets/logoTrans.png' alt='logo image'>
-    </a>
-    <div class="userContainer">
+      </a>
+    </div>
+
+    <div class="subContainer2">
+
       <div class="username">
         {{loginDisplayName}}
       </div>
+
       <div class="button">
         <button *ngIf=!isLoggedIn class="mat-raised-button" id="basic" (click)= "openDialogLogin()" >Login</button>
         <button *ngIf="!isLoggedIn" class="mat-raised-button mat-warn" mat-raised-button="" color="warn" (click)= "openDialogRegister()">Register</button>
+        <button *ngIf="isLoggedIn" class="mat-icon-button" (click)="redirect()">
+          <i aria-hidden="true" class="material-icons">account_circle</i>
+        </button>
         <button *ngIf=isLoggedIn class="mat-raised-button mat-warn"  (click)= "logout()" >Logout</button>
       </div>
     </div>
   </div>
+
 </mat-toolbar>
 

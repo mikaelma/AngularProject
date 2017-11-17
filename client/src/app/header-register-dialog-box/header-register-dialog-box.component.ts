@@ -32,7 +32,7 @@ export class HeaderRegisterDialogBoxComponent {
       firstname:['', Validators.required],
       surname: ['', Validators.required],
       email: ['', Validators.compose([Validators.required, Validators.email])],
-      password: ['', Validators.required],
+      password: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
       confirmPassword: ['', Validators.required]
     },{validator: matchingPasswords('password', 'confirmPassword')})
   }

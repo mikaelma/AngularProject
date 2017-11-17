@@ -21,7 +21,8 @@ import {
   MatToolbarModule, MatListModule, MatSnackBarModule, MatGridListModule
 } from "@angular/material";
 import {Angular2FontawesomeModule} from "angular2-fontawesome";
-import {DrinkService} from "./drink.service";
+import {DrinkService} from './drink.service';
+import { ChangePasswordDialogComponent } from './change-password-dialog/change-password-dialog.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {DrinkService} from "./drink.service";
     MainPageComponent,
     DrinkListComponent,
     DrinkComponent,
+    ChangePasswordDialogComponent,
   ],
 
   imports: [
@@ -59,6 +61,6 @@ import {DrinkService} from "./drink.service";
   ],
   providers: [JwtHelperService,AuthService, DrinkService],
   bootstrap: [AppComponent],
-  entryComponents: [HeaderDialogBoxComponent, HeaderRegisterDialogBoxComponent]
+  entryComponents: [HeaderDialogBoxComponent, HeaderRegisterDialogBoxComponent, ChangePasswordDialogComponent]
 })
 export class AppModule { }

@@ -1,0 +1,25 @@
+.main{
+  display: flex;
+  flex-direction: row;
+  flex:1;
+  justify-content: space-around;
+  padding-top:20px;
+  font-family: 'Raleway', sans-serif;
+}
+
+.personalInfo{
+  font-family: 'Raleway', sans-serif;
+  border: solid;
+}
+
+.myDrinks{
+  font-family: 'Raleway', sans-serif;
+  border: solid;
+
+}
+
+.favourites{
+  font-family: 'Raleway', sans-serif;
+  border: solid;
+
+}

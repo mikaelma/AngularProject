@@ -6,11 +6,12 @@ import {AuthService} from '../auth.service';
 import {User} from '../user';
 import {Observable} from 'rxjs/Observable'
 import {JwtHelperService} from '../jwthelper.service';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
 
 export class HeaderComponent implements OnInit{
@@ -19,13 +20,12 @@ export class HeaderComponent implements OnInit{
   loginEmail: string;
   loginPassword: string;
   isLoggedIn:boolean;
-
   firstname: string;
   surname: string;
   registerEmail: string;
   registerPassword: string;
 
-  constructor(public dialog: MatDialog,private auth:AuthService,private jwt:JwtHelperService) { }
+  constructor(public dialog: MatDialog,private auth:AuthService,private jwt:JwtHelperService, private router: Router) { }
 
   openDialogLogin(): void {
     let self = this;
@@ -75,6 +75,10 @@ export class HeaderComponent implements OnInit{
     localStorage.removeItem("token");
     self.loginDisplayName = ""
     console.log("Called logout");
+  }
+
+  redirect(){
+    this.router.navigate(['./my-page'])
   }
 
   openDialogRegister(): void {
