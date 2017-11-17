@@ -1,0 +1,77 @@
+.container{
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+}
+
+mat-form-field{
+  width: 80%;
+}
+
+#rightContainer{
+  flex: 1;
+  display: flex;
+  margin: 2%;
+  flex-direction: column;
+}
+
+#leftContainer{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  margin-top: 3%;
+  margin-left: 3%;
+  height: 100%;
+}
+
+img{
+  width: 50%;
+  height: auto;
+}
+
+mat-toolbar{
+  background-color: white;
+  margin-left: 8%;
+}
+
+hr{
+  margin-left: 8%;
+  margin-right: 8%;
+}
+
+.ingredientField{
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  width: 80%;
+}
+
+.ingredientName{
+  width: 50%;
+  margin-right: 10px;
+}
+
+.measurementName{
+  width: 25%;
+  margin-left: 10px;
+  margin-right: 10px;
+
+}
+
+.ingredientNumber{
+  width: 25%;
+  margin-left: 10px;
+}
+
+.ingredientContainer{
+  display: flex;
+  flex-direction: column;
+}
+
+.button{
+  width: 20%;
+}
+
+textarea{
+  height: 100px;
+}

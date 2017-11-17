@@ -1,0 +1,97 @@
+<mat-toolbar>Create new drink</mat-toolbar>
+<hr>
+<div class="container">
+  <div id="leftContainer">
+    <img [src]="imageUrl">
+  </div>
+  <div id="rightContainer">
+    <form [formGroup]="drinkForm" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <input matInput placeholder="Drink name (required)" formControlName="drinkName">
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput placeholder="Description" formControlName="description"></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          type="text"
+          (keyup)="changeImage($event)"
+          matInput
+          placeholder="Image Url Ratio 1:1 (required)"
+          formControlName="imageUrl">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select
+          (change)="selectGlass($event)"
+          placeholder="Choose type of glass"
+          formControlName="typeOfGlass">
+          <mat-option value="rocks">Rocks</mat-option>
+          <mat-option value="cocktail">Cocktail</mat-option>
+          <mat-option value="highball">Highball</mat-option>
+          <mat-option value="shot">Shot</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="ingredientContainer">
+        <div class="ingredientField" *ngFor="let data of data; let i = index">
+          <mat-form-field class="ingredientName">
+            <input
+              (keyup)="addIngredientName($event, i)"
+              matInput
+              placeholder="Ingredient Name"
+              value="{{data.ingredientName}}"
+              name="ingredientName"
+              formControlName="ingredientName">
+          </mat-form-field>
+          <mat-form-field class="measurementName">
+            <mat-select
+              (change)="addMeasurementName($event, i)"
+              placeholder="Measurement"
+              value="{{data.measurementName}}"
+              name="measurementName"
+              formControlName="measurementName">
+              <mat-option value="cl">Cl</mat-option>
+              <mat-option value="spoon">Spoon</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="ingredientNumber">
+            <input
+              matInput
+              (keyup)="addIngredientUnits($event, i)"
+              type="number"
+              placeholder="Units"
+              value="{{data.ingredientUnits}}"
+              name="ingredientUnits"
+              formControlName="ingredientUnits">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="buttonContainer">
+        <button
+          class="button"
+          type="button"
+          (click)="addNewRow()"
+          mat-raised-button
+          color="primary">
+          New Ingredient
+        </button>
+        <button
+          class="button"
+          type="button"
+          (click)="removeRow()"
+          class="mat-raised-button mat-warn"
+          color="warn"
+          [disabled]="data.length < 2">
+          Remove Row
+        </button>
+      </div>
+      <mat-form-field>
+        <textarea matInput placeholder="Recipe" formControlName="recipe"></textarea>
+      </mat-form-field>
+      <button
+        class="button"
+        mat-raised-button
+        color="primary"
+        [disabled]="!drinkForm.valid">Submit</button>
+    </form>
+  </div>
+</div>

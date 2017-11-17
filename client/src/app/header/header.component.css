@@ -5,11 +5,26 @@
   justify-content: space-between;
 }
 
-.search{
+.logo{
+  height: 2em;
 }
 
-.button{
+.userContainer{
+  display: flex;
+  flex-direction: row;
 }
+
+.username{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  font-family: 'Raleway';
+  font-size: 1.2em;
+  font-weight: 200;
+  padding-right: 10px;
+}
+
 #basic{
   color: black;
 }
