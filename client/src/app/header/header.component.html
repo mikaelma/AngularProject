@@ -10,7 +10,13 @@
       <div class="button">
         <button *ngIf=!isLoggedIn class="mat-raised-button" id="basic" (click)= "openDialogLogin()" >Login</button>
         <button *ngIf="!isLoggedIn" class="mat-raised-button mat-warn" mat-raised-button="" color="warn" (click)= "openDialogRegister()">Register</button>
-        <button *ngIf=isLoggedIn class="mat-raised-button mat-warn"  (click)= "logout()" >Logout</button>
+        <button
+          *ngIf=isLoggedIn
+          class="mat-raised-button"
+          style="color: black"
+          [routerLink]="['/drink/create']"
+          >Create Drink</button>
+        <button *ngIf=isLoggedIn class="mat-raised-button mat-warn" [routerLink]="['/']" (click)= "logout()" >Logout</button>
       </div>
     </div>
   </div>

@@ -93,7 +93,8 @@ app.post('/drink',(req,res)=>{
                 glass:req.body.glass,
                 ingredients:req.body.ingredients,
                 recipe:req.body.recipe,
-                author:decoded._id
+                authorId:decoded._id,
+                authorName: decoded.firstName + " " + decoded.lastName
             });
             drink.save((err,document)=>{
                 if(err){
