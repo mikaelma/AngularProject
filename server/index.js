@@ -75,10 +75,9 @@ app.get('/drinks',(req,res)=>{
         if(err){
             res.sendStatus(500);
         }else{
-            res.json(drinks)
+            res.json(drinks);
         }
     });
-    console.log("HEIA");
 });
 
 app.post('/drink',(req,res)=>{
