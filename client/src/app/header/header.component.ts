@@ -56,12 +56,11 @@ export class HeaderComponent implements OnInit{
           self.loginDisplayName = token.firstName+" "+token.lastName
           self.isLoggedIn = true;
         }else{
-          console.log("Could probably not find any tok")
+          console.log("Could probably not find any token")
         }
       });
     }catch(e){
-      console.log(e);
-      console.log("No token found in localstorage, probably because the user is not logged in");
+
     }
   }
 

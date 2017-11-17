@@ -13,14 +13,12 @@ export class MainGuard implements CanActivate {
     let self = this;
     return Observable.create(observer => {
       self.auth.verifyToken().catch(self.handleRejection).subscribe(res => {
-        if (res) {
-          observer.next(res);
-          observer.complete();
-        } else {
-          self.router.navigate(['/login']);
-          observer.next(res);
-          observer.complete();
-        }
+        observer.next(true);
+        observer.complete();
+      },error=>{
+        self.router.navigate(['/unauthorized']);
+        observer.next(false);
+        observer.complete();
       })
     });
   }

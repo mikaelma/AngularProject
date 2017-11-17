@@ -12,7 +12,7 @@ import {Subscription} from "rxjs/Subscription";
 })
 export class DrinkComponent implements OnInit,OnDestroy {
 
-  @Input() drink: Drink;
+  drink:Drink
   sub:Subscription
   constructor(
     private route: ActivatedRoute,
