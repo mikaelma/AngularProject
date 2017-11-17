@@ -9,8 +9,8 @@ import {DrinkComponent} from "./drink/drink.component";
 const appRoutes: Routes = [
     {path:'login',          component:LoginComponent},
     {path:'main-page',      component:MainPageComponent},
-    {path:'drinks/create',  component:CreateDrinkComponent},
-    {path:'drinks/:id',     component:DrinkComponent},
+    {path:'drink/create',  component:CreateDrinkComponent},
+    {path:'drink/:id',     component:DrinkComponent},
     {path: '',redirectTo: '/main-page', pathMatch: 'full'}
 ];
 

@@ -81,7 +81,7 @@ app.get('/drinks',(req,res)=>{
     console.log("HEIA");
 });
 
-app.post('/drinks',(req,res)=>{
+app.post('/drink',(req,res)=>{
     let self = this;
     verifyToken(req,(err,decoded)=>{
         if(err){

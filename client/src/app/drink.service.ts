@@ -33,7 +33,7 @@ export class DrinkService {
       'Authorization':'Bearer '+ token
     });
     return Observable.create(observer=>{
-      self.http.post<any>('/drinks',drink,{headers:header}).subscribe((res)=>{
+      self.http.post<any>('/drink',drink,{headers:header}).subscribe((res)=>{
         if(res.token){
           localStorage.setItem("token",res.token);
           observer.next(self.jwt.decodeToken(res.token));
