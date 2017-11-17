@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Drink } from './drink';
+import { Drink, Ingredient } from './drink';
 import { DRINKS } from './drink/mock-drinks';
 
 import {Observable} from 'rxjs/Observable';
@@ -15,12 +15,40 @@ import { of } from 'rxjs/observable/of';
 export class DrinkService {
   constructor(private http:HttpClient,private jwt:JwtHelperService){}
 
-  getDrinks(): Drink[] {
-    return DRINKS;
+  getDrinks(): Observable<Drink[]>{
+    //return DRINKS;
 
     //subscribe
     //return observable with drinks
+    let self = this;
+    return self.http.get<any>('/drinks').map(res => {
 
+      console.log("inne")
+
+      let drinks = new Array<Drink>();
+      for (let drink of res) {
+        let ingredients = new Array<Ingredient>();
+        for (let ingredient of drink.ingredients) {
+          ingredients.push(new Ingredient(
+            ingredient.quantity,
+            ingredient.measure,
+            ingredient.name
+          ))
+        }
+        
+        drinks.push(new Drink(
+          drink._id,
+          drink.name,
+          ingredients,
+          drink.author,
+          drink.description,
+          drink.image,
+          drink.glass,
+          drink.recipe
+        ))
+      }
+      return drinks;
+    })
   }
 
   

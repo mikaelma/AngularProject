@@ -21,9 +21,12 @@ export class DrinkListComponent implements OnInit {
     private route: Router){}
 
   getDrinks(): void {
-    this.drinks = this.drinkService.getDrinks();
-    
-
+    this.drinkService.getDrinks()
+      .subscribe(
+        (drinks: Drink[]) => {
+          this.drinks = drinks;
+        }
+      );
   }
 
   onSelect(drink): void{
