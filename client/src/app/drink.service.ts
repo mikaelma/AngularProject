@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Drink, Ingredient } from './drink';
-import { DRINKS } from './drink/mock-drinks';
-
 import {Observable} from 'rxjs/Observable';
 import {HttpClient,HttpHeaders} from '@angular/common/http';
 import {JwtHelperService} from './jwthelper.service'
@@ -14,7 +12,7 @@ import { of } from 'rxjs/observable/of';
 @Injectable()
 export class DrinkService {
   constructor(private http:HttpClient,private jwt:JwtHelperService){}
-
+  drinks:Drink[] = [];
   getDrinks(): Observable<Drink[]>{
     //return DRINKS;
 
@@ -47,6 +45,8 @@ export class DrinkService {
           drink.recipe
         ))
       }
+      this.drinks = drinks;
+      console.log(this.drinks);
       return drinks;
     })
   }
@@ -74,7 +74,8 @@ export class DrinkService {
     });
   }
 
-  getDrink(id: number): Observable<Drink>{
-    return of(DRINKS.find(drink => drink.id === id));
+  getDrink(id: string): Observable<Drink>{
+    console.log(id);
+    return of(this.drinks.find(drink => drink.id === id));
   }
 }

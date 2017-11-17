@@ -8,7 +8,7 @@ export class Ingredient {
 
 export class Drink {
     constructor(
-        public id:number,
+        public id:string,
         public name:string,
         public ingredients:Array<Ingredient>,
         public author:string,
