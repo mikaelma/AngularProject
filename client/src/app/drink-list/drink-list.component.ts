@@ -11,19 +11,26 @@ import {DomSanitizer} from '@angular/platform-browser';
 })
 
 export class DrinkListComponent implements OnInit {
-  
+
   drinks: Drink[] = [];
   typesOfAcohol = ['Brandy', 'Gin', 'Rum', 'Tequila', 'Vodka', 'Whiskey'];
   typesOfGlass = ['Cocktail', 'Highball', 'Rocks', 'Shot'];
 
   constructor(
     private drinkService: DrinkService,
-    private route: Router){}
+    private router: Router){}
 
   getDrinks(): void {
-    this.drinks = this.drinkService.getDrinks();
-    
+    this.drinkService.getDrinks()
+      .subscribe(
+        (drinks: Drink[]) => {
+          this.drinks = drinks;
+        }
+      );
+  }
 
+  navigateToDrink(id){
+      this.router.navigate(['/drink',id])
   }
 
   onSelect(drink): void{

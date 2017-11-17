@@ -6,7 +6,7 @@
     <mat-form-field>
     <input matInput placeholder="First Name" formControlName="firstname">
       <mat-error *ngIf="registerForm.controls.firstname.hasError('required')">This field is required</mat-error>
-  </mat-form-field>
+    </mat-form-field>
 
     <mat-form-field>
     <input matInput placeholder="Surname" formControlName= "surname">
@@ -23,6 +23,8 @@
   <mat-form-field>
     <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password">
     <mat-error *ngIf="registerForm.controls.password.hasError('required')">This field is required</mat-error>
+    <mat-error *ngIf="registerForm.controls.password.hasError('minlength')">Password must contain at least four characters</mat-error>
+
   </mat-form-field>
 
   <mat-form-field>

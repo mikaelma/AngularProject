@@ -55,9 +55,10 @@ export class CreateDrinkComponent implements OnInit {
     }
 
     const drink = new Drink(
-      0,
+      "",
       this.drinkForm.value.drinkName,
       ingredients,
+      "",
       "",
       this.drinkForm.value.description,
       this.drinkForm.value.imageUrl,
@@ -68,7 +69,8 @@ export class CreateDrinkComponent implements OnInit {
       res => this.snackBar.open('Successfully created a new drink', null, {duration: 2000}),
       error => console.log(error)
       );
-    this.drinkForm.reset()
+    this.drinkForm.reset();
+    this.imageUrl = "http://twinterritory.com/wp-content/uploads/2014/02/placeholder-300x400.jpg";
   }
 
   addIngredientName(e, i){

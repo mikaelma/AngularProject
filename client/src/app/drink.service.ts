@@ -14,13 +14,44 @@ import { of } from 'rxjs/observable/of';
 @Injectable()
 export class DrinkService {
   constructor(private http:HttpClient,private jwt:JwtHelperService){}
-
-  getDrinks(): Drink[] {
-    return DRINKS;
+  drinks:Drink[] = [];
+  getDrinks(): Observable<Drink[]>{
+    //return DRINKS;
 
     //subscribe
     //return observable with drinks
+    let self = this;
+    return self.http.get<any>('/drinks').map(res => {
 
+      console.log("inne")
+
+      let drinks = new Array<Drink>();
+      for (let drink of res) {
+        let ingredients = new Array<Ingredient>();
+        for (let ingredient of drink.ingredients) {
+          ingredients.push(new Ingredient(
+            ingredient.quantity,
+            ingredient.measure,
+            ingredient.name
+          ))
+        }
+
+        drinks.push(new Drink(
+          drink._id,
+          drink.name,
+          ingredients,
+          drink.authorId,
+          drink.authorName,
+          drink.description,
+          drink.image,
+          drink.glass,
+          drink.recipe
+        ))
+      }
+      this.drinks = drinks;
+      console.log(this.drinks);
+      return drinks;
+    })
   }
 
   getCreatedDrinks():Observable<Array<Drink>>{
@@ -32,14 +63,14 @@ export class DrinkService {
       'Authorization':'Bearer '+ token
     });
     return Observable.create(observer=>{
-      self.http.get<Drink[]>('/createdDrinks').map((res)=>{
+      self.http.get<any[]>('/createdDrinks').map((res)=>{
         let drinks = new Array<Drink>();
         for(let item of res){
           let ingredients = new Array<Ingredient>();
           for(let ingredient of item.ingredients){
             ingredients.push(new Ingredient(ingredient.quantity,ingredient.measure,ingredient.name));
           }
-          drinks.push(new Drink(item.id,item.name,ingredients,item.author,item.description,item.image,item.glass,item.recipe));
+          drinks.push(new Drink(item._id,item.name,ingredients,item.authorId,item.authorName,item.description,item.image,item.glass,item.recipe));
           return drinks;
         }
       })
@@ -68,8 +99,17 @@ export class DrinkService {
     });
   }
 
-  getDrink(id: number): Observable<Drink>{
-    return of(DRINKS.find(drink => drink.id === id));
+  getDrink(id: string): Observable<Drink>{
+    console.log(id);
+    let self = this;
+    return self.http.get<any>('/findDrink/'+id).map(res =>{
+      let ingredients = new Array<Ingredient>();
+      for(let item of res.ingredients){
+        ingredients.push(new Ingredient(item.quantity,item.measure,item.name));
+      }
+      return new Drink(res._id,res.name,ingredients,res.authorId,res.authorName,res.description,res.image
+      ,res.glass,res.recipe);
+    });
   }
 }
 

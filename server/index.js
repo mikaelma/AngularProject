@@ -75,10 +75,9 @@ app.get('/drinks',(req,res)=>{
         if(err){
             res.sendStatus(500);
         }else{
-            res.json(drinks)
+            res.json(drinks);
         }
     });
-    console.log("HEIA");
 });
 
 app.post('/drink',(req,res)=>{
@@ -95,7 +94,8 @@ app.post('/drink',(req,res)=>{
                 glass:req.body.glass,
                 ingredients:req.body.ingredients,
                 recipe:req.body.recipe,
-                author:decoded._id
+                authorId:decoded._id,
+                authorName: decoded.firstName + " " + decoded.lastName
             });
             drink.save((err,document)=>{
                 if(err){
@@ -188,7 +188,7 @@ function verifyToken(req, verified) {
     });
 }
 
-app.post('/passwordReset',req,res=>{
+app.post('/passwordReset',(req,res)=>{
     verifyToken(req,(err,decoded)=>{
         if(err){
             res.json({status:403,message:"Unauthorized attempt at password reset"});
@@ -225,13 +225,15 @@ app.post('/passwordReset',req,res=>{
     });
 })
 
-app.get('/drink/:id',(req,res)=>{
+app.get('/findDrink/:id',(req,res)=>{
     let id = req.params.id;
     Drink.find({_id:id},(err,doc)=>{
         if(err){
             res.json({status:500,message:"Coudld not retrieve drink from database"});
 
         }else{
+            doc = doc[0];
+            console.log(doc);
             res.json({
                 name:doc.name,
                 description:doc.description,
@@ -256,6 +258,7 @@ app.get('/createdDrinks',(req,res)=>{
             if(err){
                 res.json({status:500,message:"Error while trying to find any drinks"});
             }else{
+                console.log(queryRes);
                 res.json(queryRes);
             }
         });
@@ -268,7 +271,7 @@ app.get('*', function (req, res) {
 
 
 
-let userObject = this.jwt.decode()
+
 var server = app.listen(8080, () => {
     var host = server.address().address;
     var port = server.address().port;

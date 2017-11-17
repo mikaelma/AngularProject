@@ -10,7 +10,7 @@ import {} from '@auth0/angular-jwt'
 export class AuthService {
 
   constructor(private jwt:JwtHelperService, private http:HttpClient) { }
-  
+
   registerUser(user:User,password:string):Observable<Object>{
     let self = this;
     return Observable.create(observer=>{
@@ -22,8 +22,36 @@ export class AuthService {
         }else if(res.error){
           throw new Error("Server could not register user: "+res.message);
         }
-      }) 
+      })
     });
+  }
+
+  updatePassword(newPassword: string, oldPassword: string): Observable<any>{
+    let self  = this;
+    return Observable.create(observer =>{
+      let token = localStorage.getItem("token");
+      if(!token){
+        observer.error('ERR I updatepassword: ');
+        observer.complete();
+      }
+      let header=new HttpHeaders(
+        {'Content-Type': 'application/json',
+          'Authorization':'Bearer '+ token
+        });
+      self.http.post<any>('/my-page', {password: oldPassword, newPassword: newPassword},{headers: header})
+      .subscribe((res)=>{
+          if(res.token){
+            localStorage.setItem('token', res.token);
+            observer.next(self.jwt.decodeToken(res.token));
+            observer.complete()
+          }
+          else{
+            observer.error('ERR2 I updatepassword: ' + res);
+            observer.complete();
+          }
+        })
+    })
+
   }
 
   loginUser(email:string,password:string):Observable<User>{
@@ -55,7 +83,7 @@ export class AuthService {
       console.log("NO TOKEN:(");
       throw new Error("Could not find any token");
     }
-    let header=new HttpHeaders(  
+    let header=new HttpHeaders(
       {'Content-Type': 'application/json',
       'Authorization':'Bearer '+ token
     });
