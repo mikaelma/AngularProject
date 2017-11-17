@@ -19,6 +19,18 @@ export class DrinkService {
     return DRINKS;
   }
 
+  getCreatedDrinks(){
+    let self = this;
+    let token = localStorage.getItem("token");
+    if(!token) throw new Error("Could not find any token");
+    let header=new HttpHeaders(
+      {'Content-Type': 'application/json',
+      'Authorization':'Bearer '+ token
+    });
+    return Observable.create(observer=>{
+      self.http.get<any>('/createdDrinks');
+    });
+  }
   
   addDrink(drink:Drink):Observable<any>{
     let self  = this;

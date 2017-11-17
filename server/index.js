@@ -75,6 +75,7 @@ app.post('/drink',(req,res)=>{
         if(err){
             res.sendStatus(403);
         }else{
+            console.log(req.body.ingredients);
             let drink = new Drink({
                 name:req.body.name,
                 description:req.body.description,
@@ -116,6 +117,18 @@ app.post('/drink',(req,res)=>{
                 }
             });
         }
+    });
+});
+
+app.get('/userDrinks',(req,res)=>{
+    verifyToken(req,(err,decoded)=>{
+        Drink.find({author:decoded._id},(err,queryRes)=>{
+            if(err){
+                res.json({status:500,message:"Error on query for drinks created by user "+ decoded.email+" with id "+decoded._id});
+            }else{
+                res.json(queryRes);
+            }
+        });
     });
 });
 
@@ -171,6 +184,12 @@ app.get('/', function (req, res) {
 
 app.get('*', function (req, res) {
     res.sendFile(path.join(dist, 'index.html'));
+});
+
+app.get('/createdDrinks',(req,res)=>{
+    verifyToken(req,(err,decoded)=>{
+        
+    })
 });
 
 var server = app.listen(8080, () => {
