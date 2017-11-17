@@ -69,7 +69,19 @@ app.get('/authorize',(req,res)=>{
     });
 });
 
-app.post('/drink',(req,res)=>{
+app.get('/drinks',(req,res)=>{
+    let self = this;
+    Drink.find({}, (err,drinks) => {
+        if(err){
+            res.sendStatus(500);
+        }else{
+            res.json(drinks)
+        }
+    });
+    console.log("HEIA");
+});
+
+app.post('/drinks',(req,res)=>{
     let self = this;
     verifyToken(req,(err,decoded)=>{
         if(err){

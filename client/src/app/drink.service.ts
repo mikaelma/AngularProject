@@ -17,6 +17,10 @@ export class DrinkService {
 
   getDrinks(): Drink[] {
     return DRINKS;
+
+    //subscribe
+    //return observable with drinks
+
   }
 
   
@@ -24,12 +28,12 @@ export class DrinkService {
     let self  = this;
     let token = localStorage.getItem("token");
     if(!token) throw new Error("Could not find any token");
-    let header=new HttpHeaders(
+    let header = new HttpHeaders(
       {'Content-Type': 'application/json',
       'Authorization':'Bearer '+ token
     });
     return Observable.create(observer=>{
-      self.http.post<any>('/drink',drink,{headers:header}).subscribe((res)=>{
+      self.http.post<any>('/drinks',drink,{headers:header}).subscribe((res)=>{
         if(res.token){
           localStorage.setItem("token",res.token);
           observer.next(self.jwt.decodeToken(res.token));
