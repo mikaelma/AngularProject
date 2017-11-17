@@ -23,6 +23,7 @@ import {
 import {Angular2FontawesomeModule} from "angular2-fontawesome";
 import {DrinkService} from './drink.service';
 import { ChangePasswordDialogComponent } from './change-password-dialog/change-password-dialog.component';
+import {MainGuard} from "./main.guard";
 
 @NgModule({
   declarations: [
@@ -59,7 +60,7 @@ import { ChangePasswordDialogComponent } from './change-password-dialog/change-p
     MatSnackBarModule,
     MatListModule
   ],
-  providers: [JwtHelperService,AuthService, DrinkService],
+  providers: [JwtHelperService,AuthService, DrinkService, MainGuard],
   bootstrap: [AppComponent],
   entryComponents: [HeaderDialogBoxComponent, HeaderRegisterDialogBoxComponent, ChangePasswordDialogComponent]
 })

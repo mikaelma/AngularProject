@@ -19,7 +19,13 @@
         <button *ngIf="isLoggedIn" class="mat-icon-button" (click)="redirect()">
           <i aria-hidden="true" class="material-icons">account_circle</i>
         </button>
-        <button *ngIf=isLoggedIn class="mat-raised-button mat-warn"  (click)= "logout()" >Logout</button>
+        <button
+          *ngIf=isLoggedIn
+          class="mat-raised-button"
+          style="color: black"
+          [routerLink]="['/drink/create']"
+          >Create Drink</button>
+        <button *ngIf=isLoggedIn class="mat-raised-button mat-warn" [routerLink]="['/']" (click)= "logout()" >Logout</button>
       </div>
     </div>
   </div>

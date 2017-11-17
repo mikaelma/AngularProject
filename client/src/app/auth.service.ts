@@ -25,7 +25,7 @@ export class AuthService {
       })
     });
   }
-  
+
 
   loginUser(email:string,password:string):Observable<User>{
     let self = this;
