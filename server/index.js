@@ -188,22 +188,87 @@ function verifyToken(req, verified) {
     });
 }
 
+app.post('/passwordReset',req,res=>{
+    verifyToken(req,(err,decoded)=>{
+        if(err){
+            res.json({status:403,message:"Unauthorized attempt at password reset"});
+        }else{
+            User.find({email:decoded.email},(err,queryRes)=>{
+                if(err){
+                    res.json({status:500,message:"Something went wrong while trying to query for document"});
+                }else{
+                    let hash = passhash.sha512(req.body.password,queryRes.salt);
+                    if(queryRes.password==hash.passwordHash){
+                        hash = passhash.sha512(req.body.newPassword,passhash.random(20));
+                        queryRes.password = hash.passwordHash;
+                        queryRes.salt = hash.salt;
+                        queryRes.save((err,doc)=>{
+                            if(err){
+                                res.json({status:500,message:"Error saving the new user"});
+                            } else {
+                                let urlObject = {
+                                    _id: doc._id,
+                                    firstName: doc.firstName,
+                                    lastName: doc.lastName,
+                                    email: doc.email,
+                                    favouriteDrinks: doc.favouriteDrinks,
+                                    createdDrinks: doc.createdDrinks
+                                }
+                                let token = jwt.sign(urlObject, secretKey, { expiresIn: 18000 });
+                                res.json({ token: token });
+                            }
+                        })
+                    }
+                }
+            });
+        }
+    });
+})
 
+app.get('/drink/:id',(req,res)=>{
+    let id = req.params.id;
+    Drink.find({_id:id},(err,doc)=>{
+        if(err){
+            res.json({status:500,message:"Coudld not retrieve drink from database"});
+
+        }else{
+            res.json({
+                name:doc.name,
+                description:doc.description,
+                image:doc.image,
+                glass:doc.glass,
+                ingredients:doc.ingredients,
+                recipe:doc.recipe,
+                authorId:doc.authorId,
+                authorName:doc.authorName
+            })
+        }
+    });
+});
 
 app.get('/', function (req, res) {
     res.sendFile(path.join(dist, 'index.html'));
+});
+
+app.get('/createdDrinks',(req,res)=>{
+    verifyToken(req,(err,decoded)=>{
+        Drink.find({author:{'$in':decoded.createdDrinks}},(err,queryRes)=>{
+            if(err){
+                res.json({status:500,message:"Error while trying to find any drinks"});
+            }else{
+                res.json(queryRes);
+            }
+        });
+    })
 });
 
 app.get('*', function (req, res) {
     res.sendFile(path.join(dist, 'index.html'));
 });
 
-app.get('/createdDrinks',(req,res)=>{
-    verifyToken(req,(err,decoded)=>{
-        
-    })
-});
 
+
+let userObject = this.jwt.decode()
 var server = app.listen(8080, () => {
     var host = server.address().address;
     var port = server.address().port;

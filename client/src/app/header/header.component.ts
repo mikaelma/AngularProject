@@ -99,6 +99,7 @@ export class HeaderComponent implements OnInit{
         self.auth.registerUser(new User(result.firstname,result.surname,result.email),result.confirmPassword)
         .subscribe((res)=>{
           let user = self.jwt.decodeToken(localStorage.getItem("token"));
+          self.isLoggedIn = true;
           self.loginDisplayName = user.firstName +" "+user.lastName;
         });
       }catch(e){

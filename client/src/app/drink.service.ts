@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Drink } from './drink';
+import { Drink,Ingredient} from './drink';
 import { DRINKS } from './drink/mock-drinks';
 
 import {Observable} from 'rxjs/Observable';
@@ -23,7 +23,7 @@ export class DrinkService {
 
   }
 
-  getCreatedDrinks(){
+  getCreatedDrinks():Observable<Array<Drink>>{
     let self = this;
     let token = localStorage.getItem("token");
     if(!token) throw new Error("Could not find any token");
@@ -32,7 +32,17 @@ export class DrinkService {
       'Authorization':'Bearer '+ token
     });
     return Observable.create(observer=>{
-      self.http.get<any>('/createdDrinks');
+      self.http.get<Drink[]>('/createdDrinks').map((res)=>{
+        let drinks = new Array<Drink>();
+        for(let item of res){
+          let ingredients = new Array<Ingredient>();
+          for(let ingredient of item.ingredients){
+            ingredients.push(new Ingredient(ingredient.quantity,ingredient.measure,ingredient.name));
+          }
+          drinks.push(new Drink(item.id,item.name,ingredients,item.author,item.description,item.image,item.glass,item.recipe));
+          return drinks;
+        }
+      })
     });
   }
   
@@ -62,3 +72,5 @@ export class DrinkService {
     return of(DRINKS.find(drink => drink.id === id));
   }
 }
+
+let drinks = new Array<Drink>();
