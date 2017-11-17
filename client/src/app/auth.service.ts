@@ -26,6 +26,33 @@ export class AuthService {
     });
   }
 
+  updatePassword(newPassword: string, oldPassword: string): Observable<any>{
+    let self  = this;
+    return Observable.create(observer =>{
+      let token = localStorage.getItem("token");
+      if(!token){
+        observer.error('ERR I updatepassword: ');
+        observer.complete();
+      }
+      let header=new HttpHeaders(
+        {'Content-Type': 'application/json',
+          'Authorization':'Bearer '+ token
+        });
+      self.http.post<any>('/my-page', {password: oldPassword, newPassword: newPassword},{headers: header})
+      .subscribe((res)=>{
+          if(res.token){
+            localStorage.setItem('token', res.token);
+            observer.next(self.jwt.decodeToken(res.token));
+            observer.complete()
+          }
+          else{
+            observer.error('ERR2 I updatepassword: ' + res);
+            observer.complete();
+          }
+        })
+    })
+
+  }
 
   loginUser(email:string,password:string):Observable<User>{
     let self = this;
