@@ -3,6 +3,8 @@ import {User} from '../user';
 import {JwtHelperService} from '../jwthelper.service';
 import {MatDialog} from "@angular/material";
 import {ChangePasswordDialogComponent} from "../change-password-dialog/change-password-dialog.component";
+import {Drink} from "../drink";
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-my-page',
@@ -15,7 +17,7 @@ export class MyPageComponent implements OnInit {
   updatedPassword: string;
 
 
-  constructor(public dialog: MatDialog, private jwt: JwtHelperService) { }
+  constructor(public dialog: MatDialog, private jwt: JwtHelperService, private auth:AuthService) { }
 
   ngOnInit() {
     let token = 'token';
@@ -37,7 +39,18 @@ export class MyPageComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
-      //TODO: User.UpdatePassword(result)
+      let passwordObject ={
+        oldPassword: result.oldPassword,
+        newPassword: result.newPassword
+      }
+      try{
+        self.auth.updatePassword(result.newPassword, result.oldPassword)
+          .subscribe((res)=>{
+          console.log(res);
+        })
+      }catch(e){
+        console.log('ERR I DIALOGREFAFTERCLOSE: ' + e)
+      }
     });
   }
 }

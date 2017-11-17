@@ -16,9 +16,7 @@
       <div class="button">
         <button *ngIf=!isLoggedIn class="mat-raised-button" id="basic" (click)= "openDialogLogin()" >Login</button>
         <button *ngIf="!isLoggedIn" class="mat-raised-button mat-warn" mat-raised-button="" color="warn" (click)= "openDialogRegister()">Register</button>
-        <button *ngIf="isLoggedIn" class="mat-icon-button" (click)="redirect()">
-          <i aria-hidden="true" class="material-icons">account_circle</i>
-        </button>
+        <button *ngIf="isLoggedIn" class="mat-raised-button" mat-raised-button="" color="primary" (click)="redirect()">My Page</button>
         <button
           *ngIf=isLoggedIn
           class="mat-raised-button"
