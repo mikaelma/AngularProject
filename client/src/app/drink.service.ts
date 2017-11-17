@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Drink,Ingredient} from './drink';
-import { DRINKS } from './drink/mock-drinks';
+//import { DRINKS } from './drink/mock-drinks';
 
 import {Observable} from 'rxjs/Observable';
 import {HttpClient,HttpHeaders} from '@angular/common/http';

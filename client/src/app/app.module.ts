@@ -24,6 +24,7 @@ import {Angular2FontawesomeModule} from "angular2-fontawesome";
 import {DrinkService} from './drink.service';
 import { ChangePasswordDialogComponent } from './change-password-dialog/change-password-dialog.component';
 import {MainGuard} from "./main.guard";
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import {MainGuard} from "./main.guard";
     DrinkListComponent,
     DrinkComponent,
     ChangePasswordDialogComponent,
+    UnauthorizedComponent,
   ],
 
   imports: [

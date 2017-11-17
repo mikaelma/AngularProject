@@ -78,22 +78,24 @@ export class AuthService {
 
   verifyToken():Observable<Boolean>{
     let self  = this;
-    let token = localStorage.getItem("token");
-    if(!token){
-      console.log("NO TOKEN:(");
-      throw new Error("Could not find any token");
-    }
-    let header=new HttpHeaders(
-      {'Content-Type': 'application/json',
-      'Authorization':'Bearer '+ token
-    });
     return Observable.create(observer=>{
+      let token = localStorage.getItem("token");
+      if(!token){
+        observer.error(new Error("Could not find any token"));
+        observer.complete();
+        return;
+      }
+      let header=new HttpHeaders(
+        {'Content-Type': 'application/json',
+        'Authorization':'Bearer '+ token
+      });
+      
       self.http.get<any>("/authorize",{headers:header}).subscribe((res)=>{
         if(res.status==200){
           observer.next(true);
           observer.complete();
         }else{
-          observer.next(false);
+          observer.error(false);
           observer.complete();
         }
       });
