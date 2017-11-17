@@ -32,7 +32,7 @@
   <div class="drinkList">
     <div *ngFor="let drink of drinks" (click)="onSelect(drink)">
       <div class="drinkListItem">
-        <a routerLink="/drink/{{drink.id}}">
+        <a (click)="navigateToDrink(drink.id)">
         <img class="drinkImage" src="{{drink.image}}" alt="{drink.name} image">
         <div class="drinkName">{{drink.name}}</div>
         <div class="subHeader">Author: {{drink.authorName}}</div>

@@ -55,7 +55,7 @@ export class CreateDrinkComponent implements OnInit {
     }
 
     const drink = new Drink(
-      0,
+      "",
       this.drinkForm.value.drinkName,
       ingredients,
       "",

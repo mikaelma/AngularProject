@@ -33,7 +33,7 @@ export class DrinkService {
             ingredient.name
           ))
         }
-        
+
         drinks.push(new Drink(
           drink._id,
           drink.name,
@@ -52,7 +52,7 @@ export class DrinkService {
     })
   }
 
-  
+
   addDrink(drink:Drink):Observable<any>{
     let self  = this;
     let token = localStorage.getItem("token");
@@ -77,6 +77,14 @@ export class DrinkService {
 
   getDrink(id: string): Observable<Drink>{
     console.log(id);
-    return of(this.drinks.find(drink => drink.id === id));
+    let self = this;
+    return self.http.get<any>('/drinks/'+id).map(res =>{
+      let ingredients = new Array<Ingredient>();
+      for(let item of res.ingredients){
+        ingredients.push(new Ingredient(item.quantity,item.measure,item.name));
+      }
+      return new Drink(res._id,res.name,ingredients,res.authorId,res.authorName,res.description,res.image
+      ,res.glass,res.recipe);
+    });
   }
 }
