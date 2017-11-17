@@ -22,6 +22,7 @@ import {
 } from "@angular/material";
 import {Angular2FontawesomeModule} from "angular2-fontawesome";
 import {DrinkService} from "./drink.service";
+import {MainGuard} from "./main.guard";
 
 @NgModule({
   declarations: [
@@ -57,7 +58,7 @@ import {DrinkService} from "./drink.service";
     MatSnackBarModule,
     MatListModule
   ],
-  providers: [JwtHelperService,AuthService, DrinkService],
+  providers: [JwtHelperService,AuthService, DrinkService, MainGuard],
   bootstrap: [AppComponent],
   entryComponents: [HeaderDialogBoxComponent, HeaderRegisterDialogBoxComponent]
 })
