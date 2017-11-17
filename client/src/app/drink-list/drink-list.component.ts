@@ -22,6 +22,8 @@ export class DrinkListComponent implements OnInit {
 
   getDrinks(): void {
     this.drinks = this.drinkService.getDrinks();
+    
+
   }
 
   onSelect(drink): void{

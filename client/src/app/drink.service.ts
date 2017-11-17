@@ -17,6 +17,10 @@ export class DrinkService {
 
   getDrinks(): Drink[] {
     return DRINKS;
+
+    //subscribe
+    //return observable with drinks
+
   }
 
   getCreatedDrinks(){
@@ -36,7 +40,7 @@ export class DrinkService {
     let self  = this;
     let token = localStorage.getItem("token");
     if(!token) throw new Error("Could not find any token");
-    let header=new HttpHeaders(
+    let header = new HttpHeaders(
       {'Content-Type': 'application/json',
       'Authorization':'Bearer '+ token
     });
