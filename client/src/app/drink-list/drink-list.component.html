@@ -8,7 +8,6 @@
 </mat-form-field>
 
 <div class="listHolder">
-
   <div class="categories">
     <div>
       <h2>Alcohol</h2>
@@ -29,7 +28,13 @@
     </div>
   </div>
 
-  <div class="drinkList">
+  <div
+    class="drinkList"
+    data-infinite-scroll
+    [infiniteScrollDistance]="scrollDistance"
+    [infiniteScrollThrottle]="throttle"
+    (scrolled)="onScrollDown()"
+  >
     <div *ngFor="let drink of drinks" (click)="onSelect(drink)">
       <div class="drinkListItem">
         <a (click)="navigateToDrink(drink.id)">

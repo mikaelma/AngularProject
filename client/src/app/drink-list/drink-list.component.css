@@ -27,6 +27,7 @@ h2{
   flex-direction: row;
   flex-wrap: wrap;
   width: 80%;
+  height: 100%;
 }
 
 a {
@@ -40,6 +41,7 @@ a {
   margin: 1em;
   flex-wrap: nowrap;
   width: 256px;
+  cursor: pointer;
 }
 .drinkImage{
   width: 256px;

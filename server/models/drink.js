@@ -14,7 +14,7 @@ var schema = new Schema({
     }],
     recipe: {type: String},
     authorId: {type: Schema.Types.ObjectId, ref: 'User'},
-    authorName: {type: String}
+    authorName: {type: String},
 });
 
 schema.plugin(mongooseUniqueValidator);

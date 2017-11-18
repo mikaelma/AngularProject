@@ -15,9 +15,10 @@ import { of } from 'rxjs/observable/of';
 export class DrinkService {
   constructor(private http:HttpClient,private jwt:JwtHelperService){}
   drinks:Drink[] = [];
-  getDrinks(): Observable<Drink[]>{
+
+  getDrinks(skip:number): Observable<Drink[]>{
     let self = this;
-    return self.http.get<any>('/drinks').map(res => {
+    return self.http.get<any>('/drinks/' + skip).map(res => {
       let drinks = new Array<Drink>();
       for (let drink of res) {
         let ingredients = new Array<Ingredient>();
@@ -92,7 +93,6 @@ export class DrinkService {
   }
 
   getDrink(id: string): Observable<Drink>{
-    console.log(id);
     let self = this;
     return self.http.get<any>('/findDrink/'+id).map(res =>{
       let ingredients = new Array<Ingredient>();
@@ -106,7 +106,7 @@ export class DrinkService {
 
   searchDrink(name: string): Observable<Drink[]>{
     let self = this;
-    return self.http.get<any>('/drinks/' + name).map(res => {
+    return self.http.get<any>('/searchDrinks/' + name).map(res => {
       let drinks = new Array<Drink>();
       for (let drink of res) {
         let ingredients = new Array<Ingredient>();

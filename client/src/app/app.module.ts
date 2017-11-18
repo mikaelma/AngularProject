@@ -25,6 +25,7 @@ import {DrinkService} from './drink.service';
 import { ChangePasswordDialogComponent } from './change-password-dialog/change-password-dialog.component';
 import {MainGuard} from "./main.guard";
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
     MatSelectModule,
     MatOptionModule,
     MatSnackBarModule,
-    MatListModule
+    MatListModule,
+    InfiniteScrollModule
   ],
   providers: [JwtHelperService,AuthService, DrinkService, MainGuard],
   bootstrap: [AppComponent],

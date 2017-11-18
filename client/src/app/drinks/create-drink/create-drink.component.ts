@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 import {Drink, Ingredient} from "../../drink";
 import {DrinkService} from "../../drink.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import { Router } from '@angular/router/';
 
 @Component({
   selector: 'app-create-drink',
@@ -14,7 +15,7 @@ export class CreateDrinkComponent implements OnInit {
   drinkForm: FormGroup;
   public data = [{'ingredientUnits': 0, 'measurementName':'', 'ingredientName':''}];
 
-  constructor(private drinkService: DrinkService, public snackBar: MatSnackBar) {}
+  constructor(private drinkService: DrinkService, public snackBar: MatSnackBar, private router: Router) {}
 
   ngOnInit() {
     this.drinkForm = new FormGroup({
@@ -66,11 +67,9 @@ export class CreateDrinkComponent implements OnInit {
       this.drinkForm.value.recipe
     );
     this.drinkService.addDrink(drink).subscribe(
-      res => this.snackBar.open('Successfully created a new drink', null, {duration: 2000}),
+      res => this.router.navigate(['/drink/', res.createdDrinks[res.createdDrinks.length-1]]),
       error => console.log(error)
       );
-    this.drinkForm.reset();
-    this.imageUrl = "http://twinterritory.com/wp-content/uploads/2014/02/placeholder-300x400.jpg";
   }
 
   addIngredientName(e, i){

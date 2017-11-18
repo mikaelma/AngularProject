@@ -69,18 +69,19 @@ app.get('/authorize',(req,res)=>{
     });
 });
 
-app.get('/drinks',(req,res)=>{
+app.get('/drinks/:skip',(req,res)=>{
     let self = this;
+    let skip = parseInt(req.params.skip);
     Drink.find({}, (err,drinks) => {
         if(err){
             res.sendStatus(500);
         }else{
             res.json(drinks);
         }
-    }).limit(12);
+    }).skip(skip).limit(12);
 });
 
-app.get('/drinks/:name',(req,res)=>{
+app.get('/searchDrinks/:name',(req,res)=>{
     let self = this;
     let name = req.params.name;
     Drink.find({name: {$regex : ".*" + name + ".*", '$options' : 'i'}}, (err,drinks) => {
