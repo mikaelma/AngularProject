@@ -65,9 +65,9 @@ export class DrinkService {
           }
           drinks.push(new Drink(item._id,item.name,ingredients,item.authorId,item.authorName,item.description,item.image,item.glass,item.recipe));
           console.log("DRINKS: " + drinks);
-          return drinks;
         }
-      })
+       return drinks;
+     })
   }
 
   addDrink(drink:Drink):Observable<any>{
@@ -102,6 +102,11 @@ export class DrinkService {
       return new Drink(res._id,res.name,ingredients,res.authorId,res.authorName,res.description,res.image
       ,res.glass,res.recipe);
     });
+  }
+
+  /** GET FAVOURITE: **/
+  getFavouriteDrink(){
+    //TODO: LAG METODE FOR Å FINNE FAV DRINKS
   }
 
   searchDrink(name: string): Observable<Drink[]>{

@@ -1,0 +1,11 @@
+.mat-list-item{
+  border: solid;
+}
+
+.drinkListItem{
+  cursor: pointer;
+}
+
+mat-list-item:hover{
+  background-color: blue;
+}

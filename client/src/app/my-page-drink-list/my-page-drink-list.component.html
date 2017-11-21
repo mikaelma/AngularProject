@@ -1,11 +1,12 @@
 <div
   class="drinkList">
-  <div *ngFor="let drink of drinks">
+  <div *ngFor="let drink of drinks"  (click)="onSelect(drink)">
     <div class="drinkListItem">
-      <img class="drinkImage" src="{{drink.image}}" alt="{drink.name} image">
-      <div class="drinkName">{{drink.name}}</div>
-      <div class="subHeader">Author: {{drink.authorName}}</div>
-      <div class="text">"{{drink.description}}"</div>
+      <a (click)="navigateToDrink(drink.id)">
+      <mat-list>
+        <mat-list-item class="mat-list-item">{{drink.name}}</mat-list-item>
+      </mat-list>
+      </a>
     </div>
   </div>
 </div>

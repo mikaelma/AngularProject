@@ -18,7 +18,7 @@ import {DrinkListComponent} from "./drink-list/drink-list.component";
 import {DrinkComponent} from "./drink/drink.component";
 import {
   MatButtonModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule, MatOptionModule, MatSelectModule,
-  MatToolbarModule, MatListModule, MatSnackBarModule, MatGridListModule
+  MatToolbarModule, MatListModule, MatSnackBarModule, MatGridListModule, MatButtonToggleModule
 } from "@angular/material";
 import {Angular2FontawesomeModule} from "angular2-fontawesome";
 import {DrinkService} from './drink.service';
@@ -53,6 +53,7 @@ import { MyPageDrinkListComponent } from './my-page-drink-list/my-page-drink-lis
     FormsModule,
     ReactiveFormsModule,
     MatToolbarModule,
+    MatButtonToggleModule,
     MatDialogModule,
     MatButtonModule,
     MatIconModule,

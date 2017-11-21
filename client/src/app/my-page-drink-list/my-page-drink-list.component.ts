@@ -13,8 +13,8 @@ export class MyPageDrinkListComponent implements OnInit {
 
   drinks: Drink[] = [];
 
-  constructor(private drinkService: DrinkService) {
-  }
+  constructor(private drinkService: DrinkService,
+              private router: Router){}
 
   /**
    * Calls drinkservice to retrieve drinks from database.
@@ -22,11 +22,11 @@ export class MyPageDrinkListComponent implements OnInit {
   getCreatedDrinks(): void {
     this.drinkService.getCreatedDrinks()
       .subscribe((drinks: Drink[])=>{
-      console.log(drinks);
       this.drinks = drinks;
-      //this.sortArray(this.drinks);
+      this.sortArray(this.drinks);
     });
   }
+
 
   /**
    * Sorts array by the name of the drink.
@@ -42,6 +42,14 @@ export class MyPageDrinkListComponent implements OnInit {
         return 1;
       return 0; //default return value (no sorting)
     })
+  }
+
+  /**
+   * After pressing on a listitem this method navigates the user to a detailed information about the drink
+   * @param id
+   */
+  navigateToDrink(id){
+    this.router.navigate(['/drink',id])
   }
 
 

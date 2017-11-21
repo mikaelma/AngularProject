@@ -12,7 +12,9 @@
     flex-direction: row;
     flex: 2;
 }
-
+.disabledButton{
+  color: gray;
+}
 .header{
 
     margin-left: 1em;
