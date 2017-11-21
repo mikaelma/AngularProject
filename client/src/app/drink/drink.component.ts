@@ -17,6 +17,7 @@ export class DrinkComponent implements OnInit, OnDestroy {
   drink: Drink;
   sub: Subscription;
   isFavourite: boolean = false;
+  isRemove: boolean = false;
   isLoggedIn: boolean;
 
   constructor(private route: ActivatedRoute,
@@ -48,10 +49,18 @@ export class DrinkComponent implements OnInit, OnDestroy {
   onClick(){
     this.isFavourite = !this.isFavourite;
     console.log(this.drink);
-    this.drinkService.addFavouriteDrink(this.drink.id)
-      .subscribe(res => {
-        console.log(res.favouriteDrinks);
-      });
+    if(!this.isFavourite){
+      this.drinkService.favouriteDrink(this.drink.id, false)
+        .subscribe(res=>{
+          console.log(res.favouriteDrinks);
+        })
+    }else if(this.isFavourite){
+      this.drinkService.favouriteDrink(this.drink.id, true)
+        .subscribe(res => {
+          console.log(res.favouriteDrinks);
+        });
+    }
+
   }
 
   getDrink(id) {
