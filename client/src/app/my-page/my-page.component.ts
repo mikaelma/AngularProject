@@ -43,14 +43,13 @@ export class MyPageComponent implements OnInit {
         oldPassword: result.oldPassword,
         newPassword: result.newPassword
       }
-      try{
         self.auth.updatePassword(result.newPassword, result.oldPassword)
           .subscribe((res)=>{
           console.log(res);
-        })
-      }catch(e){
-        console.log('ERR I DIALOGREFAFTERCLOSE: ' + e)
-      }
+        }, (err)=>{
+            console.log(err);
+          })
+
     });
   }
 }

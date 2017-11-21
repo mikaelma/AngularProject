@@ -36,7 +36,7 @@ export class ChangePasswordDialogComponent {
     }
 
   submitRegistration(value: Object): void {
-    console.log(value);
+    console.log("VALUE: " + value);
     this.dialogRefRegister.close(value)
   }
 }
