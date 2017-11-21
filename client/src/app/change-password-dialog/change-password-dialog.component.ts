@@ -1,9 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import {Component, OnInit, Inject} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 
 function matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
-  return (group: FormGroup): {[key: string]: any} => {
+  return (group: FormGroup): { [key: string]: any } => {
     let newPassword = group.controls[passwordKey];
     let confirmPassword = group.controls[confirmPasswordKey];
 
@@ -32,8 +32,8 @@ export class ChangePasswordDialogComponent {
       oldPassword: ['', Validators.required],
       newPassword: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
       confirmPassword: ['', Validators.required]
-      },{validator: matchingPasswords('newPassword', 'confirmPassword')})
-    }
+    }, {validator: matchingPasswords('newPassword', 'confirmPassword')})
+  }
 
   submitRegistration(value: Object): void {
     console.log("VALUE: " + value);
