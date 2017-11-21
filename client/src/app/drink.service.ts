@@ -18,6 +18,7 @@ export class DrinkService {
 
   getDrinks(skip:number): Observable<Drink[]>{
     let self = this;
+
     return self.http.get<any>('/drinks/' + skip).map(res => {
       let drinks = new Array<Drink>();
       for (let drink of res) {
@@ -47,7 +48,7 @@ export class DrinkService {
     })
   }
 
-  getCreatedDrinks():Observable<Array<Drink>>{
+  getCreatedDrinks():Observable<Drink[]>{
     let self = this;
     let token = localStorage.getItem("token");
     if(!token) throw new Error("Could not find any token");
@@ -55,8 +56,7 @@ export class DrinkService {
       {'Content-Type': 'application/json',
       'Authorization':'Bearer '+ token
     });
-    return Observable.create(observer=>{
-      self.http.get<any[]>('/createdDrinks').map((res)=>{
+     return self.http.get<any>('/createdDrinks', {headers:header}).map((res)=>{
         let drinks = new Array<Drink>();
         for(let item of res){
           let ingredients = new Array<Ingredient>();
@@ -64,10 +64,9 @@ export class DrinkService {
             ingredients.push(new Ingredient(ingredient.quantity,ingredient.measure,ingredient.name));
           }
           drinks.push(new Drink(item._id,item.name,ingredients,item.authorId,item.authorName,item.description,item.image,item.glass,item.recipe));
-          return drinks;
         }
+       return drinks;
       })
-    });
   }
 
   addDrink(drink:Drink):Observable<any>{
@@ -102,6 +101,11 @@ export class DrinkService {
       return new Drink(res._id,res.name,ingredients,res.authorId,res.authorName,res.description,res.image
       ,res.glass,res.recipe);
     });
+  }
+
+  /** GET FAVOURITE: **/
+  getFavouriteDrink(){
+    //TODO: LAG METODE FOR Å FINNE FAV DRINKS
   }
 
   searchDrink(name: string): Observable<Drink[]>{

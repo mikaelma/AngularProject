@@ -38,15 +38,15 @@ export class AuthService {
         {'Content-Type': 'application/json',
           'Authorization':'Bearer '+ token
         });
-      self.http.post<any>('/my-page', {password: oldPassword, newPassword: newPassword},{headers: header})
+      self.http.post<any>('/passwordReset', {password: oldPassword, newPassword: newPassword},{headers: header})
       .subscribe((res)=>{
           if(res.token){
             localStorage.setItem('token', res.token);
             observer.next(self.jwt.decodeToken(res.token));
-            observer.complete()
+            observer.complete();
           }
           else{
-            observer.error('ERR2 I updatepassword: ' + res);
+            observer.error(res);
             observer.complete();
           }
         })
@@ -89,7 +89,7 @@ export class AuthService {
         {'Content-Type': 'application/json',
         'Authorization':'Bearer '+ token
       });
-      
+
       self.http.get<any>("/authorize",{headers:header}).subscribe((res)=>{
         if(res.status==200){
           observer.next(true);

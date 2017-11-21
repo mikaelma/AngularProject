@@ -7,6 +7,15 @@
     </button>
 </mat-form-field>
 
+<mat-form-field class="sortHolder">
+  <mat-select
+    (change)="changeSort($event)"
+    placeholder="Sort by:" value="name">
+    <mat-option value="name">Name</mat-option>
+    <mat-option value="author">Author</mat-option>
+  </mat-select>
+</mat-form-field>
+
 <div class="listHolder">
   <div class="categories">
     <div>

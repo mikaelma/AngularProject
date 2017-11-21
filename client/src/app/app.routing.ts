@@ -8,7 +8,7 @@ import {MyPageComponent} from "./my-page/my-page.component";
 import {MainGuard} from "./main.guard";
 
 
-const appRoutes: Routes = [
+export const appRoutes: Routes = [
     {path:'unauthorized',component:UnauthorizedComponent},
     {path:'main-page',      component:MainPageComponent},
     {path:'drink/create',   component:CreateDrinkComponent, canActivate:[MainGuard]},

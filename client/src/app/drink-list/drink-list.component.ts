@@ -24,6 +24,7 @@ export class DrinkListComponent implements OnInit {
   typesOfAcohol = ['Brandy', 'Gin', 'Rum', 'Tequila', 'Vodka', 'Whiskey'];
   typesOfGlass = ['Cocktail', 'Highball', 'Rocks', 'Shot'];
   filters: string[] = []; //Since ingredients and glasstype wont be the same, we can keep them in the same array.
+  sortBy = 'name';
 
   constructor(
     private drinkService: DrinkService,
@@ -49,15 +50,26 @@ export class DrinkListComponent implements OnInit {
    * Sorts array by the name of the drink.
    * @param array
    */
-  sortArray(array) {
-    array.sort(function (a, b) {
-      let nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase()
-      if (nameA < nameB) //sort string ascending
-        return -1;
-      if (nameA > nameB)
-        return 1;
-      return 0; //default return value (no sorting)
-    })
+  sortArray(array){
+    if (this.sortBy === 'name'){
+      array.sort(function(a, b){
+        let nameA=a.name.toLowerCase(), nameB=b.name.toLowerCase()
+        if (nameA < nameB) //sort string ascending
+          return -1;
+        if (nameA > nameB)
+          return 1;
+        return 0; //default return value (no sorting)
+      })
+    } else {
+      array.sort(function(a, b){
+        let nameA=a.authorName.toLowerCase(), nameB=b.authorName.toLowerCase()
+        if (nameA < nameB) //sort string ascending
+          return -1;
+        if (nameA > nameB)
+          return 1;
+        return 0; //default return value (no sorting)
+      })
+    }
   }
 
   /**
@@ -102,6 +114,7 @@ export class DrinkListComponent implements OnInit {
         }
         )
     } else {
+      this.skip = 0;
       this.getDrinks();
     }
 
@@ -144,6 +157,11 @@ export class DrinkListComponent implements OnInit {
       this.filters.push(filter);
     }
     self.filterDrinks();
+  }
+
+  changeSort(e) {
+    this.sortBy = e.value;
+    this.sortArray(this.drinks);
   }
 
   /**
