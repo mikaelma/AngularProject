@@ -96,6 +96,7 @@ export class DrinkListComponent implements OnInit {
           }
         )
     } else {
+      this.skip = 0;
       this.getDrinks();
     }
   }

@@ -21,20 +21,21 @@ export class MyPageDrinkListComponent implements OnInit {
    */
   getCreatedDrinks(): void {
     this.drinkService.getCreatedDrinks()
-      .subscribe((drinks: Drink[]) => {
-        console.log(drinks);
-        this.drinks = drinks;
-        this.sortArray(this.drinks);
-      });
+      .subscribe((drinks: Drink[])=>{
+      console.log(drinks);
+      this.drinks = drinks;
+      //this.sortArray(this.drinks);
+    });
   }
 
   /**
    * Sorts array by the name of the drink.
    * @param array
    */
-  sortArray(array) {
-    array.sort(function (a, b) {
-      let nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase()
+
+  sortArray(array){
+    array.sort(function(a, b){
+      let nameA=a.name.toLowerCase(), nameB=b.name.toLowerCase()
       if (nameA < nameB) //sort string ascending
         return -1;
       if (nameA > nameB)
