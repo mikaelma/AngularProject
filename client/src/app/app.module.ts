@@ -26,6 +26,7 @@ import { ChangePasswordDialogComponent } from './change-password-dialog/change-p
 import {MainGuard} from "./main.guard";
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { MyPageDrinkListComponent } from './my-page-drink-list/my-page-drink-list.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     DrinkComponent,
     ChangePasswordDialogComponent,
     UnauthorizedComponent,
+    MyPageDrinkListComponent,
   ],
 
   imports: [

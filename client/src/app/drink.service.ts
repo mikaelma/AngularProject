@@ -59,11 +59,13 @@ export class DrinkService {
       self.http.get<any[]>('/createdDrinks').map((res)=>{
         let drinks = new Array<Drink>();
         for(let item of res){
+          console.log(item);
           let ingredients = new Array<Ingredient>();
           for(let ingredient of item.ingredients){
             ingredients.push(new Ingredient(ingredient.quantity,ingredient.measure,ingredient.name));
           }
           drinks.push(new Drink(item._id,item.name,ingredients,item.authorId,item.authorName,item.description,item.image,item.glass,item.recipe));
+          console.log("DRINKS: " + drinks);
           return drinks;
         }
       })

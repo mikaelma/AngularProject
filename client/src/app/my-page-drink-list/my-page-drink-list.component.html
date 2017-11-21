@@ -1,0 +1,11 @@
+<div
+  class="drinkList">
+  <div *ngFor="let drink of drinks">
+    <div class="drinkListItem">
+        <img class="drinkImage" src="{{drink.image}}" alt="{drink.name} image">
+        <div class="drinkName">{{drink.name}}</div>
+        <div class="subHeader">Author: {{drink.authorName}}</div>
+        <div class="text">"{{drink.description}}"</div>
+    </div>
+  </div>
+</div>

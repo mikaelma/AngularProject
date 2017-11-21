@@ -5,6 +5,7 @@ import {MatDialog} from "@angular/material";
 import {ChangePasswordDialogComponent} from "../change-password-dialog/change-password-dialog.component";
 import {Drink} from "../drink";
 import {AuthService} from '../auth.service';
+import {MyPageDrinkListComponent} from "../my-page-drink-list/my-page-drink-list.component";
 
 @Component({
   selector: 'app-my-page',
