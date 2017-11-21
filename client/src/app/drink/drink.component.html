@@ -7,7 +7,7 @@
 
 
     <div class="button" *ngIf="isLoggedIn">
-      <button (click)="isFavourite = !isFavourite"  mat-icon-button>
+      <button (click)="onClick()"  mat-icon-button>
         <mat-icon *ngIf="isFavourite" aria-label="Example icon-button with a heart icon" color="warn">favorite</mat-icon>
         <mat-icon disabled class="disabledButton" *ngIf="!isFavourite" aria-label="Example icon-button with a heart icon">favorite</mat-icon>
       </button>

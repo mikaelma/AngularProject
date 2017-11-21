@@ -91,6 +91,41 @@ app.get('/searchDrinks/:name', (req, res) => {
     });
 });
 
+app.post('/addFavouriteDrink', (req, res) => {
+    let self = this;
+    verifyToken(req, (err, decoded) => {
+        if (err) {
+            res.sendStatus(403);
+        } else {
+            let id = req.body.id;
+            User.findOne({email: decoded.email}, (err, userRes) => {
+                if (err) {
+                    res.sendStatus(404);
+                } else {
+                    userRes.favouriteDrinks.push(id);
+                    userRes.save((err, revisedRes) => {
+                        if (err) {
+                            console.log(err);
+                            res.sendStatus(500);
+                        } else {
+                            let urlObject = {
+                                _id: revisedRes._id,
+                                firstName: revisedRes.firstName,
+                                lastName: revisedRes.lastName,
+                                email: revisedRes.email,
+                                favouriteDrinks: revisedRes.favouriteDrinks,
+                                createdDrinks: revisedRes.createdDrinks
+                            }
+                            let jwtToken = jwt.sign(urlObject, secretKey, {expiresIn: 18000});
+                            res.json({token: jwtToken});
+                        }
+                    });
+                }
+            });
+        }
+    });
+});
+
 app.post('/drink', (req, res) => {
     let self = this;
     verifyToken(req, (err, decoded) => {
@@ -256,6 +291,7 @@ app.get('/findDrink/:id', (req, res) => {
             doc = doc[0];
             console.log(doc);
             res.json({
+                _id: doc._id,
                 name: doc.name,
                 description: doc.description,
                 image: doc.image,

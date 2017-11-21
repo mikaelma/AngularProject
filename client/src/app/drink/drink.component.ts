@@ -30,7 +30,6 @@ export class DrinkComponent implements OnInit, OnDestroy {
     let self = this;
     this.sub = this.route.params.subscribe((params) => {
       let id = params['id'];
-      console.log(id);
       self.getDrink(id);
     });
 
@@ -46,8 +45,16 @@ export class DrinkComponent implements OnInit, OnDestroy {
     }
   }
 
+  onClick(){
+    this.isFavourite = !this.isFavourite;
+    console.log(this.drink);
+    this.drinkService.addFavouriteDrink(this.drink.id)
+      .subscribe(res => {
+        console.log(res.favouriteDrinks);
+      });
+  }
+
   getDrink(id) {
-    console.log(id);
     this.drinkService.getDrink(id)
       .subscribe(drink => {
         this.drink = drink

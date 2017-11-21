@@ -91,6 +91,31 @@ export class DrinkService {
     });
   }
 
+  addFavouriteDrink(id: string):Observable<any>{
+    let self = this;
+    let token = localStorage.getItem("token");
+    if(!token) throw new Error("Could not find any token");
+    let header = new HttpHeaders(
+      {'Content-Type': 'application/json',
+        'Authorization':'Bearer '+ token
+      });
+    let body = {
+      id: id
+    };
+    return Observable.create(observer=>{
+      self.http.post<any>('/addFavouriteDrink', body, {headers:header}).subscribe((res)=>{
+        if(res.token){
+          localStorage.setItem("token",res.token);
+          observer.next(self.jwt.decodeToken(res.token));
+          observer.complete();
+        }else{
+          observer.error(new Error("Could not post, servered returned "+res));
+          observer.complete();
+        }
+      });
+    });
+  }
+
   getDrink(id: string): Observable<Drink>{
     let self = this;
     return self.http.get<any>('/findDrink/'+id).map(res =>{
