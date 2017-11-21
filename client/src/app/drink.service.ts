@@ -63,9 +63,8 @@ export class DrinkService {
             ingredients.push(new Ingredient(ingredient.quantity,ingredient.measure,ingredient.name));
           }
           drinks.push(new Drink(item._id,item.name,ingredients,item.authorId,item.authorName,item.description,item.image,item.glass,item.recipe));
-          console.log("DRINKS: " + drinks);
-          return drinks;
         }
+       return drinks;
       })
   }
 

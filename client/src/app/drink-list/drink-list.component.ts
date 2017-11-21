@@ -22,6 +22,7 @@ export class DrinkListComponent implements OnInit {
   //Categories and types of glass used in the dropdown
   typesOfAcohol = ['Brandy', 'Gin', 'Rum', 'Tequila', 'Vodka', 'Whiskey'];
   typesOfGlass = ['Cocktail', 'Highball', 'Rocks', 'Shot'];
+  sortBy = 'name';
 
   constructor(
     private drinkService: DrinkService,
@@ -46,14 +47,25 @@ export class DrinkListComponent implements OnInit {
    * @param array
    */
   sortArray(array){
-    array.sort(function(a, b){
-      let nameA=a.name.toLowerCase(), nameB=b.name.toLowerCase()
-      if (nameA < nameB) //sort string ascending
-        return -1;
-      if (nameA > nameB)
-        return 1;
-      return 0; //default return value (no sorting)
-    })
+    if (this.sortBy === 'name'){
+      array.sort(function(a, b){
+        let nameA=a.name.toLowerCase(), nameB=b.name.toLowerCase()
+        if (nameA < nameB) //sort string ascending
+          return -1;
+        if (nameA > nameB)
+          return 1;
+        return 0; //default return value (no sorting)
+      })
+    } else {
+      array.sort(function(a, b){
+        let nameA=a.authorName.toLowerCase(), nameB=b.authorName.toLowerCase()
+        if (nameA < nameB) //sort string ascending
+          return -1;
+        if (nameA > nameB)
+          return 1;
+        return 0; //default return value (no sorting)
+      })
+    }
   }
 
   /**
@@ -101,9 +113,9 @@ export class DrinkListComponent implements OnInit {
     }
   }
 
-  onSelect(drink): void{
-    console.log("Clicked on: " + drink.name);
-    //Routing to drink
+  changeSort(e){
+    this.sortBy = e.value;
+    this.sortArray(this.drinks);
   }
 
   /**
