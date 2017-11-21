@@ -21,7 +21,7 @@
     <div>
       <h2>Alcohol</h2>
         <mat-selection-list #spirits>
-          <mat-list-option *ngFor="let alcohol of typesOfAcohol">
+          <mat-list-option *ngFor="let alcohol of typesOfAcohol" (click)="onClickFilter(alcohol)">
             {{alcohol}}
           </mat-list-option>
         </mat-selection-list>
@@ -30,7 +30,7 @@
     <div>
       <h2>Glass</h2>
       <mat-selection-list #glasses>
-          <mat-list-option *ngFor="let glass of typesOfGlass">
+          <mat-list-option *ngFor="let glass of typesOfGlass" (click)="onClickFilter(glass)">
             {{glass}}
           </mat-list-option>
         </mat-selection-list>

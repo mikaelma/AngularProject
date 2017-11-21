@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DrinkService } from '../drink.service';
-import { Drink } from '../drink';
+import { Drink, Ingredient } from '../drink';
 import { Router } from '@angular/router/';
-import {DomSanitizer} from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-drink-list',
@@ -19,26 +19,30 @@ export class DrinkListComponent implements OnInit {
   skip = 0;
   //Drink array
   drinks: Drink[] = [];
+  filteredDrinks: Drink[] = [];
   //Categories and types of glass used in the dropdown
   typesOfAcohol = ['Brandy', 'Gin', 'Rum', 'Tequila', 'Vodka', 'Whiskey'];
   typesOfGlass = ['Cocktail', 'Highball', 'Rocks', 'Shot'];
+  filters: string[] = []; //Since ingredients and glasstype wont be the same, we can keep them in the same array.
   sortBy = 'name';
 
   constructor(
     private drinkService: DrinkService,
-    private router: Router){}
+    private router: Router) { }
 
   /**
    * Calls drinkservice to retrieve drinks from database.
    */
   getDrinks(): void {
+    let self = this;
     //Gets drinks from drinkservice. the 0 indicates to not skip any records.
     this.drinkService.getDrinks(0)
       .subscribe(
-        (drinks: Drink[]) => {
-          this.drinks = drinks;
-          this.sortArray(this.drinks);
-        }
+      (drinks: Drink[]) => {
+        this.drinks = drinks;
+        this.sortArray(this.drinks);
+        self.filterDrinks();
+      }
       );
   }
 
@@ -72,8 +76,8 @@ export class DrinkListComponent implements OnInit {
    * After pressing on a listitem this method navigates the user to a detailed information about the drink
    * @param id
    */
-  navigateToDrink(id){
-      this.router.navigate(['/drink',id])
+  navigateToDrink(id) {
+    this.router.navigate(['/drink', id])
   }
 
   /**
@@ -81,14 +85,14 @@ export class DrinkListComponent implements OnInit {
    * When called it increments total records to skip so that it always fetches 12 new records at the time.
    * @param ev
    */
-  onScrollDown (ev) {
+  onScrollDown(ev) {
     this.skip = this.skip += 12;
     this.drinkService.getDrinks(this.skip)
       .subscribe(
-        (drinks: Drink[]) => {
-          this.drinks.push.apply(this.drinks, drinks);
-          this.sortArray(this.drinks);
-        }
+      (drinks: Drink[]) => {
+        this.drinks.push.apply(this.drinks, drinks);
+        this.sortArray(this.drinks);
+      }
       );
   }
 
@@ -98,22 +102,64 @@ export class DrinkListComponent implements OnInit {
    * if total letters is less than 3 it will just get the 12 first records from db.
    * @param e
    */
-  searchDrink(e){
-    if (e.target.value.length > 2){
+  searchDrink(e) {
+    let self = this;
+    if (e.target.value.length > 2) {
       this.drinkService.searchDrink(e.target.value)
         .subscribe(
-          (drinks: Drink[]) => {
-            this.drinks = drinks;
-            this.sortArray(this.drinks);
-          }
+        (drinks: Drink[]) => {
+          this.drinks = drinks;
+          this.sortArray(this.drinks);
+          self.filterDrinks();
+        }
         )
     } else {
       this.skip = 0;
       this.getDrinks();
     }
+
   }
 
-  changeSort(e){
+  //Method for filtering the drink array on the filter list
+  filterDrinks() {
+    //if we have no filters selected, return. Do this so we wont get an empty list when
+    //first checking for filters.
+    if (this.filters.length < 1) return;
+    let self = this;
+    this.filteredDrinks = this.drinks.filter(function (drink, index, array) {
+      //Filtering glass
+      if (self.filters.includes(drink.glass)){
+        return true;
+      }
+      //Filtering spirits
+      for (let ingredient of drink.ingredients) {
+        if (self.filters.includes(ingredient.name.toLowerCase())) {
+          return true;
+        }
+      }
+    });
+    self.drinks = this.filteredDrinks;
+  }
+
+  onClickFilter(filter) {
+    //Setting filter to lowercase for consistency with db
+    filter = filter.toLowerCase();
+    let self = this;
+    //If the filter list already includes the filter, remove it.
+    if (this.filters.includes(filter)) {
+      this.filters.forEach((item, index) => {
+        if (item === filter) this.filters.splice(index, 1);
+      });
+      //If we remove an item, we need to fetch drinks again.
+      self.getDrinks();  
+      //else append the new filter to the filter array
+    } else {
+      this.filters.push(filter);
+    }
+    self.filterDrinks();
+  }
+
+  changeSort(e) {
     this.sortBy = e.value;
     this.sortArray(this.drinks);
   }
@@ -122,7 +168,7 @@ export class DrinkListComponent implements OnInit {
    * This method gets called when the component is initialized.
    * Starts with using the getDrinks() method.
    */
-  ngOnInit(){
+  ngOnInit() {
     this.getDrinks();
   }
 }
