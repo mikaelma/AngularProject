@@ -202,6 +202,7 @@ function verifyToken(req, verified) {
 }
 
 app.post('/passwordReset',(req,res)=>{
+    console.log(req.body.password)
     verifyToken(req,(err,decoded)=>{
         if(err){
             res.json({status:403,message:"Unauthorized attempt at password reset"});
