@@ -43,10 +43,10 @@ export class AuthService {
           if(res.token){
             localStorage.setItem('token', res.token);
             observer.next(self.jwt.decodeToken(res.token));
-            observer.complete()
+            observer.complete();
           }
           else{
-            observer.error('ERR2 I updatepassword: ' + res);
+            observer.error(res);
             observer.complete();
           }
         })

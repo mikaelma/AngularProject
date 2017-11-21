@@ -202,16 +202,20 @@ function verifyToken(req, verified) {
 }
 
 app.post('/passwordReset',(req,res)=>{
-    console.log(req.body.password)
+
     verifyToken(req,(err,decoded)=>{
+        console.log(req.body.newPassword);
         if(err){
             res.json({status:403,message:"Unauthorized attempt at password reset"});
         }else{
             User.find({email:decoded.email},(err,queryRes)=>{
+                queryRes = queryRes[0];
                 if(err){
                     res.json({status:500,message:"Something went wrong while trying to query for document"});
                 }else{
                     let hash = passhash.sha512(req.body.password,queryRes.salt);
+                    console.log(queryRes.password);
+                    console.log(hash.passwordHash);
                     if(queryRes.password==hash.passwordHash){
                         hash = passhash.sha512(req.body.newPassword,passhash.random(20));
                         queryRes.password = hash.passwordHash;
@@ -232,6 +236,8 @@ app.post('/passwordReset',(req,res)=>{
                                 res.json({ token: token });
                             }
                         })
+                    }else{
+                        res.json({status:403,message:"Unauthorized, passwords do not match"});
                     }
                 }
             });
