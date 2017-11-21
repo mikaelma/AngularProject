@@ -44,6 +44,7 @@ export class MyPageComponent implements OnInit {
         newPassword: result.newPassword
       }
       try{
+        console.log(passwordObject);
         self.auth.updatePassword(result.newPassword, result.oldPassword)
           .subscribe((res)=>{
           console.log(res);
