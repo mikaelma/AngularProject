@@ -91,7 +91,7 @@ app.get('/searchDrinks/:name', (req, res) => {
     });
 });
 
-app.post('/addFavouriteDrink', (req, res) => {
+app.post('/favouriteDrink', (req, res) => {
     let self = this;
     verifyToken(req, (err, decoded) => {
         if (err) {
@@ -102,24 +102,48 @@ app.post('/addFavouriteDrink', (req, res) => {
                 if (err) {
                     res.sendStatus(404);
                 } else {
-                    userRes.favouriteDrinks.push(id);
-                    userRes.save((err, revisedRes) => {
-                        if (err) {
-                            console.log(err);
-                            res.sendStatus(500);
-                        } else {
-                            let urlObject = {
-                                _id: revisedRes._id,
-                                firstName: revisedRes.firstName,
-                                lastName: revisedRes.lastName,
-                                email: revisedRes.email,
-                                favouriteDrinks: revisedRes.favouriteDrinks,
-                                createdDrinks: revisedRes.createdDrinks
+
+                    if(req.body.isAdd === true){
+                        userRes.favouriteDrinks.push(id);
+                        userRes.save((err, revisedRes) => {
+                            if (err) {
+                                console.log(err);
+                                res.sendStatus(500);
+                            } else {
+                                let urlObject = {
+                                    _id: revisedRes._id,
+                                    firstName: revisedRes.firstName,
+                                    lastName: revisedRes.lastName,
+                                    email: revisedRes.email,
+                                    favouriteDrinks: revisedRes.favouriteDrinks,
+                                    createdDrinks: revisedRes.createdDrinks
+                                };
+                                let jwtToken = jwt.sign(urlObject, secretKey, {expiresIn: 18000});
+                                res.json({token: jwtToken});
                             }
-                            let jwtToken = jwt.sign(urlObject, secretKey, {expiresIn: 18000});
-                            res.json({token: jwtToken});
-                        }
-                    });
+                        });
+                    }else{
+                        var localIndex = userRes.favouriteDrinks.indexOf(id);
+                        userRes.favouriteDrinks.splice(localIndex, 1);
+                        userRes.save((err, revisedRes) => {
+                            if (err) {
+                                console.log(err);
+                                res.sendStatus(500);
+                            } else {
+                                let urlObject = {
+                                    _id: revisedRes._id,
+                                    firstName: revisedRes.firstName,
+                                    lastName: revisedRes.lastName,
+                                    email: revisedRes.email,
+                                    favouriteDrinks: revisedRes.favouriteDrinks,
+                                    createdDrinks: revisedRes.createdDrinks
+                                }
+                                let jwtToken = jwt.sign(urlObject, secretKey, {expiresIn: 18000});
+                                res.json({token: jwtToken});
+                            }
+                        });
+                    }
+
                 }
             });
         }
