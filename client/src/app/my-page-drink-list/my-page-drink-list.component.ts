@@ -23,14 +23,14 @@ export class MyPageDrinkListComponent implements OnInit{
       .subscribe((drinks: Drink[])=>{
       console.log(drinks);
       this.drinks = drinks;
-      this.sortArray(this.drinks);
+      //this.sortArray(this.drinks);
     });
   }
   /**
    * Sorts array by the name of the drink.
    * @param array
    */
-  sortArray(array){
+  /*sortArray(array){
     array.sort(function(a, b){
       let nameA=a.name.toLowerCase(), nameB=b.name.toLowerCase()
       if (nameA < nameB) //sort string ascending
@@ -39,7 +39,7 @@ export class MyPageDrinkListComponent implements OnInit{
         return 1;
       return 0; //default return value (no sorting)
     })
-  }
+  }*/
 
 
   /**

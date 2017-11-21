@@ -47,7 +47,7 @@ export class DrinkService {
     })
   }
 
-  getCreatedDrinks():Observable<Array<Drink>>{
+  getCreatedDrinks():Observable<Drink[]>{
     let self = this;
     let token = localStorage.getItem("token");
     if(!token) throw new Error("Could not find any token");
@@ -55,11 +55,9 @@ export class DrinkService {
       {'Content-Type': 'application/json',
       'Authorization':'Bearer '+ token
     });
-    return Observable.create(observer=>{
-      self.http.get<any[]>('/createdDrinks').map((res)=>{
+     return self.http.get<any>('/createdDrinks', {headers:header}).map((res)=>{
         let drinks = new Array<Drink>();
         for(let item of res){
-          console.log(item);
           let ingredients = new Array<Ingredient>();
           for(let ingredient of item.ingredients){
             ingredients.push(new Ingredient(ingredient.quantity,ingredient.measure,ingredient.name));
@@ -69,7 +67,6 @@ export class DrinkService {
           return drinks;
         }
       })
-    });
   }
 
   addDrink(drink:Drink):Observable<any>{
