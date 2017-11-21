@@ -151,7 +151,7 @@ export class DrinkListComponent implements OnInit {
         if (item === filter) this.filters.splice(index, 1);
       });
       //If we remove an item, we need to fetch drinks again.
-      self.getDrinks();  
+      self.getDrinks();
       //else append the new filter to the filter array
     } else {
       this.filters.push(filter);

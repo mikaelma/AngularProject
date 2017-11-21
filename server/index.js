@@ -360,7 +360,7 @@ app.get('/getFavouriteDrinks', (req, res) => {
                 } else {
                     res.json(queryRes);
                 }
-            });
+            }).sort({name: 1});
         }
     })
 });

@@ -40,6 +40,14 @@ export class MyPageComponent implements OnInit {
   }
 
   /**
+   * After pressing on a listitem this method navigates the user to a detailed information about the drink
+   * @param id
+   */
+  navigateToDrink(id){
+    this.router.navigate(['/drink',id])
+  }
+
+  /**
    * Calls drinkservice to retrieve favourite drinks from database.
    */
   getFavouriteDrinks(): void {
