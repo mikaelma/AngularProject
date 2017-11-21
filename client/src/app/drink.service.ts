@@ -18,6 +18,7 @@ export class DrinkService {
 
   getDrinks(skip:number): Observable<Drink[]>{
     let self = this;
+
     return self.http.get<any>('/drinks/' + skip).map(res => {
       let drinks = new Array<Drink>();
       for (let drink of res) {
