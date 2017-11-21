@@ -51,6 +51,7 @@ export class DrinkService {
   getCreatedDrinks():Observable<Drink[]>{
     let self = this;
     let token = localStorage.getItem("token");
+    console.log(self.jwt.decodeToken(token));
     if(!token) throw new Error("Could not find any token");
     let header=new HttpHeaders(
       {'Content-Type': 'application/json',
@@ -128,9 +129,25 @@ export class DrinkService {
     });
   }
 
-  /** GET FAVOURITE: **/
-  getFavouriteDrink(){
-    //TODO: LAG METODE FOR Å FINNE FAV DRINKS
+  getFavouriteDrinks():Observable<Drink[]>{
+    let self = this;
+    let token = localStorage.getItem("token");
+    if(!token) throw new Error("Could not find any token");
+    let header=new HttpHeaders(
+      {'Content-Type': 'application/json',
+        'Authorization':'Bearer '+ token
+      });
+    return self.http.get<any>('/getFavouriteDrinks', {headers:header}).map((res)=>{
+      let drinks = new Array<Drink>();
+      for(let item of res){
+        let ingredients = new Array<Ingredient>();
+        for(let ingredient of item.ingredients){
+          ingredients.push(new Ingredient(ingredient.quantity,ingredient.measure,ingredient.name));
+        }
+        drinks.push(new Drink(item._id,item.name,ingredients,item.authorId,item.authorName,item.description,item.image,item.glass,item.recipe));
+      }
+      return drinks;
+    })
   }
 
   searchDrink(name: string): Observable<Drink[]>{

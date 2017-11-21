@@ -325,6 +325,22 @@ app.get('/createdDrinks', (req, res) => {
     })
 });
 
+app.get('/getFavouriteDrinks', (req, res) => {
+    verifyToken(req, (err, decoded) => {
+        if (err) {
+            res.sendStatus(403);
+        } else {
+            Drink.find({_id: {$in: decoded.favouriteDrinks }}, (err, queryRes) => {
+                if (err) {
+                    res.json({status: 500, message: "Error while trying to find any drinks"});
+                } else {
+                    res.json(queryRes);
+                }
+            });
+        }
+    })
+});
+
 app.get('*', function (req, res) {
     res.sendFile(path.join(dist, 'index.html'));
 });
