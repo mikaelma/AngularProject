@@ -35,11 +35,11 @@ This project uses a NodeJS server and a MongoDB database.
 Here you can read a bit about the different components our project uses:
 
 * [change-password-dialog](./client/src/app/change-password-dialog) - Dialog box for changing password from [my-page](./client/src/app/my-page) component.
-* [drink](./client/src/app/drink)
-* [drink-list](./client/src/app/drink)
-* [drinks](./client/src/app/drink)
-* [drink](./client/src/app/drink)
-* [drink](./client/src/app/drink)
+* [drink](./client/src/app/drink) - This is the page for showing the drink component. 
+* [drink-list](./client/src/app/drink-list) - This is the front page of the application. It lists all the drinks in the database.
+* [header](./client/src/app/header) - The header component. Standard Material UI component. Used for navigation, login, register and my-page.
+* [login-dialog-box](./client/src/app/login-dialog-box) - Popup login box for entering user information.
+* [main-page](./client/src/app/main-page) - Application root html. 
 * [drink](./client/src/app/drink)
 * [drink](./client/src/app/drink)
 * [drink](./client/src/app/drink)
