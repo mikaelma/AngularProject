@@ -60,15 +60,22 @@ The webapplication will include a database, of the groups choice, that runs on t
 Task 3: 
 You are to demonstrate both writing and reading operations to the database, including a form of search. Implement either your own data, or data found on the web.
 
-  Solution:
-  There are several places where we write and read from the database. All these are found in the file ./server/index.js .
-  One example of this is the login-function. The information is gathered from the loginDialogBox-component and forwards the       information to the header-component. The service-component auth.service.ts then handles this information, which again is used by index.js. 
-  
-  login-dialog-box.component.html:
-          submitLogin(value: Object): void {
-    this.dialogRefLogin.close(value)
-  }
-  
+Solution:
+There are several places where we write and read from the database. All these are found in the file ./server/index.js .
+One example of this is the login-function. The information is gathered from the loginDialogBox-component and forwards the       information to the header-component. The service-component auth.service.ts then handles this information, which again is used by index.js. 
+
+The information gathered from the login dialog box are handeled the following way in header.component.ts:
+    dialogRefLogin.afterClosed().subscribe(result => {
+          self.auth.loginUser(result.email, result.password).subscribe((user) => {
+            self.isLoggedIn = true;
+            self.loginDisplayName = user.firstName + " " + user.lastName;
+          }, (err) => {
+            this.snackBar.open('Login failed:', 'Wrong username or password', {
+              duration: 3500
+            });
+            console.log('err: ' + err);
+          })
+        });
 
 Task 4:
 The user interface must contain a list-based view with few details for every unit. The goal is to show the user the content of the database or the result of a search. The user are to have the option to see more details for every unit, either in a separate window or by a expand/collapse feature.
