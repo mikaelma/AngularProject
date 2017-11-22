@@ -17,11 +17,18 @@
 
   <div class="favourites">
     <h2>My Favourite Drinks</h2>
-    <mat-list>
-      <mat-list-item>FAV1</mat-list-item>
-      <mat-list-item>FAV2</mat-list-item>
-      <mat-list-item>FAV3</mat-list-item>
-    </mat-list>
+    <div
+      class="favouriteDrinkList">
+      <div *ngFor="let drink of favouriteDrinks"  (click)="onSelect(drink)">
+        <div class="drinkListItem">
+          <a (click)="navigateToDrink(drink.id)">
+            <mat-list>
+              <mat-list-item class="mat-list-item">{{drink.name}}</mat-list-item>
+            </mat-list>
+          </a>
+        </div>
+      </div>
+    </div>
 
   </div>
 </div>

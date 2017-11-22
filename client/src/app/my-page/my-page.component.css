@@ -23,3 +23,15 @@
   border: solid;
 
 }
+
+.mat-list-item{
+  border: solid;
+}
+
+.favouriteDrinkList{
+  cursor: pointer;
+}
+
+mat-list-item:hover{
+  background-color: blue;
+}

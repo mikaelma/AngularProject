@@ -17,6 +17,7 @@ export class DrinkComponent implements OnInit, OnDestroy {
   drink: Drink;
   sub: Subscription;
   isFavourite: boolean = false;
+  isRemove: boolean = false;
   isLoggedIn: boolean;
 
   constructor(private route: ActivatedRoute,
@@ -30,8 +31,14 @@ export class DrinkComponent implements OnInit, OnDestroy {
     let self = this;
     this.sub = this.route.params.subscribe((params) => {
       let id = params['id'];
-      console.log(id);
       self.getDrink(id);
+      let token = localStorage.getItem("token");
+      let favouriteDrinks = self.jwt.decodeToken(token).favouriteDrinks;
+      if (favouriteDrinks.includes(id)){
+        this.isFavourite = true;
+      } else {
+        this.isFavourite = false;
+      }
     });
     
     try {
@@ -47,8 +54,24 @@ export class DrinkComponent implements OnInit, OnDestroy {
     }
   }
 
+  onClick(){
+    this.isFavourite = !this.isFavourite;
+    console.log(this.drink);
+    if(!this.isFavourite){
+      this.drinkService.favouriteDrink(this.drink.id, false)
+        .subscribe(res=>{
+          console.log(res.favouriteDrinks);
+        })
+    }else if(this.isFavourite){
+      this.drinkService.favouriteDrink(this.drink.id, true)
+        .subscribe(res => {
+          console.log(res.favouriteDrinks);
+        });
+    }
+
+  }
+
   getDrink(id) {
-    console.log(id);
     this.drinkService.getDrink(id)
       .subscribe(drink => {
         this.drink = drink
