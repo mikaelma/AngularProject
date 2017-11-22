@@ -11,6 +11,12 @@ export class AuthService {
 
   constructor(private jwt:JwtHelperService, private http:HttpClient) { }
 
+  /**
+   * Method for registering a user.
+   * @param {User} user
+   * @param {string} password
+   * @returns {Observable<Object>}
+   */
   registerUser(user:User,password:string):Observable<Object>{
     let self = this;
     return Observable.create(observer=>{
@@ -26,6 +32,12 @@ export class AuthService {
     });
   }
 
+  /**
+   * Method for updating an old password.
+   * @param {string} newPassword
+   * @param {string} oldPassword
+   * @returns {Observable<any>}
+   */
   updatePassword(newPassword: string, oldPassword: string): Observable<any>{
     let self  = this;
     return Observable.create(observer =>{
@@ -52,6 +64,12 @@ export class AuthService {
     })
   }
 
+  /**
+   * Method handeling login functionality.
+   * @param {string} email
+   * @param {string} password
+   * @returns {Observable<User>}
+   */
   loginUser(email:string,password:string):Observable<User>{
     let self = this;
     let obj = {
@@ -78,7 +96,10 @@ export class AuthService {
   }
 
 
-
+  /**
+   * Sends token to server which verify the signature.
+   * @returns {Observable<Boolean>}
+   */
   verifyToken():Observable<Boolean>{
     let self  = this;
     return Observable.create(observer=>{

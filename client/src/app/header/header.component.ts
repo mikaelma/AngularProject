@@ -53,8 +53,10 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  /**This method open the register dialog box and handles the data which is put into it.
-   * After the dialog is closed, if valid, the result is sent to auth.service **/
+  /**
+   * This method open the register dialog box and handles the data which is put into it.
+   * After the dialog is closed, if valid, the result is sent to auth.service.
+   * **/
   openDialogRegister(): void {
     let self = this;
     let dialogRefRegister = this.dialog.open(HeaderRegisterDialogBoxComponent, {
@@ -88,6 +90,9 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  /**
+   * When the page initializes we verify the token
+   * **/
   ngOnInit() {
     let self = this;
     try {

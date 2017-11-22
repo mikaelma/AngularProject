@@ -2,6 +2,7 @@ import {Component, OnInit, Inject} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 
+/** A function for checking if the two passwords from the changePassword-form are the same.t**/
 function matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
   return (group: FormGroup): { [key: string]: any } => {
     let newPassword = group.controls[passwordKey];
@@ -35,8 +36,8 @@ export class ChangePasswordDialogComponent {
     }, {validator: matchingPasswords('newPassword', 'confirmPassword')})
   }
 
+  /** Submits the values from the changePassword-form to the .afterClosed() in the myPage-component**/
   submitRegistration(value: Object): void {
-    console.log("VALUE: " + value);
     this.dialogRefRegister.close(value)
   }
 }

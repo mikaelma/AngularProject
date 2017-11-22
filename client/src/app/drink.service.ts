@@ -12,6 +12,11 @@ export class DrinkService {
 
   drinks: Drink[] = [];
 
+  /**
+   * Method for getting drinks from the database.
+   * @param skip how many drinks we should skip. 
+   * Used to dynamically fetch drinks from the db.
+   */
   getDrinks(skip: number): Observable<Drink[]> {
     let self = this;
 
@@ -44,6 +49,10 @@ export class DrinkService {
     })
   }
 
+  /**
+   * Method for getting the drinks
+   * the logged in user has created.
+   */
   getCreatedDrinks(): Observable<Drink[]> {
     let self = this;
     let token = localStorage.getItem("token");
@@ -66,6 +75,10 @@ export class DrinkService {
     })
   }
 
+  /**
+   * Method for adding new drinks to the database.
+   * @param drink the drink object to add to the db
+   */
   addDrink(drink: Drink): Observable<any> {
     let self = this;
     let token = localStorage.getItem("token");
@@ -89,6 +102,12 @@ export class DrinkService {
     });
   }
 
+  /**
+   * Method for marking a drink as favorite.
+   * @param id the ID of the drink to favorite.
+   * @param isAdd Boolean for either adding or
+   * removing the drink from favorites.
+   */
   favouriteDrink(id: string, isAdd: boolean): Observable<any> {
     let self = this;
     let token = localStorage.getItem("token");
@@ -116,6 +135,11 @@ export class DrinkService {
     });
   }
 
+  /**
+   * Method for recieving a specific drink
+   * from the database.
+   * @param id ID of the drink to get
+   */
   getDrink(id: string): Observable<Drink> {
     let self = this;
     return self.http.get<any>('/findDrink/' + id).map(res => {
@@ -128,6 +152,10 @@ export class DrinkService {
     });
   }
 
+  /**
+   * Get all the favorite drinks for
+   * the logged in user.
+   */
   getFavouriteDrinks():Observable<Drink[]>{
     let self = this;
     let token = localStorage.getItem("token");
@@ -149,6 +177,11 @@ export class DrinkService {
     })
   }
 
+  /**
+   * Method for searching for a drink
+   * with a specific name
+   * @param name Name of drink 
+   */
   searchDrink(name: string): Observable<Drink[]> {
     let self = this;
     return self.http.get<any>('/searchDrinks/' + name).map(res => {
