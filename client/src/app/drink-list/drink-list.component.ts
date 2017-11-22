@@ -137,6 +137,7 @@ export class DrinkListComponent implements OnInit {
     //first checking for filters.
     if (this.filters.length < 1) return;
     let self = this;
+    self.getDrinks();
     this.filteredDrinks = this.drinks.filter(function (drink, index, array) {
       //Filtering glass
       if (self.filters.includes(drink.glass)) {
@@ -162,7 +163,6 @@ export class DrinkListComponent implements OnInit {
         if (item === filter) this.filters.splice(index, 1);
       });
       //If we remove an item, we need to fetch drinks again.
-      self.getDrinks();
       //else append the new filter to the filter array
     } else {
       this.filters.push(filter);

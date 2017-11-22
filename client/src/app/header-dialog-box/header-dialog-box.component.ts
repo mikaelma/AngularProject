@@ -23,7 +23,6 @@ export class HeaderDialogBoxComponent {
   }
 
   submitLogin(value: Object): void {
-    console.log(value);
     this.dialogRefLogin.close(value)
   }
 }

@@ -38,7 +38,6 @@ export class HeaderRegisterDialogBoxComponent {
   }
 
   submitRegistration(value: Object): void {
-    console.log(value);
     this.dialogRefRegister.close(value)
   }
 
