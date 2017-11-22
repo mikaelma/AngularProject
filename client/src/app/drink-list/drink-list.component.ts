@@ -36,6 +36,8 @@ export class DrinkListComponent implements OnInit {
   gridView = true;
   //Controls if it is the first time we gather drinks
   firstFetch = true;
+  //Holds value from search
+  searchField = "";
 
   constructor(
     private drinkService: DrinkService,
@@ -57,7 +59,7 @@ export class DrinkListComponent implements OnInit {
         }
         this.drinks = drinks;
         this.sortArray(this.drinks);
-        self.filterDrinks();
+        self.filterDrinks(false);
       }
       );
   }
@@ -125,7 +127,7 @@ export class DrinkListComponent implements OnInit {
       .subscribe(
       (drinks: Drink[]) => {
         this.totalDrinks.push.apply(this.totalDrinks, drinks);
-        this.filterDrinks();
+        this.filterDrinks(false);
       }
       );
   }
@@ -137,43 +139,72 @@ export class DrinkListComponent implements OnInit {
    * @param e
    */
   searchDrink(e) {
+    console.log("Searching");
     let self = this;
     if (e.target.value.length > 2) {
+      this.searchField = e.target.value;
       this.drinkService.searchDrink(e.target.value)
         .subscribe(
         (drinks: Drink[]) => {
           this.drinks = drinks;
           this.sortArray(this.drinks);
-          self.filterDrinks();
+          this.filterDrinks(true);
         }
         )
     } else {
       this.skip = 0;
-      this.getDrinks();
+      this.drinks = this.totalDrinks;
+      this.searchField = "";
     }
+  }
+
+  reSearchDrink(string) {
+      this.drinkService.searchDrink(string)
+        .subscribe(
+        (drinks: Drink[]) => {
+          this.drinks = drinks;
+          this.sortArray(this.drinks);
+        });
   }
 
   /**
    * This method filters the drink array.
    * If there are no filters, we return. This is so we wont get an empty list when checking for filters.
    * **/
-  filterDrinks() {
-    if (this.filters.length < 1){
-      this.drinks = this.totalDrinks;
-      this.sortArray(this.drinks);
-      return;
-    }
+  filterDrinks(fromSearch) {
     let self = this;
-    this.filteredDrinks = this.totalDrinks.filter(function (drink, index, array) {
-      if (self.filters.includes(drink.glass)) {
-        return true;
+    if(fromSearch || this.searchField !== ""){
+      if (this.filters.length < 1){
+        self.reSearchDrink(self.searchField);
+        return;
       }
-      for (let ingredient of drink.ingredients) {
-        if (self.filters.includes(ingredient.name.toLowerCase())) {
+      this.filteredDrinks = self.drinks.filter(function (drink, index, array) {
+        if (self.filters.includes(drink.glass)) {
           return true;
         }
+        for (let ingredient of drink.ingredients) {
+          if (self.filters.includes(ingredient.name.toLowerCase())) {
+            return true;
+          }
+        }
+      });
+    }else{
+      if (this.filters.length < 1){
+        this.drinks = this.totalDrinks;
+        this.sortArray(this.drinks);
+        return;
       }
-    });
+      this.filteredDrinks = self.totalDrinks.filter(function (drink, index, array) {
+        if (self.filters.includes(drink.glass)) {
+          return true;
+        }
+        for (let ingredient of drink.ingredients) {
+          if (self.filters.includes(ingredient.name.toLowerCase())) {
+            return true;
+          }
+        }
+      });
+    }
     self.drinks = this.filteredDrinks;
     self.sortArray(this.drinks);
   }
@@ -194,7 +225,7 @@ export class DrinkListComponent implements OnInit {
     } else {
       self.filters.push(filter);
     }
-    self.filterDrinks();
+    self.filterDrinks(false);
   }
 
   /**
