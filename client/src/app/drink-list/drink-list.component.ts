@@ -124,9 +124,7 @@ export class DrinkListComponent implements OnInit {
     this.drinkService.getDrinks(this.skip)
       .subscribe(
       (drinks: Drink[]) => {
-        this.drinks.push.apply(this.drinks, drinks);
         this.totalDrinks.push.apply(this.totalDrinks, drinks);
-        this.sortArray(this.drinks);
         this.filterDrinks();
       }
       );
