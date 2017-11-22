@@ -27,6 +27,7 @@ import {MainGuard} from "./main.guard";
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MyPageDrinkListComponent } from './my-page-drink-list/my-page-drink-list.component';
+import { Ng2CarouselamosModule } from 'ng2-carouselamos';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { MyPageDrinkListComponent } from './my-page-drink-list/my-page-drink-lis
     MatOptionModule,
     MatSnackBarModule,
     MatListModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    Ng2CarouselamosModule
   ],
   providers: [JwtHelperService,AuthService, DrinkService, MainGuard],
   bootstrap: [AppComponent],

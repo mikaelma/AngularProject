@@ -2,7 +2,7 @@
   min-width: 150px;
   max-width: 500px;
   width: 100%;
-  margin: 40px 20%;
+  margin: 40px 15%;
 }
 
 .listHolder{
@@ -75,4 +75,40 @@ a {
   max-height: 2em;
   line-height: 1em;
 
+}
+
+#container {
+  width: 80%;
+  margin: 5em auto;,
+  padding: 0;
+  background:#fff;
+  position: relative;
+}
+
+.items {
+  max-width:512px;
+  height:512px;
+  background:#ECECEC;
+  position: relative;
+  cursor: pointer;
+}
+
+#title {
+  position: absolute;
+  top: 300px;
+  left: 0;
+  width: 100%;
+}
+
+h2 span {
+  color: white;
+  font: bold 24px/45px Helvetica, Sans-Serif;
+  letter-spacing: -1px;
+  background: rgb(0, 0, 0); /* fallback color */
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+}
+
+#left, #right {
+  margin: 30px;
 }

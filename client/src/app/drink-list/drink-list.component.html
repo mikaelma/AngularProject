@@ -9,6 +9,15 @@
 
 <mat-form-field class="sortHolder">
   <mat-select
+    (change)="changeView($event)"
+    placeholder="View:" value="grid">
+    <mat-option value="grid">Gridview</mat-option>
+    <mat-option value="carousel">Slideshow</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field class="sortHolder" style="margin-left: 20px">
+  <mat-select
     (change)="changeSort($event)"
     placeholder="Sort by:" value="name">
     <mat-option value="name">Name</mat-option>
@@ -16,7 +25,38 @@
   </mat-select>
 </mat-form-field>
 
-<div class="listHolder">
+
+<div id="container" >
+  <div
+    *ngIf="!gridView"
+    ng2-carouselamos
+    class="slides-wrapper"
+    [items]="drinks"
+    [width]="512"
+    [$prev]="prev"
+    [$next]="next"
+    [$item]="item"
+  >
+  </div>
+
+
+  <ng-template #prev >
+    <img src="../../assets/left.png" id="left"  height="100" width="100" style="cursor: pointer"/>
+  </ng-template>
+  <ng-template #next>
+    <img src="../../assets/right.png" id="right" height="100" width="100" style="cursor: pointer"/>
+  </ng-template>
+  <ng-template #item let-item let-i="index">
+
+    <div class="items" (click)="navigateToDrink(item.id)">
+      <img width="512" src="{{ item.image }}">
+      <h2 id="title"><span>{{item.name}} <br />&#160;By {{item.authorName}}</span></h2>
+
+    </div>
+
+  </ng-template>
+
+<div class="listHolder" *ngIf="gridView">
   <div class="categories">
     <div>
       <h2>Alcohol</h2>
