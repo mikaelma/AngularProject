@@ -108,7 +108,7 @@ You are to demonstrate both writing and reading operations to the database, incl
 There are several places where we write and read from the database. All these are found in the file [./server/index.js](./server/index.js).
 One example of this is the register-function. The information is gathered from the [register-dialog-box.component](./client/src/app/register-dialog-box/register-dialog-box.component.ts) and forwards the information to the [header.component](./client/src/app/header/header.component.ts). The service-component [auth.service.ts](.client/app/auth.service.ts) then handles this information, which again is used by [index.js](.server/index.js). 
 
-The information gathered from the register dialog box are handeled the following way in header.component.ts](./client/src/app/header/header.component.ts):
+The information gathered from the register dialog box are handeled the following way in [header.component.ts](./client/src/app/header/header.component.ts):
 ```
 ...
    dialogRefRegister.afterClosed().subscribe(result => {
@@ -240,29 +240,31 @@ The list needs to have the ability to get sorted by two attributes.
 
 *Solution:*   
 The list gets sorted in [drink-list.component.ts](./client/src/app/drink-list/drink-list.component.ts). In the html-file you find (change)="changeSort($event)" in the <div> "sortHolder". It is a simple method in [drink-list.component.ts](./client/src/app/drink-list/drink-list.component.ts) which changes the the parameters on which the list is sorted on. These are the name of the drink and the author of the drink. Our sorting function looks like this:
-'''
-sortArray(array) {
-    if (this.sortBy === 'name') {
-        array.sort(function (a, b) {
-        let nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase()
-        if (nameA < nameB) //sort string ascending
-            return -1;
-        if (nameA > nameB)
-            return 1;
-        return 0; //default return value (no sorting)
-        })
-    } else {
-        array.sort(function (a, b) {
-        let nameA = a.authorName.toLowerCase(), nameB = b.authorName.toLowerCase()
-        if (nameA < nameB) //sort string ascending
-            return -1;
-        if (nameA > nameB)
-            return 1;
-        return 0; //default return value (no sorting)
-        })
+
+```
+    sortArray(array) {
+        if (this.sortBy === 'name') {
+            array.sort(function (a, b) {
+            let nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase()
+            if (nameA < nameB) //sort string ascending
+                return -1;
+            if (nameA > nameB)
+                return 1;
+            return 0; //default return value (no sorting)
+            })
+        } else {
+            array.sort(function (a, b) {
+            let nameA = a.authorName.toLowerCase(), nameB = b.authorName.toLowerCase()
+            if (nameA < nameB) //sort string ascending
+                return -1;
+            if (nameA > nameB)
+                return 1;
+            return 0; //default return value (no sorting)
+            })
+        }
     }
-}
-'''
+```
+
 **Task 6:**   
 The list needs to have the ability to get filtered by two attributes. 
 
@@ -270,28 +272,28 @@ The list needs to have the ability to get filtered by two attributes.
 The solution for this is similar to the one above; (change)="changeView($event)" is also an method in [drink-list.component.ts](./client/src/app/drink-list/drink-list.component.ts).
 To filter the drinks we append a _filter_ to our _filterArray_ in the [drink-list.component.ts](./client/src/app/drink-list/drink-list.component.ts). We then run a filter function that filters out all the drinks that match the currently selected filters.
 This is the method for adding new filters to our filter array:
-'''
-onClickFilter(filter) {
-    //Setting filter to lowercase for consistency with db
-    filter = filter.toLowerCase();
-    let self = this;
-    //If the filter list already includes the filter, remove it.
-    if (self.filters.includes(filter)) {
-      self.filters.forEach((item, index) => {
-        if (item === filter) self.filters.splice(index, 1);
-      });
-      //If we remove an item, we need to fetch drinks again.
-      //else append the new filter to the filter array
-    } else {
-      self.filters.push(filter);
+```
+    onClickFilter(filter) {
+        //Setting filter to lowercase for consistency with db
+        filter = filter.toLowerCase();
+        let self = this;
+        //If the filter list already includes the filter, remove it.
+        if (self.filters.includes(filter)) {
+        self.filters.forEach((item, index) => {
+            if (item === filter) self.filters.splice(index, 1);
+        });
+        //If we remove an item, we need to fetch drinks again.
+        //else append the new filter to the filter array
+        } else {
+        self.filters.push(filter);
+        }
+        self.filterDrinks();
     }
-    self.filterDrinks();
-}
-'''
+```
 
 We then run the actual filter method:
 
-'''
+```
  //Method for filtering the drink array on the filter list
 filterDrinks() {
     //if we have no filters selected, return. Do this so we wont get an empty list when
@@ -313,7 +315,7 @@ filterDrinks() {
     });
     self.drinks = this.filteredDrinks;
 }
-'''
+```
 
 **Task 7:**.  
 The list needs to have the ability to load data dynamically.
