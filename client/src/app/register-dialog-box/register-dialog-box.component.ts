@@ -17,9 +17,9 @@ function matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
 }
 
 @Component({
-  selector: 'app-header-register-dialog-box',
-  templateUrl: './header-register-dialog-box.component.html',
-  styleUrls: ['./header-register-dialog-box.component.css'],
+  selector: 'app-register-dialog-box',
+  templateUrl: './register-dialog-box.component.html',
+  styleUrls: ['./register-dialog-box.component.css'],
 })
 export class HeaderRegisterDialogBoxComponent {
   hide = true;

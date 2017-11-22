@@ -3,9 +3,9 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {FormControl, Validators, FormGroup, FormBuilder} from '@angular/forms';
 
 @Component({
-  selector: 'app-header-dialog-box',
-  templateUrl: './header-dialog-box.component.html',
-  styleUrls: ['./header-dialog-box.component.css'],
+  selector: 'app-login-dialog-box',
+  templateUrl: './login-dialog-box.component.html',
+  styleUrls: ['./login-dialog-box.component.css'],
 })
 export class HeaderDialogBoxComponent {
   hide = true;

@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MatDialog, MatSnackBar} from '@angular/material';
-import {HeaderDialogBoxComponent} from '../header-dialog-box/header-dialog-box.component';
-import {HeaderRegisterDialogBoxComponent} from '../header-register-dialog-box/header-register-dialog-box.component';
+import {HeaderDialogBoxComponent} from '../login-dialog-box/login-dialog-box.component';
+import {HeaderRegisterDialogBoxComponent} from '../register-dialog-box/register-dialog-box.component';
 import {AuthService} from '../auth.service';
 import {User} from '../user';
 import {Observable} from 'rxjs/Observable'

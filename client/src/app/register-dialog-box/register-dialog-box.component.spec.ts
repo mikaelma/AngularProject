@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HeaderRegisterDialogBoxComponent } from './header-register-dialog-box.component';
+import { HeaderRegisterDialogBoxComponent } from './register-dialog-box.component';
 import {TestingModule} from '../../testing/testing.module';
 
 describe('HeaderRegisterDialogBoxComponent', () => {
