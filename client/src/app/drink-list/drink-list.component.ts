@@ -158,14 +158,14 @@ export class DrinkListComponent implements OnInit {
     filter = filter.toLowerCase();
     let self = this;
     //If the filter list already includes the filter, remove it.
-    if (this.filters.includes(filter)) {
-      this.filters.forEach((item, index) => {
-        if (item === filter) this.filters.splice(index, 1);
+    if (self.filters.includes(filter)) {
+      self.filters.forEach((item, index) => {
+        if (item === filter) self.filters.splice(index, 1);
       });
       //If we remove an item, we need to fetch drinks again.
       //else append the new filter to the filter array
     } else {
-      this.filters.push(filter);
+      self.filters.push(filter);
     }
     self.filterDrinks();
   }
