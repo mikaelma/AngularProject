@@ -26,6 +26,7 @@ export class DrinkListComponent implements OnInit {
   lastFiveDrinks = [];
   filters: string[] = []; //Since ingredients and glasstype wont be the same, we can keep them in the same array.
   sortBy = 'name';
+  gridView = true;
 
   constructor(
     private drinkService: DrinkService,
@@ -171,6 +172,16 @@ export class DrinkListComponent implements OnInit {
   changeSort(e) {
     this.sortBy = e.value;
     this.sortArray(this.drinks);
+  }
+
+  changeView(e) {
+    console.log(e.value);
+    if (e.value === "grid"){
+      this.gridView = true;
+    } else {
+      this.gridView = false;
+    }
+    console.log(this.gridView);
   }
 
   /**
