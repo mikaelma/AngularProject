@@ -25,7 +25,9 @@ let db = mongoose.connect('mongodb://localhost/putin', (err) => {
     }
 });
 
-
+/**
+ * Method for log in
+ */
 app.post('/login', (req, res) => {
     User.find({
         email: req.body.email
@@ -69,6 +71,9 @@ app.get('/authorize', (req, res) => {
     });
 });
 
+/**
+ * 
+ */
 app.get('/drinks/:skip', (req, res) => {
     let self = this;
     let skip = parseInt(req.params.skip);
@@ -204,6 +209,11 @@ app.post('/drink', (req, res) => {
     });
 });
 
+
+/**
+ * Recieve all drinks created by 
+ * the logged in user.
+ */
 app.get('/userDrinks', (req, res) => {
     verifyToken(req, (err, decoded) => {
         Drink.find({author: decoded._id}, (err, queryRes) => {
@@ -219,6 +229,9 @@ app.get('/userDrinks', (req, res) => {
     });
 });
 
+/**
+ * Register new users
+ */
 app.post('/register', (req, res) => {
     console.log(req.body);
     let hash = passhash.sha512(req.body.password, passhash.random(20));
@@ -263,6 +276,9 @@ function verifyToken(req, verified) {
     });
 }
 
+/**
+ * Reset password for user
+ */
 app.post('/passwordReset', (req, res) => {
 
     verifyToken(req, (err, decoded) => {
@@ -307,6 +323,9 @@ app.post('/passwordReset', (req, res) => {
     });
 })
 
+/**
+ * Find specific drink with id.
+ */
 app.get('/findDrink/:id', (req, res) => {
     let id = req.params.id;
     Drink.find({_id: id}, (err, doc) => {

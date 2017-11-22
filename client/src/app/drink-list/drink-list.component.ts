@@ -21,6 +21,8 @@ export class DrinkListComponent implements OnInit {
   drinks: Drink[] = [];
   //Holds the drinks that are filtered.
   filteredDrinks: Drink[] = [];
+  //Holds all drinks for easier filtering.
+  totalDrinks: Drink[] = [];
   //Categories for types of glasses and spirits used in the dropdown
   typesOfAcohol = ['Brandy', 'Gin', 'Rum', 'Tequila', 'Vodka', 'Whiskey'];
   typesOfGlass = ['Cocktail', 'Highball', 'Rocks', 'Shot'];
@@ -32,6 +34,8 @@ export class DrinkListComponent implements OnInit {
   sortBy = 'name';
   //Holds a boolean to choose between fancy and regular view.
   gridView = true;
+  //Controls if it is the first time we gather drinks
+  firstFetch = true;
 
   constructor(
     private drinkService: DrinkService,
@@ -42,10 +46,15 @@ export class DrinkListComponent implements OnInit {
    */
   getDrinks(): void {
     let self = this;
+    
     //Gets drinks from drinkservice. the 0 indicates to not skip any records.
     this.drinkService.getDrinks(0)
       .subscribe(
       (drinks: Drink[]) => {
+        if(self.firstFetch){
+          this.totalDrinks = drinks;
+          self.firstFetch = false;
+        }
         this.drinks = drinks;
         this.sortArray(this.drinks);
         self.filterDrinks();
@@ -116,7 +125,9 @@ export class DrinkListComponent implements OnInit {
       .subscribe(
       (drinks: Drink[]) => {
         this.drinks.push.apply(this.drinks, drinks);
+        this.totalDrinks.push.apply(this.totalDrinks, drinks);
         this.sortArray(this.drinks);
+        this.filterDrinks();
       }
       );
   }
@@ -149,10 +160,13 @@ export class DrinkListComponent implements OnInit {
    * If there are no filters, we return. This is so we wont get an empty list when checking for filters.
    * **/
   filterDrinks() {
-    if (this.filters.length < 1) return;
+    if (this.filters.length < 1){
+      this.drinks = this.totalDrinks;
+      this.sortArray(this.drinks);
+      return;
+    }
     let self = this;
-    self.getDrinks();
-    this.filteredDrinks = this.drinks.filter(function (drink, index, array) {
+    this.filteredDrinks = this.totalDrinks.filter(function (drink, index, array) {
       if (self.filters.includes(drink.glass)) {
         return true;
       }
@@ -163,6 +177,7 @@ export class DrinkListComponent implements OnInit {
       }
     });
     self.drinks = this.filteredDrinks;
+    self.sortArray(this.drinks);
   }
 
   /**
@@ -178,8 +193,6 @@ export class DrinkListComponent implements OnInit {
       self.filters.forEach((item, index) => {
         if (item === filter) self.filters.splice(index, 1);
       });
-      //If we remove an item, we need to fetch drinks again.
-      //else append the new filter to the filter array
     } else {
       self.filters.push(filter);
     }
