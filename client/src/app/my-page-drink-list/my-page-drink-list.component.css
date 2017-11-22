@@ -1,11 +1,14 @@
-.mat-list-item{
-  border: solid;
-}
-
 .drinkListItem{
   cursor: pointer;
 }
 
-mat-list-item:hover{
-  background-color: blue;
+mat-list-item{
+  font-family: 'Raleway', sans-serif;
 }
+
+
+mat-list-item:hover{
+  border: solid;
+  border-width: 1px;
+}
+

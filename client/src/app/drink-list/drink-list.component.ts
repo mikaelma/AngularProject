@@ -23,7 +23,7 @@ export class DrinkListComponent implements OnInit {
   //Categories and types of glass used in the dropdown
   typesOfAcohol = ['Brandy', 'Gin', 'Rum', 'Tequila', 'Vodka', 'Whiskey'];
   typesOfGlass = ['Cocktail', 'Highball', 'Rocks', 'Shot'];
-  lastFiveDrinks = [];
+  lastFiveDrinks: Drink[] = [];
   filters: string[] = []; //Since ingredients and glasstype wont be the same, we can keep them in the same array.
   sortBy = 'name';
   gridView = true;
@@ -85,6 +85,7 @@ export class DrinkListComponent implements OnInit {
   onSelectDrink(drink){
     try{
       this.lastFiveDrinks.push(drink);
+      localStorage.setItem('lastFiveDrinks', JSON.stringify(this.lastFiveDrinks));
     }catch(error){
       console.log(error);
     }
@@ -136,6 +137,7 @@ export class DrinkListComponent implements OnInit {
     //first checking for filters.
     if (this.filters.length < 1) return;
     let self = this;
+    self.getDrinks();
     this.filteredDrinks = this.drinks.filter(function (drink, index, array) {
       //Filtering glass
       if (self.filters.includes(drink.glass)) {
@@ -156,15 +158,14 @@ export class DrinkListComponent implements OnInit {
     filter = filter.toLowerCase();
     let self = this;
     //If the filter list already includes the filter, remove it.
-    if (this.filters.includes(filter)) {
-      this.filters.forEach((item, index) => {
-        if (item === filter) this.filters.splice(index, 1);
+    if (self.filters.includes(filter)) {
+      self.filters.forEach((item, index) => {
+        if (item === filter) self.filters.splice(index, 1);
       });
       //If we remove an item, we need to fetch drinks again.
-      self.getDrinks();
       //else append the new filter to the filter array
     } else {
-      this.filters.push(filter);
+      self.filters.push(filter);
     }
     self.filterDrinks();
   }
@@ -190,6 +191,18 @@ export class DrinkListComponent implements OnInit {
    */
   ngOnInit() {
     this.getDrinks();
-    this.lastFiveDrinks = JSON.parse(localStorage.getItem('lastFiveDrinks'));
+    
+    let tempLastFiveDrinks = JSON.parse(localStorage.getItem('lastFiveDrinks')); 
+
+    if(tempLastFiveDrinks){
+      if(tempLastFiveDrinks.length > 5){
+        let numElements = Math.abs(5 - tempLastFiveDrinks.length);
+        tempLastFiveDrinks.splice(0, numElements);
+      }
+      this.lastFiveDrinks = tempLastFiveDrinks;
+    }else{
+      this.lastFiveDrinks = new Array<Drink>();
+    }
+    console.log("last five drinks is: " + this.lastFiveDrinks);
   }
 }

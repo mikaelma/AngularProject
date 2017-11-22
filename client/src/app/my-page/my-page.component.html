@@ -1,22 +1,24 @@
+<div class="header">
+  <h2>My Page</h2>
+</div>
+
 <div class="main">
 
   <div class="personalInfo">
-    <h2>Personal Information</h2>
-    <mat-list>
-      <mat-list-item>{{user.firstName}}</mat-list-item>
-      <mat-list-item>{{user.lastName}}</mat-list-item>
-      <mat-list-item>{{user.email}}</mat-list-item>
-    </mat-list>
+    <h3>Personal Iinformation</h3>
+    <div class="text">{{user.firstName}} {{user.lastName}}</div>
+    <div class="text">{{user.email}}</div>
+    <br>
     <button mat-raised-button="" color="primary" (click)="openDialog()">Change Password</button>
   </div>
 
   <div class="myDrinks">
-    <h2>My Drinks</h2>
+    <h3>My drinks</h3>
     <app-my-page-drink-list></app-my-page-drink-list>
   </div>
 
   <div class="favourites">
-    <h2>My Favourite Drinks</h2>
+    <h3>My favourite drinks</h3>
     <div
       class="favouriteDrinkList">
       <div *ngFor="let drink of favouriteDrinks"  (click)="onSelect(drink)">

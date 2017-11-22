@@ -1,37 +1,63 @@
+.header{
+  margin-left: 5%;
+  display: flex;
+  align-items: center;
+}
+
+h2{
+  font-family: 'Raleway';
+  font-weight: 200;
+  font-size: 3em;
+}
+
+h3{
+  font-family: 'Raleway';
+  font-weight: 400;
+  font-size: 2em;
+}
+
 .main{
   display: flex;
   flex-direction: row;
-  flex:1;
-  justify-content: space-around;
+  flex:3;
+  justify-content: center;
   padding-top:20px;
+  padding-left: 5%;
+  flex-wrap: wrap;
+}
+
+.text{
   font-family: 'Raleway', sans-serif;
+  width: 50%;
 }
 
 .personalInfo{
   font-family: 'Raleway', sans-serif;
-  border: solid;
+  flex: 1;
 }
 
 .myDrinks{
   font-family: 'Raleway', sans-serif;
-  border: solid;
-
+  margin-left: 2%;
+  flex: 1;
 }
 
 .favourites{
   font-family: 'Raleway', sans-serif;
-  border: solid;
-
-}
-
-.mat-list-item{
-  border: solid;
+  flex: 1;
+  margin-left: 2%;
 }
 
 .favouriteDrinkList{
   cursor: pointer;
 }
 
-mat-list-item:hover{
-  background-color: blue;
+mat-list-item{
+  font-family: 'Raleway', sans-serif;
 }
+
+mat-list-item:hover{
+  border: solid;
+  border-width: 1px;
+}
+

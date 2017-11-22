@@ -2,6 +2,15 @@
   display: flex;
   flex: 1;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+h2{
+  font-family: 'Raleway', sans-serif;
+  font-weight: 200;
+  font-size: 3em;
+  margin-left: 10%;
 }
 
 mat-form-field{
@@ -16,17 +25,20 @@ mat-form-field{
 }
 
 #leftContainer{
-  flex: 1;
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex: 1;
   margin-top: 3%;
-  margin-left: 3%;
   height: 100%;
+  width: 100%;
 }
 
-img{
-  width: 50%;
+img {
+  object-fit: contain;
+  width: 70%;
   height: auto;
+
 }
 
 mat-toolbar{
@@ -69,7 +81,7 @@ hr{
 }
 
 .button{
-  width: 20%;
+  width: 30%;
 }
 
 textarea{

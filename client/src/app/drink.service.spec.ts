@@ -1,11 +1,13 @@
 import { TestBed, inject } from '@angular/core/testing';
-
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 import { DrinkService } from './drink.service';
+import {JwtHelperService} from './jwthelper.service';
 
 describe('DrinkService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [DrinkService]
+      providers: [DrinkService,JwtHelperService],
+      imports:[HttpClientTestingModule]
     });
   });
 

@@ -1,15 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Drink, Ingredient} from './drink';
-//import { DRINKS } from './drink/mock-drinks';
-
 import {Observable} from 'rxjs/Observable';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {JwtHelperService} from './jwthelper.service'
 import {of} from 'rxjs/observable/of';
-
-
-//DRINK SERVICE
-//FOR NOW IT GETS DRINKS FROM MOCK DRINKS TO SERVE TO OTHER COMPONENTS.
 
 @Injectable()
 export class DrinkService {
