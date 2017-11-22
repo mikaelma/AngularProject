@@ -3,6 +3,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {FormControl, Validators, FormGroup, FormBuilder} from '@angular/forms';
 
 
+/** A function for validating the two passwords from the register-form.t**/
 function matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
     return (group: FormGroup): {[key: string]: any} => {
     let password = group.controls[passwordKey];
@@ -17,9 +18,9 @@ function matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
 }
 
 @Component({
-  selector: 'app-header-register-dialog-box',
-  templateUrl: './header-register-dialog-box.component.html',
-  styleUrls: ['./header-register-dialog-box.component.css'],
+  selector: 'app-register-dialog-box',
+  templateUrl: './register-dialog-box.component.html',
+  styleUrls: ['./register-dialog-box.component.css'],
 })
 export class HeaderRegisterDialogBoxComponent {
   hide = true;
@@ -37,6 +38,7 @@ export class HeaderRegisterDialogBoxComponent {
     },{validator: matchingPasswords('password', 'confirmPassword')})
   }
 
+  /** Submits the values from the register-form to the .afterClosed() in the header-component**/
   submitRegistration(value: Object): void {
     this.dialogRefRegister.close(value)
   }

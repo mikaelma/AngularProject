@@ -58,6 +58,7 @@ export class DrinkComponent implements OnInit, OnDestroy {
     }
   }
 
+  /** Handles if a user adds a drink to favourites**/
   onClick(){
     this.isFavourite = !this.isFavourite;
     console.log(this.drink);

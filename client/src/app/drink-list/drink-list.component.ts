@@ -78,8 +78,8 @@ export class DrinkListComponent implements OnInit {
    * After pressing on a listitem this method navigates the user to a detailed information about the drink
    * @param id
    */
-  navigateToDrink(id) {   
-    this.router.navigate(['/drink', id]);    
+  navigateToDrink(id) {
+    this.router.navigate(['/drink', id]);
   }
 
   onSelectDrink(drink){
@@ -89,7 +89,7 @@ export class DrinkListComponent implements OnInit {
     }catch(error){
       console.log(error);
     }
-    this.navigateToDrink(drink.id);    
+    this.navigateToDrink(drink.id);
   }
 
   /**
@@ -131,19 +131,19 @@ export class DrinkListComponent implements OnInit {
     }
   }
 
-  //Method for filtering the drink array on the filter list
+  /**
+   * This method  filters the drink array.
+   * If there are no filters, we return. This is so we wont get an empty list when checking for filters.
+   * **/
+
   filterDrinks() {
-    //if we have no filters selected, return. Do this so we wont get an empty list when
-    //first checking for filters.
     if (this.filters.length < 1) return;
     let self = this;
     self.getDrinks();
     this.filteredDrinks = this.drinks.filter(function (drink, index, array) {
-      //Filtering glass
       if (self.filters.includes(drink.glass)) {
         return true;
       }
-      //Filtering spirits
       for (let ingredient of drink.ingredients) {
         if (self.filters.includes(ingredient.name.toLowerCase())) {
           return true;
@@ -153,19 +153,22 @@ export class DrinkListComponent implements OnInit {
     self.drinks = this.filteredDrinks;
   }
 
+  /**
+   * This method simply adds a filter to the filter-array that holds current active filters.
+   * **/
   onClickFilter(filter) {
     //Setting filter to lowercase for consistency with db
     filter = filter.toLowerCase();
     let self = this;
     //If the filter list already includes the filter, remove it.
-    if (this.filters.includes(filter)) {
-      this.filters.forEach((item, index) => {
-        if (item === filter) this.filters.splice(index, 1);
+    if (self.filters.includes(filter)) {
+      self.filters.forEach((item, index) => {
+        if (item === filter) self.filters.splice(index, 1);
       });
       //If we remove an item, we need to fetch drinks again.
       //else append the new filter to the filter array
     } else {
-      this.filters.push(filter);
+      self.filters.push(filter);
     }
     self.filterDrinks();
   }
@@ -191,8 +194,8 @@ export class DrinkListComponent implements OnInit {
    */
   ngOnInit() {
     this.getDrinks();
-    
-    let tempLastFiveDrinks = JSON.parse(localStorage.getItem('lastFiveDrinks')); 
+
+    let tempLastFiveDrinks = JSON.parse(localStorage.getItem('lastFiveDrinks'));
 
     if(tempLastFiveDrinks){
       if(tempLastFiveDrinks.length > 5){

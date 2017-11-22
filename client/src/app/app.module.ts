@@ -10,9 +10,8 @@ import { AppComponent } from './app.component';
 import { CreateDrinkComponent } from './create-drink/create-drink.component';
 import {MyPageComponent} from "./my-page/my-page.component";
 import {HeaderComponent} from "./header/header.component";
-import {HeaderDialogBoxComponent} from "./header-dialog-box/header-dialog-box.component";
-import {HeaderRegisterDialogBoxComponent} from "./header-register-dialog-box/header-register-dialog-box.component";
-import {MainPageComponent} from "./main-page/main-page.component";
+import {HeaderDialogBoxComponent} from "./login-dialog-box/login-dialog-box.component";
+import {HeaderRegisterDialogBoxComponent} from "./register-dialog-box/register-dialog-box.component";
 import {DrinkListComponent} from "./drink-list/drink-list.component";
 import {DrinkComponent} from "./drink/drink.component";
 import {
@@ -36,7 +35,6 @@ import { Ng2CarouselamosModule } from 'ng2-carouselamos';
     HeaderComponent,
     HeaderDialogBoxComponent,
     HeaderRegisterDialogBoxComponent,
-    MainPageComponent,
     DrinkListComponent,
     DrinkComponent,
     ChangePasswordDialogComponent,
