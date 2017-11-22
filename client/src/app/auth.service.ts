@@ -19,9 +19,9 @@ export class AuthService {
           localStorage.setItem("token",res.token);
           observer.next();
           observer.complete();
-        }else if(res.error){
-          throw new Error("Server could not register user: "+res.message);
-        }
+        }else if(res.status){
+          observer.error(res);
+          observer.complete();        }
       })
     });
   }
@@ -31,7 +31,7 @@ export class AuthService {
     return Observable.create(observer =>{
       let token = localStorage.getItem("token");
       if(!token){
-        observer.error('ERR I updatepassword: ');
+        observer.error('Err i updatepassword');
         observer.complete();
       }
       let header=new HttpHeaders(
@@ -62,8 +62,9 @@ export class AuthService {
     }
     return Observable.create((observer)=>{
       self.http.post<any>('/login',obj).subscribe((res)=>{
-        if(res.status==403){
-          throw new Error("Unauthorized access");
+        if(res.status){
+          observer.error(res);
+          observer.complete();
         }
         localStorage.setItem("token",res.token);
         console.log(localStorage.getItem("token"));
