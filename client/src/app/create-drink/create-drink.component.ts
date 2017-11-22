@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, OnChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import {Drink, Ingredient} from "../../drink";
-import {DrinkService} from "../../drink.service";
+import {Drink, Ingredient} from "../drink";
+import {DrinkService} from "../drink.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import { Router } from '@angular/router/';
 
