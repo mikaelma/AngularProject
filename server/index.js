@@ -374,7 +374,7 @@ app.get('*', function (req, res) {
 });
 
 
-var server = app.listen(8080, () => {
+var server = app.listen(8084, () => {
     var host = server.address().address;
     var port = server.address().port;
     console.log('Running on 8080');
