@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {User} from '../user';
 import {JwtHelperService} from '../jwthelper.service';
-import {MatDialog} from "@angular/material";
+import {MatDialog, MatSnackBar} from "@angular/material";
 import {ChangePasswordDialogComponent} from "../change-password-dialog/change-password-dialog.component";
 import {Drink} from "../drink";
 import {AuthService} from '../auth.service';
@@ -25,7 +25,8 @@ export class MyPageComponent implements OnInit {
     private jwt:JwtHelperService,
     private auth:AuthService,
     private drinkService: DrinkService,
-    private router: Router) { }
+    private router: Router,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     let token = 'token';
@@ -71,8 +72,14 @@ export class MyPageComponent implements OnInit {
         newPassword: result.newPassword
       }
         self.auth.updatePassword(result.newPassword, result.oldPassword).subscribe((res)=>{
+          this.snackBar.open('Successfully updated the password', '', {
+            duration: 3500
+          });
           console.log(res);
         }, (err)=>{
+          this.snackBar.open('Updating password failed', '', {
+            duration: 3500
+          });
             console.log(err);
           })
 

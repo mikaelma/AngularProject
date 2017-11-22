@@ -50,7 +50,6 @@ app.post('/login', (req, res) => {
                 res.json({token: jwtToken});
 
             }else{
-                console.log("No password");
                 res.json({status: 403});
             }
         }else {
