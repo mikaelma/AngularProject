@@ -1,6 +1,6 @@
 # IT2810 - Prosjekt 4 - Gruppe 34
 
-![Logo](./client/src/logoTransBlack.png)
+![Logo](./client/src/assets/logoTransBlack.png)
 
 # Description
 
@@ -20,12 +20,12 @@ If you are interested in checking out our original idea for this project you can
 
 # Running the project
 
-If you are on _eduroam_ you can also access the application here:
+If you are on __eduroam__ you can also access the application here:
 [http://it2810-34.idi.ntnu.no:8084/](http://it2810-34.idi.ntnu.no:8084/)
 
 ## Dependencies
 __Angular CLI__
-If you don't already have angular@cli run: npm install -g angular@cli
+If you don't already have angular@cli run: __npm install -g angular@cli__
 
 __MongoDB__
 We use mongodb for database. The easiest way to install MongoDB is to check out the [documentation](https://docs.mongodb.com/manual/installation/).
@@ -35,11 +35,11 @@ The server is run by NodeJS. Easiest way to get it is by downloading it from the
 
 ## Instructions
 * Clone the project
-* Start mongodb: Run _mongod_ in terminal.
-* Change to the _putin_ database: in terminal run _mongo_ command. In the mongo program run _use putin_.
-* Start the server: in the folder ./server run _node index.js_ or _nodemon index.js_ (if you use nodemon).
-* Build the client: navigate to ./client and run: _ng build --watch_.
-* Access the project: in your preferred web browser, go to _localhost:8084_.
+* Start mongodb: Run __mongod__ in __terminal__.
+* Change to the "putin" database: in terminal run __mongo__ command. In the mongo program run __use putin__.
+* Start the server: in the folder ./server run __node index.js__ or __nodemon index.js__ (if you use nodemon).
+* Build the client: navigate to ./client and run: __ng build --watch__.
+* Access the project: in your preferred web browser, go to __localhost:8084__.
 
 # Technology
 
@@ -47,7 +47,7 @@ The server is run by NodeJS. Easiest way to get it is by downloading it from the
 The system uses Angular 5 for frontend.
 
 ## Backend
-For backend the server will run NodeJS with express and the database will be MongoDB.
+For backend the server is running NodeJS with express and the database we use is MongoDB.
 
 ## Modules
 * Mongoose - Methods for communicating with MongoDB
@@ -60,9 +60,11 @@ For backend the server will run NodeJS with express and the database will be Mon
 
 # Folder structure
 
-[/client](./client) - The angular part of the application served to the client
-[/server](./server) - The server side of the application hosting the REST API and acting as a web server
-[/README-Images](./README-Images) - Folder used only for hosting images for the README.md
+[/client](./client) - The angular part of the application served to the client.
+
+[/server](./server) - The server side of the application hosting the REST API and acting as a web server.
+
+[/README-Images](./README-Images) - Folder used only for hosting images for the README.md.
 
 # Components
 
@@ -72,7 +74,7 @@ For backend the server will run NodeJS with express and the database will be Mon
 * [header](./client/src/app/header) - The header component. Standard Material UI component. Used for navigation, login, register and my-page.
 * [login-dialog-box](./client/src/app/login-dialog-box) - Popup login box for entering user information.
 * [my-page](./client/src/app/my-page) - Page for user related stuff. Here you can change your password and see the drinks you've created. You can also take a look at your favorite drinks.
-* [my-page-drink-list](./client/src/app/drink) - Component used for displaying the drinks you have created in [my-page](./client/src/app/my-page) component.
+* [my-page-drink-list](./client/src/app/my-page-drink-list) - Component used for displaying the drinks you have created in [my-page](./client/src/app/my-page) component.
 * [register-dialog-box](./client/src/app/register-dialog-box) - Dialogbox for registering new users. 
 * [unauthorized](./client/src/app/unauthorized) - This page is shown when unauthorized users try to access pages they do not have access to.
 
@@ -82,27 +84,31 @@ For backend the server will run NodeJS with express and the database will be Mon
 The webapplication will run on the groups viritual machine and use node.js at the serverside, and developed in Angular v2 or v4. 
 
 *Solution:*
+
 We had some problems running the project on the server. Steps to run the project:
 * ssh into the server
-* run _sudo su - root_
+* run __sudo su - root__
 * Clone Git project
 * install missing dependencies 
+
 Now we were able to run the project like we normally would on our own computers.
 
 **Task 2:**   
 The webapplication will include a database, of the groups choice, that runs on the groups viritual machine. The database are to be well designed according to good practice.
 
 *Solution:*
+
 After getting admin rights from _Task 1_ we were able to run MongoDB on the server.
 
 **Task 3:**   
 You are to demonstrate both writing and reading operations to the database, including a form of search. Implement either your own data, or data found on the web.
 
-*Solution:*.  
-There are several places where we write and read from the database. All these are found in the file ./server/index.js .
-One example of this is the register-function. The information is gathered from the registerDialogBox-component and forwards the information to the header-component. The service-component auth.service.ts then handles this information, which again is used by index.js. 
+*Solution:*
 
-The information gathered from the register dialog box are handeled the following way in header.component.ts:
+There are several places where we write and read from the database. All these are found in the file [./server/index.js](./server/index.js).
+One example of this is the register-function. The information is gathered from the [register-dialog-box.component](./client/src/app/register-dialog-box/register-dialog-box.component.ts) and forwards the information to the [header.component](./client/src/app/header/header.component.ts). The service-component [auth.service.ts](.client/app/auth.service.ts) then handles this information, which again is used by [index.js](.server/index.js). 
+
+The information gathered from the register dialog box are handeled the following way in header.component.ts](./client/src/app/header/header.component.ts):
 ```
 ...
    dialogRefRegister.afterClosed().subscribe(result => {
@@ -175,7 +181,7 @@ This part of /register performs the .save-operation to mongoDb.
 The user interface must contain a list-based view with few details for every unit. The goal is to show the user the content of the database or the result of a search. The user are to have the option to see more details for every unit, either in a separate window or by a expand/collapse feature.
 
 *Solution:*   
-The list is created in the drink-list.component. In this component we define an empty array, which in turn are filled with the drinks gathered by the getDrinks()-method. We then go through this array in the drink-list.component.html with an ngFor-loop. If a user clicks an element in the list, he is redirected by (click) = "onSelectDrink(drink)". An excerpt of the code is found below:
+The list is created in the [drink-list.component](./client/src/app/drink-list/drink-list.component.ts). In this component we define an empty array, which in turn are filled with the drinks gathered by the getDrinks()-method. We then go through this array in the drink-list.component.html with an ngFor-loop. If a user clicks an element in the list, he is redirected by (click) = "onSelectDrink(drink)". An excerpt of the code is found below:
 
 ```
 export class DrinkListComponent implements OnInit {
@@ -233,7 +239,7 @@ In the html-file, the list-view looks like this:
 The list needs to have the ability to get sorted by two attributes. 
 
 *Solution:*   
-The list gets sorted in drink-list.component. In the html-file you find (change)="changeSort($event)" in the <div> "sortHolder". It is a simple method in drink-list.component.ts which changes the the parameters on which the list is sorted on. These are the name of the drink and the author of the drink. Our sorting function looks like this:
+The list gets sorted in [drink-list.component.ts](./client/src/app/drink-list/drink-list.component.ts). In the html-file you find (change)="changeSort($event)" in the <div> "sortHolder". It is a simple method in [drink-list.component.ts](./client/src/app/drink-list/drink-list.component.ts) which changes the the parameters on which the list is sorted on. These are the name of the drink and the author of the drink. Our sorting function looks like this:
 '''
 sortArray(array) {
     if (this.sortBy === 'name') {
@@ -261,8 +267,8 @@ sortArray(array) {
 The list needs to have the ability to get filtered by two attributes. 
 
 *Solution:*   
-The solution for this is similar to the one above; (change)="changeView($event)" is also an method in drink-list.component.ts.
-To filter the drinks we append a _filter_ to our _filterArray_ in the drink-list.component. We then run a filter function that filters out all the drinks that match the currently selected filters.
+The solution for this is similar to the one above; (change)="changeView($event)" is also an method in [drink-list.component.ts](./client/src/app/drink-list/drink-list.component.ts).
+To filter the drinks we append a _filter_ to our _filterArray_ in the [drink-list.component.ts](./client/src/app/drink-list/drink-list.component.ts). We then run a filter function that filters out all the drinks that match the currently selected filters.
 This is the method for adding new filters to our filter array:
 '''
 onClickFilter(filter) {
@@ -313,7 +319,7 @@ filterDrinks() {
 The list needs to have the ability to load data dynamically.
 
 *Solution:*   
-This solution are also found in drink-list. In drink-list.component.ts the following method is found:
+This solution are also found in [drink-list.component.ts](./client/src/app/drink-list/drink-list.component.ts). In drink-list.component.ts the following method is found:
 ```
 ...
   onScrollDown(ev) {
@@ -343,7 +349,7 @@ You need to implement session-handling in the webapplication.
 The webapplication must have a "fancy", alternate, list view to the original one.
 
 *Solution:*
-Our solution to the task to implement a "fancy" view were similar to how we solved filtering and sorting. In the drink-list-component, at the main page, the user can toggle between a grid-view and a slideshow. 
+Our solution to the task to implement a "fancy" view were solved by using bootstrap. In the [drink-list.component.ts](./client/src/app/drink-list/drink-list.component.ts), at the main page, the user can toggle between a grid-view and a _slideshow_. The slideshow option shows the drinks as a slideshow. Pretty _fancy_ if you ask us! 
 
 **Task 11:**   
 The code needs to be tested and the functionality have to be well tried and not faulty.
