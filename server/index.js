@@ -9,7 +9,6 @@ var mongoose = require("mongoose");
 var Drink = require('./models/drink');
 var User = require('./models/user');
 
-
 var secretKey = "kafornokka";
 
 app.use(express.static(dist));
@@ -17,7 +16,7 @@ app.use(bodyParser.json());
 var tokens = [];
 console.log(dist);
 
-
+//Connecting to the database. Name of database is "putin"
 let db = mongoose.connect('mongodb://localhost/putin', (err) => {
     if (err) {
         console.log(err);

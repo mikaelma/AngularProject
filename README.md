@@ -1,6 +1,6 @@
 # IT2810 - Prosjekt 4 - Gruppe 34
 
-![Logo](./client/src/assets/logoTransBlack.png)
+![Logo](./client/src/assets/logoTrans.png)
 
 # Description
 
