@@ -1,0 +1,12 @@
+<div
+  class="drinkList">
+  <div *ngFor="let drink of drinks"  (click)="onSelect(drink)">
+    <div class="drinkListItem">
+      <a (click)="navigateToDrink(drink.id)">
+      <mat-list>
+        <mat-list-item class="mat-list-item">{{drink.name}}</mat-list-item>
+      </mat-list>
+      </a>
+    </div>
+  </div>
+</div>

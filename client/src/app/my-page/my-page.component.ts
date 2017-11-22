@@ -5,6 +5,8 @@ import {MatDialog} from "@angular/material";
 import {ChangePasswordDialogComponent} from "../change-password-dialog/change-password-dialog.component";
 import {Drink} from "../drink";
 import {AuthService} from '../auth.service';
+import {Router} from "@angular/router";
+import {DrinkService} from "../drink.service";
 
 @Component({
   selector: 'app-my-page',
@@ -15,9 +17,15 @@ export class MyPageComponent implements OnInit {
   user: User;
   oldPassword: string;
   updatedPassword: string;
+  favouriteDrinks: Drink[] = [];
 
 
-  constructor(public dialog: MatDialog, private jwt: JwtHelperService, private auth:AuthService) { }
+  constructor(
+    public dialog: MatDialog,
+    private jwt:JwtHelperService,
+    private auth:AuthService,
+    private drinkService: DrinkService,
+    private router: Router) { }
 
   ngOnInit() {
     let token = 'token';
@@ -28,6 +36,25 @@ export class MyPageComponent implements OnInit {
       userObject.email,
       userObject.favouriteDrinks,
       userObject.createdDrinks)
+    this.getFavouriteDrinks();
+  }
+
+  /**
+   * After pressing on a listitem this method navigates the user to a detailed information about the drink
+   * @param id
+   */
+  navigateToDrink(id){
+    this.router.navigate(['/drink',id])
+  }
+
+  /**
+   * Calls drinkservice to retrieve favourite drinks from database.
+   */
+  getFavouriteDrinks(): void {
+    this.drinkService.getFavouriteDrinks()
+      .subscribe((drinks: Drink[])=>{
+        this.favouriteDrinks = drinks;
+      });
   }
 
   openDialog(): void {
@@ -43,15 +70,12 @@ export class MyPageComponent implements OnInit {
         oldPassword: result.oldPassword,
         newPassword: result.newPassword
       }
-      try{
-        console.log(passwordObject);
-        self.auth.updatePassword(result.newPassword, result.oldPassword)
-          .subscribe((res)=>{
+        self.auth.updatePassword(result.newPassword, result.oldPassword).subscribe((res)=>{
           console.log(res);
-        })
-      }catch(e){
-        console.log('ERR I DIALOGREFAFTERCLOSE: ' + e)
-      }
+        }, (err)=>{
+            console.log(err);
+          })
+
     });
   }
 }

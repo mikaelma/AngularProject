@@ -1,0 +1,14 @@
+.drinkListItem{
+  cursor: pointer;
+}
+
+mat-list-item{
+  font-family: 'Raleway', sans-serif;
+}
+
+
+mat-list-item:hover{
+  border: solid;
+  border-width: 1px;
+}
+

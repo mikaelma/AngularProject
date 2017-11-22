@@ -1,34 +1,44 @@
 <div *ngIf="drink" class="drinkClass">
-    <div class="header">
-        <div class="headerText">
-            <h2> {{drink.name}} </h2>
-            <div class="text" id="author" >By: {{drink.authorName}}</div>
-        </div>
-        <button id="icon" mat-icon-button color="accent">
-            <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
-        </button>
+  <div class="header">
+    <div class="headerText">
+      <h2> {{drink.name}} </h2>
+      <div class="text" id="author">By: {{drink.authorName}}</div>
     </div>
-    <div class="drinkHolder">
 
-        <div class="textContainer">
-            <h3>Glass</h3>
-            <div class="text">{{drink.glass}}</div>
-            <h3>Ingredients</h3>
-            <div *ngFor="let ingredient of drink.ingredients">
-                <div class="text">
-                    {{ingredient.quantity}}
-                    {{ingredient.measure}}
-                    {{ingredient.name}}
-                </div>
-            </div>
-            <h3>Recipe</h3>
-            <div class="text">{{drink.recipe}}</div>
-            <h3>Description</h3>
-            <div class="text">{{drink.description}}</div>
-        </div>
-
-        <div class="image">
-            <img [src]=drink.image alt="Drink image">
-        </div>
+    <div class="button" *ngIf="isLoggedIn">
+      <button (click)="onClick()"  mat-icon-button>
+        <mat-icon *ngIf="isFavourite" aria-label="Example icon-button with a heart icon" color="warn">favorite</mat-icon>
+        <mat-icon disabled class="disabledButton" *ngIf="!isFavourite" aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+      </button>
     </div>
+ </div>
+
+
+
+  <div class="drinkHolder">
+    
+    <div class="imageContainer">
+      <img class="image" [src]=drink.image alt="Drink image">
+    </div>
+  
+    <div class="textContainer">
+      <h3>Glass</h3>
+      <div class="text">{{drink.glass}}</div>
+      <h3>Ingredients</h3>
+      <div *ngFor="let ingredient of drink.ingredients">
+        <div class="text">
+          {{ingredient.quantity}}
+          {{ingredient.measure}}
+          {{ingredient.name}}
+        </div>
+      </div>
+      <h3>Recipe</h3>
+      <div class="text">{{drink.recipe}}</div>
+      <h3>Description</h3>
+      <div class="text">{{drink.description}}</div>
+    </div>
+
+
+    
+  </div>
 </div>

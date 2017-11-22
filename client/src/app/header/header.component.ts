@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
 import {HeaderDialogBoxComponent} from '../header-dialog-box/header-dialog-box.component';
 import {HeaderRegisterDialogBoxComponent} from '../header-register-dialog-box/header-register-dialog-box.component';
 import {AuthService} from '../auth.service';
@@ -14,61 +14,99 @@ import {Router} from '@angular/router'
   styleUrls: ['./header.component.css'],
 })
 
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit {
 
-  loginDisplayName:string;
+  loginDisplayName: string;
   loginEmail: string;
   loginPassword: string;
-  isLoggedIn:boolean;
+  isLoggedIn: boolean;
   firstname: string;
   surname: string;
   registerEmail: string;
   registerPassword: string;
 
-  constructor(public dialog: MatDialog,private auth:AuthService,private jwt:JwtHelperService, private router: Router) { }
+  constructor(public dialog: MatDialog,
+              private auth: AuthService,
+              private jwt: JwtHelperService,
+              private router: Router,
+              private snackBar: MatSnackBar) {
+  }
 
   openDialogLogin(): void {
     let self = this;
-    let dialogRefLogin= this.dialog.open(HeaderDialogBoxComponent, {
+    let dialogRefLogin = this.dialog.open(HeaderDialogBoxComponent, {
       width: '250px',
       data: {loginEmail: this.loginEmail, loginPassword: this.loginPassword}
     });
 
     dialogRefLogin.afterClosed().subscribe(result => {
-      try {
-        self.auth.loginUser(result.email, result.password).subscribe((user) => {
-          self.isLoggedIn = true;
-          self.loginDisplayName = user.firstName + " " + user.lastName;
+      self.auth.loginUser(result.email, result.password).subscribe((user) => {
+        self.isLoggedIn = true;
+        self.loginDisplayName = user.firstName + " " + user.lastName;
+      }, (err) => {
+        this.snackBar.open('Login failed:', 'Wrong username or password', {
+          duration: 3500
         });
-      } catch (e) {
-        //TODO: Return some message to the user, for example unknown account / password
-        console.log(e);
-      }
+        console.log('err: ' + err);
+      })
     });
   }
 
-  ngOnInit(){
+  openDialogRegister(): void {
     let self = this;
-    try{
-      self.auth.verifyToken().subscribe((res)=>{
-        if(res){
-          let token = self.jwt.decodeToken(localStorage.getItem("token"));
-          self.loginDisplayName = token.firstName+" "+token.lastName
+    let dialogRefRegister = this.dialog.open(HeaderRegisterDialogBoxComponent, {
+      width: '250px',
+      data: {
+        firstname: this.firstname,
+        surname: this.surname,
+        registerEmail: this.registerEmail,
+        registerPassword: this.registerPassword
+      }
+    });
+
+    dialogRefRegister.afterClosed().subscribe(result => {
+      let registerObject = {
+        firstName: result.firstname,
+        lastName: result.surname,
+        email: result.registerEmail,
+      }
+
+      self.auth.registerUser(new User(result.firstname, result.surname, result.email), result.confirmPassword)
+        .subscribe((res) => {
+          let user = self.jwt.decodeToken(localStorage.getItem("token"));
           self.isLoggedIn = true;
-        }else{
+          self.loginDisplayName = user.firstName + " " + user.lastName;
+        }, (err) => {
+          this.snackBar.open('Registration failed:', 'Email is already registered', {
+            duration: 3500
+          });
+          console.log(err);
+        });
+    });
+  }
+
+  ngOnInit() {
+    let self = this;
+    try {
+      self.auth.verifyToken().subscribe((res) => {
+        if (res) {
+          let token = self.jwt.decodeToken(localStorage.getItem("token"));
+          self.loginDisplayName = token.firstName + " " + token.lastName
+          self.isLoggedIn = true;
+        } else {
           console.log("Could probably not find any token")
         }
       });
-    }catch(e){
+    } catch (e) {
 
     }
   }
 
-  handleError(error):Observable<Error>{
+  handleError(error): Observable<Error> {
     return Observable.throw(new Error("Having some troubles finding token"));
   }
 
-  logout(){
+  logout() {
     let self = this;
     self.isLoggedIn = false;
     localStorage.removeItem("token");
@@ -76,40 +114,10 @@ export class HeaderComponent implements OnInit{
     console.log("Called logout");
   }
 
-  redirect(){
+  redirect() {
     this.router.navigate(['./my-page'])
   }
 
-  openDialogRegister(): void {
-    let self = this;
-    let dialogRefRegister= this.dialog.open(HeaderRegisterDialogBoxComponent, {
-      width: '250px',
-      data: {
-        firstname: this.firstname,
-        surname: this.surname,
-        registerEmail: this.registerEmail,
-        registerPassword: this.registerPassword}
-    });
 
-    dialogRefRegister.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-      let registerObject = {
-        firstName:result.firstname,
-        lastName:result.surname,
-        email:result.registerEmail,
-      }
-      try{
-        self.auth.registerUser(new User(result.firstname,result.surname,result.email),result.confirmPassword)
-        .subscribe((res)=>{
-          let user = self.jwt.decodeToken(localStorage.getItem("token"));
-          self.isLoggedIn = true;
-          self.loginDisplayName = user.firstName +" "+user.lastName;
-        });
-      }catch(e){
-        //TODO: Return some message to the user indicating that registration failed
-        console.log(e);
-      }
-    });
-  }
 }
 
