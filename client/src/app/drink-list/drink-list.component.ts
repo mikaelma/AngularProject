@@ -23,6 +23,7 @@ export class DrinkListComponent implements OnInit {
   //Categories and types of glass used in the dropdown
   typesOfAcohol = ['Brandy', 'Gin', 'Rum', 'Tequila', 'Vodka', 'Whiskey'];
   typesOfGlass = ['Cocktail', 'Highball', 'Rocks', 'Shot'];
+  lastFiveDrinks = [];
   filters: string[] = []; //Since ingredients and glasstype wont be the same, we can keep them in the same array.
   sortBy = 'name';
 
@@ -50,10 +51,10 @@ export class DrinkListComponent implements OnInit {
    * Sorts array by the name of the drink.
    * @param array
    */
-  sortArray(array){
-    if (this.sortBy === 'name'){
-      array.sort(function(a, b){
-        let nameA=a.name.toLowerCase(), nameB=b.name.toLowerCase()
+  sortArray(array) {
+    if (this.sortBy === 'name') {
+      array.sort(function (a, b) {
+        let nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase()
         if (nameA < nameB) //sort string ascending
           return -1;
         if (nameA > nameB)
@@ -61,8 +62,8 @@ export class DrinkListComponent implements OnInit {
         return 0; //default return value (no sorting)
       })
     } else {
-      array.sort(function(a, b){
-        let nameA=a.authorName.toLowerCase(), nameB=b.authorName.toLowerCase()
+      array.sort(function (a, b) {
+        let nameA = a.authorName.toLowerCase(), nameB = b.authorName.toLowerCase()
         if (nameA < nameB) //sort string ascending
           return -1;
         if (nameA > nameB)
@@ -76,8 +77,17 @@ export class DrinkListComponent implements OnInit {
    * After pressing on a listitem this method navigates the user to a detailed information about the drink
    * @param id
    */
-  navigateToDrink(id) {
-    this.router.navigate(['/drink', id])
+  navigateToDrink(id) {   
+    this.router.navigate(['/drink', id]);    
+  }
+
+  onSelectDrink(drink){
+    try{
+      this.lastFiveDrinks.push(drink);
+    }catch(error){
+      console.log(error);
+    }
+    this.navigateToDrink(drink.id);    
   }
 
   /**
@@ -117,7 +127,6 @@ export class DrinkListComponent implements OnInit {
       this.skip = 0;
       this.getDrinks();
     }
-
   }
 
   //Method for filtering the drink array on the filter list
@@ -128,7 +137,7 @@ export class DrinkListComponent implements OnInit {
     let self = this;
     this.filteredDrinks = this.drinks.filter(function (drink, index, array) {
       //Filtering glass
-      if (self.filters.includes(drink.glass)){
+      if (self.filters.includes(drink.glass)) {
         return true;
       }
       //Filtering spirits
@@ -151,7 +160,7 @@ export class DrinkListComponent implements OnInit {
         if (item === filter) this.filters.splice(index, 1);
       });
       //If we remove an item, we need to fetch drinks again.
-      self.getDrinks();  
+      self.getDrinks();
       //else append the new filter to the filter array
     } else {
       this.filters.push(filter);
@@ -170,5 +179,6 @@ export class DrinkListComponent implements OnInit {
    */
   ngOnInit() {
     this.getDrinks();
+    this.lastFiveDrinks = JSON.parse(localStorage.getItem('lastFiveDrinks'));
   }
 }

@@ -33,16 +33,17 @@ export class DrinkComponent implements OnInit, OnDestroy {
       console.log(id);
       self.getDrink(id);
     });
-
+    
     try {
       self.auth.verifyToken().subscribe((res) => {
         if (res) {
           self.isLoggedIn = true;
         } else {
-          console.log("Could probably not find any token")
+          console.log("Could probably not find any token");
         }
       });
     } catch (e) {
+      console.log(e);
     }
   }
 
