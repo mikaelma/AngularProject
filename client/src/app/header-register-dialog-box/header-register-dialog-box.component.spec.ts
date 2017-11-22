@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeaderRegisterDialogBoxComponent } from './header-register-dialog-box.component';
+import {TestingModule} from '../../testing/testing.module';
 
 describe('HeaderRegisterDialogBoxComponent', () => {
   let component: HeaderRegisterDialogBoxComponent;
@@ -8,7 +9,8 @@ describe('HeaderRegisterDialogBoxComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HeaderRegisterDialogBoxComponent ]
+      declarations: [ HeaderRegisterDialogBoxComponent ],
+      imports:[TestingModule]
     })
     .compileComponents();
   }));

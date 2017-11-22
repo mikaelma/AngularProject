@@ -1,7 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import {MatIconModule,MatFormFieldModule,MatListModule} from '@angular/material';
+import {MatIconModule,MatFormFieldModule,MatListModule,MatInputModule} from '@angular/material';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import { DrinkListComponent } from './drink-list.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DrinkService} from '../drink.service';
 import {MockDrink} from '../../testing/mock-drink.service';
 import {RouterModule} from '@angular/router';
@@ -15,12 +16,14 @@ describe('DrinkListComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ DrinkListComponent ],
       imports:[
+        MatInputModule,
         MatIconModule,
         MatFormFieldModule,
         MatListModule,
         InfiniteScrollModule,
         RouterModule,
-        RouterTestingModule
+        RouterTestingModule,
+        BrowserAnimationsModule
       ],providers:[
         {provide:DrinkService,useClass:MockDrink}
       ]
