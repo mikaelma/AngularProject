@@ -20,14 +20,17 @@ export class MyPageComponent implements OnInit {
   favouriteDrinks: Drink[] = [];
 
 
-  constructor(
-    public dialog: MatDialog,
-    private jwt:JwtHelperService,
-    private auth:AuthService,
-    private drinkService: DrinkService,
-    private router: Router,
-    private snackBar: MatSnackBar) { }
+  constructor(public dialog: MatDialog,
+              private jwt: JwtHelperService,
+              private auth: AuthService,
+              private drinkService: DrinkService,
+              private router: Router,
+              private snackBar: MatSnackBar) {
+  }
 
+  /**
+   * When the page initializese: get user information to display on mypage
+   * **/
   ngOnInit() {
     let token = 'token';
     let userObject = this.jwt.decodeToken(localStorage.getItem(token));
@@ -44,8 +47,8 @@ export class MyPageComponent implements OnInit {
    * After pressing on a listitem this method navigates the user to a detailed information about the drink
    * @param id
    */
-  navigateToDrink(id){
-    this.router.navigate(['/drink',id])
+  navigateToDrink(id) {
+    this.router.navigate(['/drink', id])
   }
 
   /**
@@ -53,11 +56,15 @@ export class MyPageComponent implements OnInit {
    */
   getFavouriteDrinks(): void {
     this.drinkService.getFavouriteDrinks()
-      .subscribe((drinks: Drink[])=>{
+      .subscribe((drinks: Drink[]) => {
         this.favouriteDrinks = drinks;
       });
   }
 
+  /**
+   * Open the dialog box change password.
+   * If the input-information is valid = Success, error = Fail.
+   * **/
   openDialog(): void {
     let self = this;
     let dialogRef = this.dialog.open(ChangePasswordDialogComponent, {
@@ -67,21 +74,21 @@ export class MyPageComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
-      let passwordObject ={
+      let passwordObject = {
         oldPassword: result.oldPassword,
         newPassword: result.newPassword
       }
-        self.auth.updatePassword(result.newPassword, result.oldPassword).subscribe((res)=>{
-          this.snackBar.open('Successfully updated the password', '', {
-            duration: 3500
-          });
-          console.log(res);
-        }, (err)=>{
-          this.snackBar.open('Updating password failed', '', {
-            duration: 3500
-          });
-            console.log(err);
-          })
+      self.auth.updatePassword(result.newPassword, result.oldPassword).subscribe((res) => {
+        this.snackBar.open('Successfully updated the password', '', {
+          duration: 3500
+        });
+        console.log(res);
+      }, (err) => {
+        this.snackBar.open('Updating password failed', '', {
+          duration: 3500
+        });
+        console.log(err);
+      })
 
     });
   }

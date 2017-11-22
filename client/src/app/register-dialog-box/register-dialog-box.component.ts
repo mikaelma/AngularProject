@@ -3,9 +3,11 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {FormControl, Validators, FormGroup, FormBuilder} from '@angular/forms';
 
 
-/** A function for validating the two passwords from the register-form.t**/
+/**
+ * A function for checking if the two passwords from the register-form are the same
+ * **/
 function matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
-    return (group: FormGroup): {[key: string]: any} => {
+  return (group: FormGroup): { [key: string]: any } => {
     let password = group.controls[passwordKey];
     let confirmPassword = group.controls[confirmPasswordKey];
 
@@ -30,12 +32,12 @@ export class HeaderRegisterDialogBoxComponent {
               @Inject(MAT_DIALOG_DATA) public data: any, public builder: FormBuilder) {
 
     this.registerForm = builder.group({
-      firstname:['', Validators.required],
+      firstname: ['', Validators.required],
       surname: ['', Validators.required],
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
       confirmPassword: ['', Validators.required]
-    },{validator: matchingPasswords('password', 'confirmPassword')})
+    }, {validator: matchingPasswords('password', 'confirmPassword')})
   }
 
   /** Submits the values from the register-form to the .afterClosed() in the header-component**/
