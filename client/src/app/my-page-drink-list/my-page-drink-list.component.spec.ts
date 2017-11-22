@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MyPageDrinkListComponent } from './my-page-drink-list.component';
+import {TestingModule} from '../../testing/testing.module';
+import {MyPageComponent} from '../my-page/my-page.component';
 
 describe('MyPageDrinkListComponent', () => {
   let component: MyPageDrinkListComponent;
@@ -8,7 +10,8 @@ describe('MyPageDrinkListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MyPageDrinkListComponent ]
+      declarations: [ MyPageDrinkListComponent,MyPageComponent],
+      imports:[TestingModule]
     })
     .compileComponents();
   }));

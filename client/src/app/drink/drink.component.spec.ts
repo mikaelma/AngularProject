@@ -1,14 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import {MatButtonModule} from '@angular/material';
 import {Observable} from 'rxjs/Rx';
-import {MatIconModule,MatFormFieldModule,MatListModule,MatInputModule,MatToolbarModule} from '@angular/material';
-import { from } from 'rxjs/observable/from';
 import {ActivatedRoute} from '@angular/router';
 import {DrinkService} from '../drink.service';
 import {MockDrink} from '../../testing/mock-drink.service';
-import {RouterTestingModule} from '@angular/router/testing';
-
 import { DrinkComponent } from './drink.component';
+import {TestingModule} from '../../testing/testing.module';
 
 class MockActivatedRoute{
   constructor(){}
@@ -29,11 +25,7 @@ describe('DrinkComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ DrinkComponent ],
       imports:[
-        MatButtonModule,
-        MatIconModule,
-        RouterTestingModule,
-        MatFormFieldModule,
-        MatToolbarModule
+        TestingModule
       ],
       providers:[
         {provide: ActivatedRoute, useValue: { 'params': Observable.from([{ 'id': 1 }]) }},

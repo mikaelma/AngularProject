@@ -15,6 +15,7 @@ import {JwtHelperService} from '../app/jwthelper.service';
 import {DrinkService} from '../app/drink.service';
 import {MockDrink} from './mock-drink.service';
 import {MockJwt} from './jwt-mock.service'
+import {Ng2CarouselamosModule} from 'ng2-carouselamos';
 
 @NgModule({
     providers:[
@@ -40,7 +41,8 @@ import {MockJwt} from './jwt-mock.service'
           ReactiveFormsModule,
           RouterTestingModule,
           MatListModule,
-          InfiniteScrollModule
+          InfiniteScrollModule,
+          Ng2CarouselamosModule
         ]
 })
 export class TestingModule{}

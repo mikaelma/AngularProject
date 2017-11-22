@@ -20,4 +20,11 @@ export class MockAuth{
             observer.complete();
         });
     }
+
+    verifyToken(){
+        return Observable.create(observer=>{
+            observer.next();
+            observer.complete();
+        })
+    }
 }
