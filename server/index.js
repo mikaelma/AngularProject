@@ -60,6 +60,9 @@ app.post('/login', (req, res) => {
     });
 });
 
+/*
+* Method used by route  guard in order to verify the JWT
+*/
 app.get('/authorize', (req, res) => {
     verifyToken(req, (err, decoded) => {
         if (err) {
@@ -72,7 +75,7 @@ app.get('/authorize', (req, res) => {
 });
 
 /**
- * 
+ *  Returns drinks from the databse , skipping "skip" drinks
  */
 app.get('/drinks/:skip', (req, res) => {
     let self = this;
@@ -86,6 +89,9 @@ app.get('/drinks/:skip', (req, res) => {
     }).skip(skip).limit(12);
 });
 
+/**
+ * Queries the database for drinks
+ */
 app.get('/searchDrinks/:name', (req, res) => {
     let self = this;
     let name = req.params.name;
@@ -98,6 +104,9 @@ app.get('/searchDrinks/:name', (req, res) => {
     });
 });
 
+/**
+ * Gets favourite drinks for the current user, determined by token
+ */
 app.post('/favouriteDrink', (req, res) => {
     let self = this;
     verifyToken(req, (err, decoded) => {
@@ -157,6 +166,9 @@ app.post('/favouriteDrink', (req, res) => {
     });
 });
 
+/**
+ * Saves a drink to the database, created by the current user determined by the supplied token
+ */
 app.post('/drink', (req, res) => {
     let self = this;
     verifyToken(req, (err, decoded) => {
@@ -230,7 +242,7 @@ app.get('/userDrinks', (req, res) => {
 });
 
 /**
- * Register new users
+ * Register new users, returns a signed JWT, refer to README.md task 9 for more info
  */
 app.post('/register', (req, res) => {
     console.log(req.body);
@@ -263,11 +275,14 @@ app.post('/register', (req, res) => {
 });
 
 
-app.get('/testToken', (req, res) => {
-    let urlObject = {email: "testmail", password: "testPassword"};
-    let jwtToken = jwt.sign(urlObject, secretKey, {expiresIn: 18000});
-    res.json({token: jwtToken});
-});
+
+/**
+ * 
+ * @param {*} req - Request object supplied by express
+ * @param {*} verified callback function which supplies (err,decoded)
+ * Verifies the token supplied in request headers, if it passes then err will be null and decoded will contain the token payload.
+ * Refer to README.md task 9 for more information about Jwt
+ */
 
 function verifyToken(req, verified) {
     let token = req.headers.authorization.split(" ")[1];
@@ -277,7 +292,8 @@ function verifyToken(req, verified) {
 }
 
 /**
- * Reset password for user
+ * Reset password for user determined by the JWT supplied in request headers
+ * Resets the password 
  */
 app.post('/passwordReset', (req, res) => {
 
@@ -350,6 +366,9 @@ app.get('/findDrink/:id', (req, res) => {
     });
 });
 
+/**
+ * Default route
+ */
 app.get('/', function (req, res) {
     res.sendFile(path.join(dist, 'index.html'));
 });
@@ -386,11 +405,17 @@ app.get('/getFavouriteDrinks', (req, res) => {
     })
 });
 
+/**
+ * In case of an invalid URL
+ */
+
 app.get('*', function (req, res) {
     res.sendFile(path.join(dist, 'index.html'));
 });
 
-
+/**
+ * Light it up!
+ */
 var server = app.listen(8084, () => {
     var host = server.address().address;
     var port = server.address().port;
