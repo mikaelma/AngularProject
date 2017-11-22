@@ -33,14 +33,16 @@ export class DrinkComponent implements OnInit, OnDestroy {
       let id = params['id'];
       self.getDrink(id);
       let token = localStorage.getItem("token");
-      let favouriteDrinks = self.jwt.decodeToken(token).favouriteDrinks;
-      if (favouriteDrinks.includes(id)){
-        this.isFavourite = true;
-      } else {
-        this.isFavourite = false;
+      if (token){
+        let favouriteDrinks = self.jwt.decodeToken(token).favouriteDrinks;
+        if (favouriteDrinks.includes(id)){
+          this.isFavourite = true;
+        } else {
+          this.isFavourite = false;
+        }
       }
     });
-    
+
     try {
       self.auth.verifyToken().subscribe((res) => {
         if (res) {
