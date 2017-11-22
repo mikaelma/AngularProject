@@ -17,7 +17,7 @@ export class DrinkListComponent implements OnInit {
   scrollDistance = 0.5;
   //How many records the db should skip when loading more drinks on scroll
   skip = 0;
-  //Drink array
+  //The current drinks
   drinks: Drink[] = [];
   //Holds the drinks that are filtered.
   filteredDrinks: Drink[] = [];

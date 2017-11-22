@@ -184,6 +184,7 @@ This part of /register performs the .save-operation to mongoDb.
 The user interface must contain a list-based view with few details for every unit. The goal is to show the user the content of the database or the result of a search. The user are to have the option to see more details for every unit, either in a separate window or by a expand/collapse feature.
 
 *Solution:*   
+
 The list is created in the [drink-list.component](./client/src/app/drink-list/drink-list.component.ts). In this component we define an empty array, which in turn are filled with the drinks gathered by the getDrinks()-method. We then go through this array in the drink-list.component.html with an ngFor-loop. If a user clicks an element in the list, he is redirected by (click) = "onSelectDrink(drink)". An excerpt of the code is found below:
 
 ```
@@ -241,7 +242,8 @@ In the html-file, the list-view looks like this:
 **Task 5:**   
 The list needs to have the ability to get sorted by two attributes. 
 
-*Solution:*   
+*Solution:* 
+
 The list gets sorted in [drink-list.component.ts](./client/src/app/drink-list/drink-list.component.ts). In the html-file you find (change)="changeSort($event)" in the <div> "sortHolder". It is a simple method in [drink-list.component.ts](./client/src/app/drink-list/drink-list.component.ts) which changes the the parameters on which the list is sorted on. These are the name of the drink and the author of the drink. Our sorting function looks like this:
 
 ```
@@ -271,7 +273,8 @@ The list gets sorted in [drink-list.component.ts](./client/src/app/drink-list/dr
 **Task 6:**   
 The list needs to have the ability to get filtered by two attributes. 
 
-*Solution:*   
+*Solution:*  
+
 The solution for this is similar to the one above; (change)="changeView($event)" is also an method in [drink-list.component.ts](./client/src/app/drink-list/drink-list.component.ts).
 To filter the drinks we append a _filter_ to our _filterArray_ in the [drink-list.component.ts](./client/src/app/drink-list/drink-list.component.ts). We then run a filter function that filters out all the drinks that match the currently selected filters.
 This is the method for adding new filters to our filter array:
@@ -324,6 +327,7 @@ filterDrinks() {
 The list needs to have the ability to load data dynamically.
 
 *Solution:*   
+
 This solution are also found in [drink-list.component.ts](./client/src/app/drink-list/drink-list.component.ts). In drink-list.component.ts the following method is found:
 ```
 ...
@@ -344,13 +348,15 @@ When the user scrolls down, and reaches the bottom, 12 new results are loaded un
 **Task 8:**   
 The webapplication must contain a "My page" where a user can log on and where some of the search activity are stored. 
 
-*Solution:*  
+*Solution:* 
+
 The login and register-functionality are bound to the header, as we found it more convenient. This functionality is covered in the description of task 3. Our "my page" contain three elements: User information/change password, which drink-recipies the user have added and a list over favourite drinks. We found it to be impractical to have search-information connected to "my page", and that is why we added myFavouriteDrinks. This was complemented with an overview over the last five drink which the user have looked at. This is found at the main page. 
 
 **Task 9:**   
 You need to implement session-handling in the webapplication.
 
 *Solution:*
+
 By using _JSON Web Tokens_ the client can send a JSON object to the server, the server in turn returns a string known as a token. The token is split into three parts, namely header, payload and signature. The payload can be base64 decoded to reveal a JSON object determined by the server. For the purpose of this application the payload is a representation of the user object stored in the database, minus some attributes such as passwordhash and salt.
 
 ```
@@ -371,12 +377,14 @@ The signature is a hash of the header and payload part of the token. The server 
 The webapplication must have a "fancy", alternate, list view to the original one.
 
 *Solution:*
+
 Our solution to the task to implement a "fancy" view were solved by using bootstrap. In the [drink-list.component.ts](./client/src/app/drink-list/drink-list.component.ts), at the main page, the user can toggle between a grid-view and a _slideshow_. The slideshow option shows the drinks as a slideshow. Pretty _fancy_ if you ask us! 
 
 **Task 11:**   
 The code needs to be tested and the functionality have to be well tried and not faulty.
 
 *Solution:*
+
 The code has been tested using the jasmine and karma frameworks.  Most tests are rather generic, however HeaderComponent and MainGuard has been extensivly tested since they are critical for user authentication. To run tests simply run __npm test__
  
 
@@ -384,6 +392,7 @@ The code has been tested using the jasmine and karma frameworks.  Most tests are
 The project needs to be well documented. 
 
 *Solution:*
+
 We think this document in addition to well documented code will suffice. 
 
 # Further work
