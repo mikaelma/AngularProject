@@ -31,7 +31,8 @@ export class HeaderComponent implements OnInit {
               private router: Router,
               private snackBar: MatSnackBar) {
   }
-
+/**This method open the login dialog box and handles the data which is put into it.
+ * After the dialog is closed, if valid, the result is sent to auth.service **/
   openDialogLogin(): void {
     let self = this;
     let dialogRefLogin = this.dialog.open(HeaderDialogBoxComponent, {
@@ -52,6 +53,8 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  /**This method open the register dialog box and handles the data which is put into it.
+   * After the dialog is closed, if valid, the result is sent to auth.service **/
   openDialogRegister(): void {
     let self = this;
     let dialogRefRegister = this.dialog.open(HeaderRegisterDialogBoxComponent, {
@@ -106,6 +109,7 @@ export class HeaderComponent implements OnInit {
     return Observable.throw(new Error("Having some troubles finding token"));
   }
 
+  /** Handles when a user logs out, it removes the token. **/
   logout() {
     let self = this;
     self.isLoggedIn = false;

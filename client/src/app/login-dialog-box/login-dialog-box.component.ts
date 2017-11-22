@@ -22,6 +22,7 @@ export class HeaderDialogBoxComponent {
       })
   }
 
+  /** Submits the values from the login-form to the .afterClosed() in the header-component**/
   submitLogin(value: Object): void {
     this.dialogRefLogin.close(value)
   }
