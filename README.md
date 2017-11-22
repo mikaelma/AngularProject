@@ -2,6 +2,12 @@
 
 # Description
 
+In this project we have created a portal for viewing different types of cocktails and drinks. Any user can access the portal and look at the drink catalog. We have also implemented search and filtering possibilites for the user.
+
+If the user wants to take a closer look at the drink and perhaps learn how to make it, he or she can simply click the drink item in the catalog and see a more detailed page.
+
+We have also implemented user management. This means that should the user want, it is possible to create an account. This gives the user the ability to add new drinks to the catalog, as well as favorite the best drinks.
+
 In this project we will create a portal containing a catalog of different cocktails and drinks. All drinks will be an individual entity in our database. The database entry will contain the following:
 * Image of the drink
 * Glass to be served in
