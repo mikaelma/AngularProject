@@ -44,14 +44,18 @@ app.post('/login', (req, res) => {
                     email: userRes.email,
                     favouriteDrinks: userRes.favouriteDrinks,
                     createdDrinks: userRes.createdDrinks
-                }
+                };
 
                 let jwtToken = jwt.sign(urlObject, secretKey, {expiresIn: 18000});
                 res.json({token: jwtToken});
+
+            }else{
+                console.log("No password");
+                res.json({status: 403});
             }
-        } else {
+        }else {
             console.log("No user found");
-            res.json({status: 403});
+            res.json({status: 404});
         }
     });
 });

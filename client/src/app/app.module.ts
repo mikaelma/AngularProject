@@ -18,7 +18,7 @@ import {DrinkListComponent} from "./drink-list/drink-list.component";
 import {DrinkComponent} from "./drink/drink.component";
 import {
   MatButtonModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule, MatOptionModule, MatSelectModule,
-  MatToolbarModule, MatListModule, MatSnackBarModule, MatGridListModule, MatButtonToggleModule
+  MatToolbarModule, MatListModule, MatGridListModule, MatButtonToggleModule, MatSnackBarModule
 } from "@angular/material";
 import {Angular2FontawesomeModule} from "angular2-fontawesome";
 import {DrinkService} from './drink.service';
@@ -27,6 +27,7 @@ import {MainGuard} from "./main.guard";
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MyPageDrinkListComponent } from './my-page-drink-list/my-page-drink-list.component';
+import { Ng2CarouselamosModule } from 'ng2-carouselamos';
 
 @NgModule({
   declarations: [
@@ -63,9 +64,10 @@ import { MyPageDrinkListComponent } from './my-page-drink-list/my-page-drink-lis
     MatGridListModule,
     MatSelectModule,
     MatOptionModule,
-    MatSnackBarModule,
     MatListModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    Ng2CarouselamosModule,
+    MatSnackBarModule
   ],
   providers: [JwtHelperService,AuthService, DrinkService, MainGuard],
   bootstrap: [AppComponent],

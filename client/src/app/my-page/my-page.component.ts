@@ -70,8 +70,7 @@ export class MyPageComponent implements OnInit {
         oldPassword: result.oldPassword,
         newPassword: result.newPassword
       }
-        self.auth.updatePassword(result.newPassword, result.oldPassword)
-          .subscribe((res)=>{
+        self.auth.updatePassword(result.newPassword, result.oldPassword).subscribe((res)=>{
           console.log(res);
         }, (err)=>{
             console.log(err);
