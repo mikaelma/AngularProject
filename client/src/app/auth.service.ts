@@ -67,7 +67,6 @@ export class AuthService {
           observer.complete();
         }
         localStorage.setItem("token",res.token);
-        console.log(localStorage.getItem("token"));
         let token = self.jwt.decodeToken(res.token);
         observer.next(new User(token.firstName,token.lastName,token.email,token.favouriteDrinks,token.createdDrinks));
         observer.complete();
