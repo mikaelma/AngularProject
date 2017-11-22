@@ -1,12 +1,10 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import {DrinkService} from '../../drink.service';
-import {MockDrink} from '../../../testing/mock-drink.service';
+import { async, ComponentFixture, TestBed,fakeAsync,tick} from '@angular/core/testing';
+import {DrinkService} from '../drink.service';
+import {MockDrink} from '../../testing/mock-drink.service';
+import {Drink,Ingredient} from '../drink';
 
 import { CreateDrinkComponent } from './create-drink.component';
-import {MatToolbarModule,MatFormFieldModule,MatInputModule,MatSelectModule,MatSnackBarModule} from '@angular/material';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {RouterTestingModule} from '@angular/router/testing';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {TestingModule} from '../../testing/testing.module';
 
 describe('CreateDrinkComponent', () => {
   let component: CreateDrinkComponent;
@@ -16,19 +14,8 @@ describe('CreateDrinkComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ CreateDrinkComponent ],
       imports:[
-        MatToolbarModule,
-        MatFormFieldModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatInputModule,
-        MatSelectModule,
-        MatSnackBarModule,
-        RouterTestingModule,
-        BrowserAnimationsModule
+        TestingModule
       ],
-      providers:[
-        {provide:DrinkService,useClass:MockDrink}
-      ]
     })
     .compileComponents();
   }));

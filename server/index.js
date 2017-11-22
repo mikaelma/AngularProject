@@ -45,8 +45,8 @@ app.post('/login', (req, res) => {
                     favouriteDrinks: userRes.favouriteDrinks,
                     createdDrinks: userRes.createdDrinks
                 };
-
                 let jwtToken = jwt.sign(urlObject, secretKey, {expiresIn: 18000});
+                console.log(jwtToken);
                 res.json({token: jwtToken});
 
             }else{

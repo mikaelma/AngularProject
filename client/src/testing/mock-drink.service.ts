@@ -85,5 +85,16 @@ export class MockDrink{
             observer.complete();
         });
     }
+    
+    addDrink(drink: Drink): Observable<any> {
+        let self = this;
+        let token = localStorage.getItem("token");
+        if (!token) throw new Error("Could not find any token");
+ 
+        return Observable.create(observer => {
+          observer.next({test:"test"});
+          observer.complete();
+        });
+      }
 
 }
