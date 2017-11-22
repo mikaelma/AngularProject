@@ -1,32 +1,33 @@
+<br>
+<div class="searchFields">
+  <mat-form-field class="searchInput">
+      <input #serachField matInput type="text" placeholder="Search" (keyup)="searchDrink($event)"/>
+      <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+        <mat-icon>close</mat-icon>
+      </button>
+  </mat-form-field>
+  
+  <mat-form-field class="selectInput">
+    <mat-select
+      (change)="changeView($event)"
+      placeholder="View:" value="grid">
+      <mat-option value="grid">Gridview</mat-option>
+      <mat-option value="carousel">Slideshow</mat-option>
+    </mat-select>
+  </mat-form-field>
 
+  <mat-form-field class="selectInput" >
+    <mat-select
+      (change)="changeSort($event)"
+      placeholder="Sort by:" value="name">
+      <mat-option value="name">Name</mat-option>
+      <mat-option value="author">Author</mat-option>
+    </mat-select>
+  </mat-form-field>
 
-<mat-form-field class="searchHolder">
-    <input #serachField matInput type="text" placeholder="Search" (keyup)="searchDrink($event)"/>
-    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-      <mat-icon>close</mat-icon>
-    </button>
-</mat-form-field>
+</div>
 
-<mat-form-field class="sortHolder" style="margin-left: 20px">
-  <mat-select
-    (change)="changeView($event)"
-    placeholder="View:" value="grid">
-    <mat-option value="grid">Gridview</mat-option>
-    <mat-option value="carousel">Slideshow</mat-option>
-  </mat-select>
-</mat-form-field>
-
-<mat-form-field class="sortHolder" style="margin-left: 20px">
-  <mat-select
-    (change)="changeSort($event)"
-    placeholder="Sort by:" value="name">
-    <mat-option value="name">Name</mat-option>
-    <mat-option value="author">Author</mat-option>
-  </mat-select>
-</mat-form-field>
-
-
-<div id="container" >
+<div id="carouselContainer" >
   <div
     *ngIf="!gridView"
     ng2-carouselamos
@@ -38,26 +39,35 @@
     [$item]="item"
   >
   </div>
-
-
   <ng-template #prev >
-    <img src="../../assets/left.png" id="left"  height="100" width="100" style="cursor: pointer"/>
+    <img src="../../assets/left.png" id="left"  height="64" width="64" style="cursor: pointer"/>
   </ng-template>
   <ng-template #next>
-    <img src="../../assets/right.png" id="right" height="100" width="100" style="cursor: pointer"/>
+    <img src="../../assets/right.png" id="right" height="64" width="64" style="cursor: pointer"/>
   </ng-template>
   <ng-template #item let-item let-i="index">
 
     <div class="items" (click)="navigateToDrink(item.id)">
-      <img width="512" src="{{ item.image }}">
+      <img id="image" height="512" width="512" src="{{ item.image }}">
       <h2 id="title"><span>{{item.name}} <br />&#160;By {{item.authorName}}</span></h2>
-
     </div>
-
   </ng-template>
+</div>
 
 <div class="listHolder" *ngIf="gridView">
   <div class="categories">
+    <div class="lastFive" *ngIf="gridView">
+      <h2>Last five</h2>
+      <div class="lastFiveElements">
+        <div class="hover" *ngFor="let drink of lastFiveDrinks" >
+          <a (click)="onSelectDrink(drink)">
+          <div class="lastFiveName">{{drink.name}}</div>
+          <div class="lastFiveAuthor">{{drink.authorName}}</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
     <div>
       <h2>Alcohol</h2>
         <mat-selection-list #spirits>
@@ -96,12 +106,5 @@
     </div>
   </div>
 
-  <!--
-  <div class="lastFive">
-    <div class="lastElement" *ngFor="let drink of lastFiveDrinks" (click)="onSelect(drink)">
-      <div class="drinkName">{{drink.name}}</div>
-      <div class="subHeader">{{drink.authorName}}</div>
-    </div>
-  </div>
-  !-->
+  
 </div>
