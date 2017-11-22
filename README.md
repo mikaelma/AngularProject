@@ -51,13 +51,13 @@ This is a basic sketch of the components we will have to use. The list is not fi
 
 # Tasks and solutions
 
-**Task 1:**.  
+**Task 1:**. 
 The webapplication will run on the groups viritual machine and use node.js at the serverside, and developed in Angular v2 or v4. 
 
 **Task 2:**. 
 The webapplication will include a database, of the groups choice, that runs on the groups viritual machine. The database are to be well designed according to good practice. 
 
-**Task 3:**   
+**Task 3:**. 
 You are to demonstrate both writing and reading operations to the database, including a form of search. Implement either your own data, or data found on the web.
 
 Solution:  
@@ -80,31 +80,31 @@ The information gathered from the login dialog box are handeled the following wa
 ```
 
 
-**Task 4:**. 
+**Task 4:**   
 The user interface must contain a list-based view with few details for every unit. The goal is to show the user the content of the database or the result of a search. The user are to have the option to see more details for every unit, either in a separate window or by a expand/collapse feature.
 
-**Task 5:**  
+**Task 5:**   
 The list needs to have the ability to get sorted by two attributes. 
 
-**Task 6:**.  
+**Task 6:**   
 The list needs to have the ability to get filtered by two attributes. 
 
-**Task 7:**. 
+**Task 7:**.  
 The list needs to have the ability to load data dynamically.
 
-**Task 8:**. 
+**Task 8:**   
 The webapplication must contain a "My page" where a user can log on and where some of the search activity are stored. 
 
-**Task 9:**. 
+**Task 9:**   
 You need to implement session-handling in the webapplication.
 
-**Task 10:**. 
+**Task 10:**   
 The webapplication must have a "fancy", alternate, list view to the original one.
 
-**Task 11:**. 
+**Task 11:**   
 The code needs to be tested and the functionality have to be well tried and not faulty.
 
-**Task 12:**. 
+**Task 12:**   
 The project needs to be well documented. 
 
 # First draft
