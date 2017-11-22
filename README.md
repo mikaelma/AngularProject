@@ -20,6 +20,9 @@ If you are interested in checking out our original idea for this project you can
 
 # Running the project
 
+If you are on _eduroam_ you can also access the application here:
+[http://it2810-34.idi.ntnu.no:8084/](http://it2810-34.idi.ntnu.no:8084/)
+
 ## Dependencies
 __Angular CLI__
 If you don't already have angular@cli run: npm install -g angular@cli
@@ -78,8 +81,19 @@ For backend the server will run NodeJS with express and the database will be Mon
 **Task 1:**.  
 The webapplication will run on the groups viritual machine and use node.js at the serverside, and developed in Angular v2 or v4. 
 
+*Solution:*
+We had some problems running the project on the server. Steps to run the project:
+* ssh into the server
+* run _sudo su - root_
+* Clone Git project
+* install missing dependencies 
+Now we were able to run the project like we normally would on our own computers.
+
 **Task 2:**   
-The webapplication will include a database, of the groups choice, that runs on the groups viritual machine. The database are to be well designed according to good practice. 
+The webapplication will include a database, of the groups choice, that runs on the groups viritual machine. The database are to be well designed according to good practice.
+
+*Solution:*
+After getting admin rights from _Task 1_ we were able to run MongoDB on the server.
 
 **Task 3:**   
 You are to demonstrate both writing and reading operations to the database, including a form of search. Implement either your own data, or data found on the web.
@@ -161,7 +175,7 @@ This part of /register performs the .save-operation to mongoDb.
 The user interface must contain a list-based view with few details for every unit. The goal is to show the user the content of the database or the result of a search. The user are to have the option to see more details for every unit, either in a separate window or by a expand/collapse feature.
 
 *Solution:*   
-The list is created in the drinkList-component. In this component we define an empty array, which in turn are filled with the drinks gathered by the getDrinks()-method. We then go through this array in the drinkList.component.html with an ngFor-loop. If a user clicks an element in the list, he is redirected by (click) = "onSelectDrink(drink)". An excerpt of the code is found below:
+The list is created in the drink-list.component. In this component we define an empty array, which in turn are filled with the drinks gathered by the getDrinks()-method. We then go through this array in the drink-list.component.html with an ngFor-loop. If a user clicks an element in the list, he is redirected by (click) = "onSelectDrink(drink)". An excerpt of the code is found below:
 
 ```
 export class DrinkListComponent implements OnInit {
@@ -219,13 +233,81 @@ In the html-file, the list-view looks like this:
 The list needs to have the ability to get sorted by two attributes. 
 
 *Solution:*   
-The list gets sorted in drinkList-component. In the html-file you find (change)="changeSort($event)" in the <div> "sortHolder". It is a simple method in drink-list.component.ts which changes the the parameters on which the list is sorted on. These are the name of the drink and the author of the drink. 
-
+The list gets sorted in drink-list.component. In the html-file you find (change)="changeSort($event)" in the <div> "sortHolder". It is a simple method in drink-list.component.ts which changes the the parameters on which the list is sorted on. These are the name of the drink and the author of the drink. Our sorting function looks like this:
+'''
+sortArray(array) {
+    if (this.sortBy === 'name') {
+        array.sort(function (a, b) {
+        let nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase()
+        if (nameA < nameB) //sort string ascending
+            return -1;
+        if (nameA > nameB)
+            return 1;
+        return 0; //default return value (no sorting)
+        })
+    } else {
+        array.sort(function (a, b) {
+        let nameA = a.authorName.toLowerCase(), nameB = b.authorName.toLowerCase()
+        if (nameA < nameB) //sort string ascending
+            return -1;
+        if (nameA > nameB)
+            return 1;
+        return 0; //default return value (no sorting)
+        })
+    }
+}
+'''
 **Task 6:**   
 The list needs to have the ability to get filtered by two attributes. 
 
 *Solution:*   
 The solution for this is similar to the one above; (change)="changeView($event)" is also an method in drink-list.component.ts.
+To filter the drinks we append a _filter_ to our _filterArray_ in the drink-list.component. We then run a filter function that filters out all the drinks that match the currently selected filters.
+This is the method for adding new filters to our filter array:
+'''
+onClickFilter(filter) {
+    //Setting filter to lowercase for consistency with db
+    filter = filter.toLowerCase();
+    let self = this;
+    //If the filter list already includes the filter, remove it.
+    if (self.filters.includes(filter)) {
+      self.filters.forEach((item, index) => {
+        if (item === filter) self.filters.splice(index, 1);
+      });
+      //If we remove an item, we need to fetch drinks again.
+      //else append the new filter to the filter array
+    } else {
+      self.filters.push(filter);
+    }
+    self.filterDrinks();
+}
+'''
+
+We then run the actual filter method:
+
+'''
+ //Method for filtering the drink array on the filter list
+filterDrinks() {
+    //if we have no filters selected, return. Do this so we wont get an empty list when
+    //first checking for filters.
+    if (this.filters.length < 1) return;
+    let self = this;
+    self.getDrinks();
+    this.filteredDrinks = this.drinks.filter(function (drink, index, array) {
+        //Filtering glass
+        if (self.filters.includes(drink.glass)) {
+            return true;
+        }
+        //Filtering spirits
+        for (let ingredient of drink.ingredients) {
+            if (self.filters.includes(ingredient.name.toLowerCase())) {
+                return true;
+            }
+        }
+    });
+    self.drinks = this.filteredDrinks;
+}
+'''
 
 **Task 7:**.  
 The list needs to have the ability to load data dynamically.
@@ -269,8 +351,11 @@ The code needs to be tested and the functionality have to be well tried and not 
 **Task 12:**   
 The project needs to be well documented. 
 
-<<<<<<< HEAD
+*Solution:*
+We think this document in addition to well documented code will suffice. 
+
 # Further work
+There are still some bugs that needs to be solved and we have some ideas for further development. However, the application is working in its current state
 
 __Standardization of ingredients__
 As the application is now the user can add whatever ingredient he or she should choose. The problem is that we can not filter all ingredients. We could implement a standardization of more spirits. This would also make it possible to group drinks based on their base spirit upposed to only filterin them.
@@ -283,10 +368,6 @@ Add functionality so the user can delete the drinks related to the account.
 
 __Edit drinks__
 Give the user ability to edit drinks related to the accound.
-=======
-*Solution:*
-We think this document in addition to well documented code will suffice. 
->>>>>>> dd30dded6530905be6045c62d11c4f55948976cf
 
 # First draft
 Here you can read about the first draft regarding what the system would look like, both on the frontend and the backend. 
