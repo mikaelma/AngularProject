@@ -65,7 +65,6 @@ export class HeaderComponent implements OnInit {
     });
 
     dialogRefRegister.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
       let registerObject = {
         firstName: result.firstname,
         lastName: result.surname,
