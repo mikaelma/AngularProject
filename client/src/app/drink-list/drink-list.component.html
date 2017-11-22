@@ -1,13 +1,13 @@
 
 
 <mat-form-field class="searchHolder">
-    <input matInput type="text" placeholder="Search" (keyup)="searchDrink($event)"/>
+    <input #serachField matInput type="text" placeholder="Search" (keyup)="searchDrink($event)"/>
     <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
       <mat-icon>close</mat-icon>
     </button>
 </mat-form-field>
 
-<mat-form-field class="sortHolder">
+<mat-form-field class="sortHolder" style="margin-left: 20px">
   <mat-select
     (change)="changeView($event)"
     placeholder="View:" value="grid">
@@ -84,9 +84,9 @@
     [infiniteScrollThrottle]="throttle"
     (scrolled)="onScrollDown()"
   >
-    <div *ngFor="let drink of drinks" (click)="onSelect(drink)">
+    <div *ngFor="let drink of drinks">
       <div class="drinkListItem">
-        <a (click)="navigateToDrink(drink.id)">
+        <a (click)="onSelectDrink(drink)">
         <img class="drinkImage" src="{{drink.image}}" alt="{drink.name} image">
         <div class="drinkName">{{drink.name}}</div>
         <div class="subHeader">Author: {{drink.authorName}}</div>
@@ -95,16 +95,13 @@
       </div>
     </div>
   </div>
+
   <!--
-  <ul class="drinkList">
-    <li *ngFor="let drink of drinks" (click)="onSelect(drink)">
-      <a routerLink="/drink/{{drink.id}}">
-        <div class="drinkListItem">
-          <img width="128" height="128" src={{drink.image}} alt="{drink.name} image">
-          <h3>{{drink.name}}</h3>
-        </div>
-      </a>
-    </li>
-  </ul>
-  -->
+  <div class="lastFive">
+    <div class="lastElement" *ngFor="let drink of lastFiveDrinks" (click)="onSelect(drink)">
+      <div class="drinkName">{{drink.name}}</div>
+      <div class="subHeader">{{drink.authorName}}</div>
+    </div>
+  </div>
+  !-->
 </div>

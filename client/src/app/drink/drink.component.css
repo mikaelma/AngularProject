@@ -17,15 +17,14 @@
 }
 .header{
 
-    margin-left: 1em;
-
+    margin-left: 10%;
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 }
 
 #icon {
@@ -38,9 +37,17 @@
     flex-direction: column;
 }
 
-.image{
-    margin-top: 10%;
+.imageContainer{
+    display: flex;
     flex: 1;
+    justify-content: flex-end; /* align horizontal */
+    align-items: center; /* align vertical */
+}
+
+.image{
+    margin-right: 10%;
+    width: 50%;
+    height: auto;
 }
 
 #author{
@@ -62,7 +69,6 @@ h3{
 
 .textContainer{
     display: flex;
-    padding-left: 10%;
     flex-direction: column;
     flex: 1;
 }
@@ -71,7 +77,7 @@ h3{
     font-family: 'Raleway', sans-serif;
     font-size: 1.1em;
     font-weight: 300;
-    width: 70%;
+    width: 50%;
 }
 
 .ingredient{
