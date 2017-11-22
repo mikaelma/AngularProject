@@ -85,6 +85,9 @@ The webapplication will run on the groups viritual machine and use node.js at th
 
 *Solution:*
 
+The project is created using Angular 5, the reason behind beeing that recent releases of dependencies such Material now requires v5.
+
+
 We had some problems running the project on the server. Steps to run the project:
 * ssh into the server
 * run __sudo su - root__
@@ -347,6 +350,23 @@ The login and register-functionality are bound to the header, as we found it mor
 **Task 9:**   
 You need to implement session-handling in the webapplication.
 
+*Solution:*
+By using _JSON Web Tokens_ the client can send a JSON object to the server, the server in turn returns a string known as a token. The token is split into three parts, namely header, payload and signature. The payload can be base64 decoded to reveal a JSON object determined by the server. For the purpose of this application the payload is a representation of the user object stored in the database, minus some attributes such as passwordhash and salt.
+
+```
+    //Decoded JWT payload
+
+    _id:string
+    firstName: string,
+    createdDrinks: string[],
+    lastName: string,
+    email: string,
+    favouriteDrinks: string[]
+```
+The signature is a hash of the header and payload part of the token. The server can thus verify the token by re-hashing the token and compare the token's original signature and the resulting hash. After a token has been made by the server, the client stores it in the browser's local storage. After this, the drink app can check for a jwt and try to verify it whenever it is loaded, this enables the user to stay logged in and the server to know which user it serves. 
+
+
+
 **Task 10:**   
 The webapplication must have a "fancy", alternate, list view to the original one.
 
@@ -355,6 +375,10 @@ Our solution to the task to implement a "fancy" view were solved by using bootst
 
 **Task 11:**   
 The code needs to be tested and the functionality have to be well tried and not faulty.
+
+*Solution:*
+The code has been tested using the jasmine and karma frameworks.  Most tests are rather generic, however HeaderComponent and MainGuard has been extensivly tested since they are critical for user authentication. To run tests simply run __npm test__
+ 
 
 **Task 12:**   
 The project needs to be well documented. 

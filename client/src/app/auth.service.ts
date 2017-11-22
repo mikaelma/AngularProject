@@ -44,14 +44,12 @@ export class AuthService {
             localStorage.setItem('token', res.token);
             observer.next(self.jwt.decodeToken(res.token));
             observer.complete();
-          }
-          else{
+          }else{
             observer.error(res);
             observer.complete();
           }
         })
     })
-
   }
 
   loginUser(email:string,password:string):Observable<User>{
@@ -72,14 +70,8 @@ export class AuthService {
           observer.next(new User(token.firstName,token.lastName,token.email,token.favouriteDrinks,token.createdDrinks));
           observer.complete();
         }
-<<<<<<< HEAD
       },(error)=>{
         observer.error(error);
-=======
-        localStorage.setItem("token",res.token);
-        let token = self.jwt.decodeToken(res.token);
-        observer.next(new User(token.firstName,token.lastName,token.email,token.favouriteDrinks,token.createdDrinks));
->>>>>>> c0a08b9b3c5ff0e435f819ae00df7d9844936d39
         observer.complete();
       });
     });
