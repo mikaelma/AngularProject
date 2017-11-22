@@ -1,5 +1,6 @@
 import {Component, OnInit, Input, OnDestroy} from '@angular/core';
 import {Drink} from '../drink';
+import {MatSnackBar} from '@angular/material';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {DrinkService} from '../drink.service';
@@ -24,8 +25,9 @@ export class DrinkComponent implements OnInit, OnDestroy {
               private drinkService: DrinkService,
               private location: Location,
               private auth: AuthService,
-              private jwt: JwtHelperService) {
-  }
+              private jwt: JwtHelperService,
+              private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     let self = this;
@@ -60,11 +62,17 @@ export class DrinkComponent implements OnInit, OnDestroy {
     this.isFavourite = !this.isFavourite;
     console.log(this.drink);
     if(!this.isFavourite){
+      this.snackBar.open('Removed from favourites', '', {
+        duration: 1000
+      });
       this.drinkService.favouriteDrink(this.drink.id, false)
         .subscribe(res=>{
           console.log(res.favouriteDrinks);
         })
     }else if(this.isFavourite){
+      this.snackBar.open('Added to favourites', '', {
+        duration: 1000
+      });
       this.drinkService.favouriteDrink(this.drink.id, true)
         .subscribe(res => {
           console.log(res.favouriteDrinks);
