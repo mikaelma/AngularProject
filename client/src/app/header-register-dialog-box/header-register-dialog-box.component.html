@@ -17,7 +17,6 @@
     <input matInput placeholder="Email"  formControlName="email">
     <mat-error *ngIf="registerForm.controls.email.hasError('required')">This field is required</mat-error>
     <mat-error *ngIf="registerForm.controls.email.hasError('email')">Not a valid email</mat-error>
-
   </mat-form-field>
 
   <mat-form-field>
