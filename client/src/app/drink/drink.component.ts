@@ -29,6 +29,9 @@ export class DrinkComponent implements OnInit, OnDestroy {
               private snackBar: MatSnackBar
   ) {}
 
+  /** Verifying the user when we init the component. 
+   * This is also so we can check if the user has
+   * made this a favorite drink.**/
   ngOnInit() {
     let self = this;
     this.sub = this.route.params.subscribe((params) => {
@@ -82,6 +85,7 @@ export class DrinkComponent implements OnInit, OnDestroy {
 
   }
 
+  /** Getting the drink data from the server.**/  
   getDrink(id) {
     this.drinkService.getDrink(id)
       .subscribe(drink => {
@@ -89,6 +93,7 @@ export class DrinkComponent implements OnInit, OnDestroy {
       });
   }
 
+   /** Navigating back to where you came from.**/
   goBack(): void {
     this.location.back();
   }

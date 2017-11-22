@@ -7,7 +7,7 @@ import {DrinkComponent} from "./drink/drink.component";
 import {MyPageComponent} from "./my-page/my-page.component";
 import {MainGuard} from "./main.guard";
 
-
+//These are the routes for the application.
 export const appRoutes: Routes = [
     {path:'unauthorized',component:UnauthorizedComponent},
     {path:'main-page',      component:DrinkListComponent},

@@ -19,13 +19,18 @@ export class DrinkListComponent implements OnInit {
   skip = 0;
   //Drink array
   drinks: Drink[] = [];
+  //Holds the drinks that are filtered.
   filteredDrinks: Drink[] = [];
-  //Categories and types of glass used in the dropdown
+  //Categories for types of glasses and spirits used in the dropdown
   typesOfAcohol = ['Brandy', 'Gin', 'Rum', 'Tequila', 'Vodka', 'Whiskey'];
   typesOfGlass = ['Cocktail', 'Highball', 'Rocks', 'Shot'];
+  //Array for holding the latest visited drinks.
   lastFiveDrinks: Drink[] = [];
+  //Array for holding the selected filters.
   filters: string[] = []; //Since ingredients and glasstype wont be the same, we can keep them in the same array.
+  //If we sort by name or author
   sortBy = 'name';
+  //Holds a boolean to choose between fancy and regular view.
   gridView = true;
 
   constructor(
@@ -82,6 +87,14 @@ export class DrinkListComponent implements OnInit {
     this.router.navigate(['/drink', id]);
   }
 
+  /**
+   * After pressing on drink we add the drink to the last
+   * five visited drinks and pop the array if there is more 
+   * than five drinks in it. We also save the last five 
+   * drinks array to localstorage. Then we navigate to the 
+   * drink view.
+   * @param drink
+   */
   onSelectDrink(drink){
     try{
       this.lastFiveDrinks.push(drink);
@@ -132,10 +145,9 @@ export class DrinkListComponent implements OnInit {
   }
 
   /**
-   * This method  filters the drink array.
+   * This method filters the drink array.
    * If there are no filters, we return. This is so we wont get an empty list when checking for filters.
    * **/
-
   filterDrinks() {
     if (this.filters.length < 1) return;
     let self = this;
@@ -155,7 +167,8 @@ export class DrinkListComponent implements OnInit {
 
   /**
    * This method simply adds a filter to the filter-array that holds current active filters.
-   * **/
+   * @param filter is the filter to be added to the array.
+   **/
   onClickFilter(filter) {
     //Setting filter to lowercase for consistency with db
     filter = filter.toLowerCase();
@@ -173,11 +186,19 @@ export class DrinkListComponent implements OnInit {
     self.filterDrinks();
   }
 
+  /**
+   * Method for changing the sorting of drinks
+   * @param e name or author
+   */
   changeSort(e) {
     this.sortBy = e.value;
     this.sortArray(this.drinks);
   }
 
+  /**
+   * Changes between the regular and fancy view.
+   * @param e 
+   */
   changeView(e) {
     console.log(e.value);
     if (e.value === "grid"){
@@ -191,10 +212,12 @@ export class DrinkListComponent implements OnInit {
   /**
    * This method gets called when the component is initialized.
    * Starts with using the getDrinks() method.
+   * We check to see if there is any last five drinks in localstorage
+   * and add these to the array if they exist. If not, we initialize
+   * a new array.
    */
   ngOnInit() {
     this.getDrinks();
-
     let tempLastFiveDrinks = JSON.parse(localStorage.getItem('lastFiveDrinks'));
 
     if(tempLastFiveDrinks){
@@ -206,6 +229,5 @@ export class DrinkListComponent implements OnInit {
     }else{
       this.lastFiveDrinks = new Array<Drink>();
     }
-    console.log("last five drinks is: " + this.lastFiveDrinks);
   }
 }
