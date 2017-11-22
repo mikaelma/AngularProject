@@ -366,15 +366,15 @@ We think this document in addition to well documented code will suffice.
 There are still some bugs that needs to be solved and we have some ideas for further development. However, the application is working in its current state
 
 __Standardization of ingredients__
+
 As the application is now the user can add whatever ingredient he or she should choose. The problem is that we can not filter all ingredients. We could implement a standardization of more spirits. This would also make it possible to group drinks based on their base spirit upposed to only filterin them.
 
-__Fix filter bugs__
-Some bugs still remain with the filter function. We are experiencing loss of infinite scroll and some weird filtering happening some times when we add or remove filters.
-
 __Delete drinks__
+
 Add functionality so the user can delete the drinks related to the account.
 
 __Edit drinks__
+
 Give the user ability to edit drinks related to the accound.
 
 # First draft
