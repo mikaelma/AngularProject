@@ -73,6 +73,12 @@ a {
   height: 256px;
 }
 
+.carouselImage{
+  object-fit: contain;
+  width: 512px;
+  height: 512px;
+}
+
 .drinkName{
   font-family: 'Raleway', sans-serif;
   font-size: 1.4em;
@@ -113,7 +119,7 @@ a {
 .items {
   max-width:512px;
   height:512px;
-  background:#ECECEC;
+  background:white;
   position: relative;
   cursor: pointer;
 }
