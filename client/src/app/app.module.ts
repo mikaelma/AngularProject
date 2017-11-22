@@ -7,7 +7,6 @@ import {AuthService} from './auth.service';
 import {JwtHelperService} from './jwthelper.service';
 import {routing} from './app.routing';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
 import { CreateDrinkComponent } from './drinks/create-drink/create-drink.component';
 import {MyPageComponent} from "./my-page/my-page.component";
 import {HeaderComponent} from "./header/header.component";
@@ -30,7 +29,6 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     CreateDrinkComponent,
     MyPageComponent,
     HeaderComponent,
